@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../model/item_model.dart';
+
 class SimpleListCardWidget extends StatelessWidget {
-  const SimpleListCardWidget({super.key});
+  final List<ItemModel>? items;
+
+  const SimpleListCardWidget({super.key, this.items});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 4,
+        itemCount: items?.length??0,
         itemBuilder: (context, index) {
           return Container(
             alignment: Alignment.centerRight,
@@ -23,7 +27,7 @@ class SimpleListCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
 
-                Text('فاطمة في سطور',
+                Text(items?[index].title??'',
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.titleLarge),
                 Container(

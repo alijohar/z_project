@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zahra/model/item_model.dart';
 
 class SmallImageCardWidget extends StatelessWidget {
-  const SmallImageCardWidget({super.key});
+  final ItemModel item;
+
+  const SmallImageCardWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {

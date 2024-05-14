@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../model/item_model.dart';
+
 class ThreeItemsCardWidget extends StatelessWidget {
-  final List<String> items;
+  final List<ItemModel>? items;
 
   const ThreeItemsCardWidget({super.key, required this.items});
 
@@ -14,7 +16,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       child: Row(
-        children: items.map((item) => Container(
+        children: items!.map((item) => Container(
           margin: const EdgeInsets.all(8),
           height: 130,
           width: MediaQuery.of(context).size.width/3.7,
@@ -33,7 +35,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
                 Expanded(
                   child: Text(
                     textAlign: TextAlign.right,
-                    item,
+                    item.title??'',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white),
                   ),
                 ),

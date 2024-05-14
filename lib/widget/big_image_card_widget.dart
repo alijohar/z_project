@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zahra/model/item_model.dart';
 
 class BigImageCardWidget extends StatelessWidget {
-  const BigImageCardWidget({super.key});
+  final ItemModel item;
+  const BigImageCardWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +15,8 @@ class BigImageCardWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(26), // Apply the same radius here
-        child: Image.network(
-          'https://picsum.photos/400/300',
+        child: Image.asset(
+          item.picName??'',
           fit: BoxFit.cover,
         ),
       ),

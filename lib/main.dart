@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zahra/repository/json_repository.dart';
+import 'package:zahra/screen/home/home_cubit.dart';
 import 'package:zahra/screen/home/home_screen.dart';
 
 void main() {
@@ -19,7 +22,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'tajwal',
       ),
-      home: const HomeScreen(title: 'تطبيق الزهراء'),
+      home: BlocProvider(
+        create: (context) => HomeCubit(JsonRepository()),
+        child: HomeScreen(title: 'تطبيق الزهراء'),
+      ),
     );
   }
 }

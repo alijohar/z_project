@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../model/item_model.dart';
+
 class NormalListCardWidget extends StatelessWidget {
-  final List<String> items;
+  final List<ItemModel>? items;
 
   const NormalListCardWidget({super.key, required this.items});
 
@@ -15,7 +17,7 @@ class NormalListCardWidget extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
-        itemCount: items.length,
+        itemCount: items?.length??0,
         itemBuilder: (context, index) {
           return Container(
             width: MediaQuery.of(context).size.width / 3.5, // Slightly more space than the fixed width previously
@@ -29,7 +31,7 @@ class NormalListCardWidget extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                  items[index],
+                  items?[index].title??'',
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme

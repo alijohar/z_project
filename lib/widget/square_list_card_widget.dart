@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zahra/model/item_model.dart';
 
 class SquareListCardWidget extends StatelessWidget {
-  final List<String> items;
+  final List<ItemModel>? items;
 
   const SquareListCardWidget({super.key, required this.items});
 
@@ -15,7 +16,7 @@ class SquareListCardWidget extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
-        itemCount: items.length,
+        itemCount: items?.length??0,
         itemBuilder: (context, index) {
           return Container(
             width: MediaQuery.of(context).size.width / 3.5, // Slightly more space than the fixed width previously
@@ -35,7 +36,7 @@ class SquareListCardWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      items[index],
+                      items?[index].title??'',
                       textAlign: TextAlign.right,
                       style: Theme.of(context)
                           .textTheme

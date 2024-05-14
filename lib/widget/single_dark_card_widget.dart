@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import '../model/item_model.dart';
 
 class SingleDarkCardWidget extends StatelessWidget {
-  final List<String> items;
+  final List<ItemModel>? items;
 
   const SingleDarkCardWidget({
     super.key,
@@ -26,21 +29,19 @@ class SingleDarkCardWidget extends StatelessWidget {
       ),
       child: Row(
         children: items
-            .map((item) => Expanded(
+            !.map((item) => Expanded(
                   child: Row(children: [
-                    Text(
-                      item,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(color: Colors.white),
+                    Expanded(
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        item.title??'',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(color: Colors.white),
+                      ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.all(8),
-                      width: 10,
-                      height: 10,
-                      color: Colors.yellow[600],
-                    ),
+
                   ]),
                 ))
             .toList(),

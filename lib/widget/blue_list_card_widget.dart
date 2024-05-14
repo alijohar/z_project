@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../model/item_model.dart';
 import '../util/dodecagon_clipper.dart';
 
 class BlueListCardWidget extends StatelessWidget {
-  final List<String> items;
+  final List<ItemModel>? items;
 
   const BlueListCardWidget({super.key, required this.items});
 
@@ -17,7 +18,7 @@ class BlueListCardWidget extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
-        itemCount: items.length,
+        itemCount: items?.length,
         itemBuilder: (context, index) {
           return ClipPath(
             clipper: DodecagonClipper(),  // Applying the custom clipper for hexagon shape
@@ -32,7 +33,7 @@ class BlueListCardWidget extends StatelessWidget {
 
               child: Center(
                 child: Text(
-                  items[index],
+                  items?[index].title??'',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
