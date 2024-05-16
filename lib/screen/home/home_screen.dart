@@ -16,9 +16,8 @@ import '../../model/item_model.dart';
 import '../../widget/simple_list_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.title});
+  const HomeScreen({super.key});
 
-  final String title;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -32,27 +31,47 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<HomeCubit>().fetchItems();
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, state) {
-          return state.when(
-            initial: () => Center(child: Text('Tap to start fetching...')),
-            loading: () => const CircularProgressIndicator(),
-            loaded: (items) => ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return _buildItem(context, items[index]);
-              },
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 600.0,
+            floating: false,
+            pinned: false,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset(
+                'assets/image/main_light.jpg',
+                fit: BoxFit.cover,
+              ),
             ),
-            error: (message) {
-              print('error is $message');
-              return Center(child: Text(message));
+          ),
+          // Using BlocBuilder to rebuild the SliverList based on state changes
+          BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              return state.when(
+                initial: () => const SliverFillRemaining(
+                  child: Center(child: Text('Tap to start fetching...')),
+                ),
+                loading: () => const SliverFillRemaining(
+                  child: CircularProgressIndicator(),
+                ),
+                loaded: (items) => SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                        (context, index) => _buildItem(context, items[index]),
+                    childCount: items.length, // Set child count based on items length
+                  ),
+                ),
+                error: (message) => SliverFillRemaining(
+                  child: Center(child: Text(message)),
+                ),
+              );
             },
-          );
-        },
+          ),
+        ],
       ),
     );
   }
+
 
   Widget _buildItem(BuildContext context, ItemModel item) {
     switch (item.type) {
