@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/repository/json_repository.dart';
-import 'package:zahra/screen/home/home_cubit.dart';
+import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:zahra/screen/home/home_screen.dart';
 
 void main() {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       onSurfaceVariant: Color(0xFF45483C),
       outline: Color(0xFF76786B),
       outlineVariant: Color(0xFFC6C8B9),
-      background: Color(0xFF3f426d),
+      background: Color(0xFFFFFFFF),
       onBackground: Color(0xFF1B1C17),
     );
 

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zahra/model/item_model.dart';
-import '../../repository/json_repository.dart';
+import '../../../repository/json_repository.dart';
 
 part 'home_state.dart';
 part 'home_cubit.freezed.dart';

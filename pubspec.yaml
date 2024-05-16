@@ -39,7 +39,13 @@ dependencies:
   freezed_annotation: ^2.0.0
   http: ^0.13.3
   json_annotation: ^4.9.0
-
+  epub_parser: ^3.0.1
+  flutter_svg: ^1.0.3
+  scrollable_positioned_list: ^0.3.8
+  flutter_html: ^3.0.0-beta.2
+  html: ^0.15.4
+  shared_preferences: ^2.0.6
+  sqflite: ^2.3.3+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -66,7 +72,24 @@ flutter:
   assets:
     - assets/json/
     - assets/image/
+    - assets/epub/
+    - assets/icon/
   fonts:
+    - family: font1
+      fonts:
+        - asset: assets/font/font1.ttf
+    - family: font2
+      fonts:
+        - asset: assets/font/font2.ttf
+    - family: font3
+      fonts:
+        - asset: assets/font/font3.ttf
+    - family: font4
+      fonts:
+        - asset: assets/font/font4.ttf
+    - family: font5
+      fonts:
+        - asset: assets/font/font5.ttf
     - family: tajwal
       fonts:
         - asset: assets/font/tajwal.ttf
