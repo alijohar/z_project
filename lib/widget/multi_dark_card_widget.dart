@@ -4,12 +4,12 @@ import 'package:flutter/widgets.dart';
 
 import '../model/item_model.dart';
 
-class SingleDarkCardWidget extends StatelessWidget {
-  final ItemModel item;
+class MultiDarkCardWidget extends StatelessWidget {
+  final List<ItemModel>? items;
 
-  const SingleDarkCardWidget({
+  const MultiDarkCardWidget({
     super.key,
-    required this.item,
+    required this.items,
   });
 
   @override
@@ -27,13 +27,25 @@ class SingleDarkCardWidget extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: Text(
-        textAlign: TextAlign.center,
-        item.title??'',
-        style: Theme.of(context)
-            .textTheme
-            .titleLarge
-            ?.copyWith(color: Colors.white),
-      ),);
+      child: Row(
+        children: items
+        !.map((item) => Expanded(
+          child: Row(children: [
+            Expanded(
+              child: Text(
+                textAlign: TextAlign.center,
+                item.title??'',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(color: Colors.white),
+              ),
+            ),
+
+          ]),
+        ))
+            .toList(),
+      ),
+    );
   }
 }

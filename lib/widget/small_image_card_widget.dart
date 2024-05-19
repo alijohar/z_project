@@ -43,8 +43,8 @@ class SmallImageCardWidget extends StatelessWidget {
                   topRight: Radius.circular(8),  // Top right corner
                   bottomRight: Radius.circular(8),  // Bottom left corner
                 ),
-                image: const DecorationImage(
-                  image: AssetImage('assets/image/1.jpg'),
+                image: DecorationImage(
+                  image: AssetImage('assets/image/${item.picName}'),
                   fit: BoxFit.cover,
                 ),
               ),

@@ -2,7 +2,7 @@
   {
     "title": "فاطمة في سطور",
     "type": "smallimage",
-    "picName": "1.png",
+    "picName": "1.jpg",
     "items": [],
     "linkTo": {
       "goto": "text",
@@ -45,7 +45,7 @@
   {
     "title": "فاطمة في القرآن الكريم",
     "type": "smallimage",
-    "picName": "2.png",
+    "picName": "2.jpg",
     "items": [],
     "linkTo": {
       "goto": "jsonList",
@@ -56,7 +56,7 @@
   {
     "title": "فاطمة في الحديث",
     "type": "smallimage",
-    "picName": "3.png",
+    "picName": "3.jpg",
     "items": [],
     "linkTo": {
       "goto": "jsonGraphic",
@@ -99,7 +99,7 @@
   {
     "title": "فاطمة في مكة المكرمة",
     "type": "smallimage",
-    "picName": "4.png",
+    "picName": "4.jpg",
     "items": [],
     "linkTo": {
       "goto": "jsonList",
@@ -110,7 +110,7 @@
   {
     "title": "فاطمة في المدينة المنورة",
     "type": "smallimage",
-    "picName": "5.png",
+    "picName": "5.jpg",
     "items": [],
     "linkTo": {
       "goto": "jsonList",

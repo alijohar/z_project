@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/widget/big_image_card_widget.dart';
 import 'package:zahra/widget/blue_list_card_widget.dart';
 import 'package:zahra/widget/circle_list_card_widget.dart';
+import 'package:zahra/widget/multi_dark_card_widget.dart';
 import 'package:zahra/widget/normal_list_card_widget.dart';
 import 'package:zahra/widget/single_dark_card_widget.dart';
 import 'package:zahra/widget/small_image_card_widget.dart';
@@ -114,11 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
       case 'normal_list':
         return NormalListCardWidget(items: item.items);
       case 'singleDark':
-        return SingleDarkCardWidget(items: item.items);
+        return SingleDarkCardWidget(item: item);
       case 'dubleLight':
-        return SingleDarkCardWidget(items: item.items);
+        return MultiDarkCardWidget(items: item.items);
       case 'tripleDark':
-        return SingleDarkCardWidget(items: item.items);
+        return MultiDarkCardWidget(items: item.items);
       case 'smallimage':
         return SmallImageCardWidget(item: item);
       case 'square_list':

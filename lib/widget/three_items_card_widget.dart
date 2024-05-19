@@ -23,7 +23,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
-              image: NetworkImage("https://picsum.photos/200/100"),
+              image: AssetImage('assets/image/squarelist_light.jpg'),
               fit: BoxFit.cover,
             ),
           ),
