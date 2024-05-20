@@ -1,13 +1,13 @@
 import 'package:flutter_html/flutter_html.dart';
 
 enum FontSizeCustom {
-  xxSmall(7.875),
-  xSmall(8.75),
-  small(11.375),
-  medium(14.0),
-  large(15.75),
-  xLarge(21.0),
-  xxLarge(28.0);
+  xxSmall(12),
+  xSmall(14),
+  small(16),
+  medium(20),
+  large(24),
+  xLarge(27),
+  xxLarge(30);
 
   final double size;
   const FontSizeCustom(this.size);

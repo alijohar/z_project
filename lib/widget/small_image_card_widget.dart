@@ -12,7 +12,7 @@ class SmallImageCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=> openEpub(context: context, cat: CategoryModel(id: 0, catId: 0, bookPath: 'a1.epub')),
+      onTap: ()=> openEpub(context: context, cat: CategoryModel(id: 0, catId: 0, bookPath: '1.epub')),
       child: Container(
       
         margin: const EdgeInsets.all(8),

@@ -36,7 +36,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
                   child: Text(
                     textAlign: TextAlign.right,
                     item.title??'',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 Container(

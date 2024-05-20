@@ -297,6 +297,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                                 fontSize: FontSize.medium,
                                 textAlign: TextAlign.right,
                               ),
+
                               "mark": Style(
                                 backgroundColor: Colors.yellow,
                               ),
@@ -356,6 +357,16 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       child: Html(
                         data: content[index],
                         style: {
+                          ".pagen, .fm": Style(
+                            padding: HtmlPaddings.only(top: 40),
+                            color: Colors.red,
+                            textAlign: TextAlign.center,
+                          ),
+                          ".fnote": Style(
+                            color: Colors.blueGrey,
+                            fontSize: FontSize(fontSize.size-fontSize.size/4),
+
+                          ),
                           "html": Style(
                             textAlign: TextAlign.justify,
                             direction: TextDirection.rtl,

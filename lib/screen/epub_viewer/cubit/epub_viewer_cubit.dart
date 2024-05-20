@@ -88,7 +88,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
 
     List<HtmlFileInfo> orderedFiles = [];
     for (var spineItem in spineItems) {
-      HtmlFileInfo? file = htmlFilesMap[spineItem];
+      HtmlFileInfo? file = htmlFilesMap[spineItem.replaceFirst('x', '')];
       if (file != null) {
         orderedFiles.add(file);
       }
