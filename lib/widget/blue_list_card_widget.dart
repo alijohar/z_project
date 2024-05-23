@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../model/item_model.dart';
 import '../util/dodecagon_clipper.dart';
+import '../util/navigation_helper.dart';
 
 class BlueListCardWidget extends StatelessWidget {
-  final List<ItemModel>? items;
+  final List<SubItems>? items;
 
   const BlueListCardWidget({super.key, required this.items});
 
@@ -20,7 +21,9 @@ class BlueListCardWidget extends StatelessWidget {
         reverse: true,
         itemCount: items?.length,
         itemBuilder: (context, index) {
-          return ClipPath(
+          return GestureDetector(
+              onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: items?[index], goto: items?[index].goto ?? '',),
+          child: ClipPath(
             clipper: DodecagonClipper(),  // Applying the custom clipper for hexagon shape
             child: Container(
               width: MediaQuery.of(context).size.width / 4,
@@ -40,7 +43,7 @@ class BlueListCardWidget extends StatelessWidget {
               ),
               ),
             ),
-          );
+          ));
         },
       ),
     );

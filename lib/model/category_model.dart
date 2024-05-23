@@ -9,8 +9,8 @@ class CategoryModel {
   final String? description;
 
   CategoryModel({
-    required this.id,
-    required this.catId,
+    this.id,
+    this.catId,
     required this.bookPath,
     this.bookName,
     this.bookCover,

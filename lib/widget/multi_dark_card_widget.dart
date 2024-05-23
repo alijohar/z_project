@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../model/item_model.dart';
+import '../util/navigation_helper.dart';
 
 class MultiDarkCardWidget extends StatelessWidget {
-  final List<ItemModel>? items;
+  final List<SubItems>? items;
 
   const MultiDarkCardWidget({
     super.key,
@@ -32,7 +33,12 @@ class MultiDarkCardWidget extends StatelessWidget {
         !.map((item) => Expanded(
           child: Row(children: [
             Expanded(
-              child: Text(
+              child: GestureDetector(
+                onTap: () {
+                  print('item.goto: ${item.goto}');
+                  NavigationHelper.navigateTo(context: context, subItem: item, goto: item.goto ?? '',);
+                },
+          child: Text(
                 textAlign: TextAlign.center,
                 item.title??'',
                 style: Theme.of(context)
@@ -42,7 +48,7 @@ class MultiDarkCardWidget extends StatelessWidget {
               ),
             ),
 
-          ]),
+            )]),
         ))
             .toList(),
       ),

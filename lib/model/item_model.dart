@@ -9,11 +9,23 @@ class ItemModel with _$ItemModel {
     String? title,
     String? type,
     String? picName,
-    List<ItemModel>? items,
+    List<SubItems>? items,
     LinkTo? linkTo,
   }) = _ItemModel;
 
   factory ItemModel.fromJson(Map<String, dynamic> json) => _$ItemModelFromJson(json);
+}
+
+@freezed
+class SubItems with _$SubItems {
+  const factory SubItems({
+    String? title,
+    String? goto,
+    String? key,
+    int? id,
+  }) = _SubItems;
+
+  factory SubItems.fromJson(Map<String, dynamic> json) => _$SubItemsFromJson(json);
 }
 
 @freezed

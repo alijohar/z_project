@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../model/item_model.dart';
+import '../util/navigation_helper.dart';
 
 class NormalListCardWidget extends StatelessWidget {
-  final List<ItemModel>? items;
+  final List<SubItems>? items;
 
   const NormalListCardWidget({super.key, required this.items});
 
@@ -19,11 +20,13 @@ class NormalListCardWidget extends StatelessWidget {
         reverse: true,
         itemCount: items?.length??0,
         itemBuilder: (context, index) {
-          return Container(
+          return GestureDetector(
+              onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: items?[index], goto: items?[index].goto ?? '',),
+          child: Container(
             width: MediaQuery.of(context).size.width / 3.5, // Slightly more space than the fixed width previously
             margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(20),  // Top right corner
                 bottomLeft: Radius.circular(20),  // Bottom left corner
               ),
@@ -37,7 +40,7 @@ class NormalListCardWidget extends StatelessWidget {
                       .textTheme
                       .titleLarge),
             ),
-          );
+          ));
         },
       ),
     );

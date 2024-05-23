@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:zahra/model/item_model.dart';
 
 import '../util/dodecagon_clipper.dart';
+import '../util/navigation_helper.dart';
 
 class CircleListCardWidget extends StatelessWidget {
-  final List<ItemModel>? items;
+  final List<SubItems>? items;
 
   const CircleListCardWidget({super.key, required this.items});
 
@@ -20,7 +21,9 @@ class CircleListCardWidget extends StatelessWidget {
         reverse: true,
         itemCount: items?.length??0,
         itemBuilder: (context, index) {
-          return ClipPath(
+          return GestureDetector(
+              onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: items?[index], goto: items?[index].goto ?? '',),
+          child: ClipPath(
             clipper: DodecagonClipper(),  // Applying the custom clipper for hexagon shape
             child: CustomPaint(
               child: Container(
@@ -34,7 +37,7 @@ class CircleListCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-          );
+          ));
         },
       ),
     );

@@ -12,7 +12,7 @@ _$ItemModelImpl _$$ItemModelImplFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String?,
       picName: json['picName'] as String?,
       items: (json['items'] as List<dynamic>?)
-          ?.map((e) => ItemModel.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => SubItems.fromJson(e as Map<String, dynamic>))
           .toList(),
       linkTo: json['linkTo'] == null
           ? null
@@ -26,6 +26,22 @@ Map<String, dynamic> _$$ItemModelImplToJson(_$ItemModelImpl instance) =>
       'picName': instance.picName,
       'items': instance.items,
       'linkTo': instance.linkTo,
+    };
+
+_$SubItemsImpl _$$SubItemsImplFromJson(Map<String, dynamic> json) =>
+    _$SubItemsImpl(
+      title: json['title'] as String?,
+      goto: json['goto'] as String?,
+      key: json['key'] as String?,
+      id: (json['id'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$$SubItemsImplToJson(_$SubItemsImpl instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'goto': instance.goto,
+      'key': instance.key,
+      'id': instance.id,
     };
 
 _$LinkToImpl _$$LinkToImplFromJson(Map<String, dynamic> json) => _$LinkToImpl(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:zahra/model/category_model.dart';
 import 'package:zahra/model/item_model.dart';
 import 'package:zahra/util/epub_helper.dart';
+import 'package:zahra/util/navigation_helper.dart';
 
 class SmallImageCardWidget extends StatelessWidget {
   final ItemModel item;
@@ -12,7 +13,7 @@ class SmallImageCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=> openEpub(context: context, cat: CategoryModel(id: 0, catId: 0, bookPath: '1.epub')),
+      onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item),
       child: Container(
       
         margin: const EdgeInsets.all(8),

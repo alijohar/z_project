@@ -23,7 +23,7 @@ mixin _$ItemModel {
   String? get title => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   String? get picName => throw _privateConstructorUsedError;
-  List<ItemModel>? get items => throw _privateConstructorUsedError;
+  List<SubItems>? get items => throw _privateConstructorUsedError;
   LinkTo? get linkTo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $ItemModelCopyWith<$Res> {
       {String? title,
       String? type,
       String? picName,
-      List<ItemModel>? items,
+      List<SubItems>? items,
       LinkTo? linkTo});
 
   $LinkToCopyWith<$Res>? get linkTo;
@@ -82,7 +82,7 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
       items: freezed == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<ItemModel>?,
+              as List<SubItems>?,
       linkTo: freezed == linkTo
           ? _value.linkTo
           : linkTo // ignore: cast_nullable_to_non_nullable
@@ -115,7 +115,7 @@ abstract class _$$ItemModelImplCopyWith<$Res>
       {String? title,
       String? type,
       String? picName,
-      List<ItemModel>? items,
+      List<SubItems>? items,
       LinkTo? linkTo});
 
   @override
@@ -155,7 +155,7 @@ class __$$ItemModelImplCopyWithImpl<$Res>
       items: freezed == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<ItemModel>?,
+              as List<SubItems>?,
       linkTo: freezed == linkTo
           ? _value.linkTo
           : linkTo // ignore: cast_nullable_to_non_nullable
@@ -171,7 +171,7 @@ class _$ItemModelImpl implements _ItemModel {
       {this.title,
       this.type,
       this.picName,
-      final List<ItemModel>? items,
+      final List<SubItems>? items,
       this.linkTo})
       : _items = items;
 
@@ -184,9 +184,9 @@ class _$ItemModelImpl implements _ItemModel {
   final String? type;
   @override
   final String? picName;
-  final List<ItemModel>? _items;
+  final List<SubItems>? _items;
   @override
-  List<ItemModel>? get items {
+  List<SubItems>? get items {
     final value = _items;
     if (value == null) return null;
     if (_items is EqualUnmodifiableListView) return _items;
@@ -238,7 +238,7 @@ abstract class _ItemModel implements ItemModel {
       {final String? title,
       final String? type,
       final String? picName,
-      final List<ItemModel>? items,
+      final List<SubItems>? items,
       final LinkTo? linkTo}) = _$ItemModelImpl;
 
   factory _ItemModel.fromJson(Map<String, dynamic> json) =
@@ -251,12 +251,199 @@ abstract class _ItemModel implements ItemModel {
   @override
   String? get picName;
   @override
-  List<ItemModel>? get items;
+  List<SubItems>? get items;
   @override
   LinkTo? get linkTo;
   @override
   @JsonKey(ignore: true)
   _$$ItemModelImplCopyWith<_$ItemModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+SubItems _$SubItemsFromJson(Map<String, dynamic> json) {
+  return _SubItems.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SubItems {
+  String? get title => throw _privateConstructorUsedError;
+  String? get goto => throw _privateConstructorUsedError;
+  String? get key => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SubItemsCopyWith<SubItems> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SubItemsCopyWith<$Res> {
+  factory $SubItemsCopyWith(SubItems value, $Res Function(SubItems) then) =
+      _$SubItemsCopyWithImpl<$Res, SubItems>;
+  @useResult
+  $Res call({String? title, String? goto, String? key, int? id});
+}
+
+/// @nodoc
+class _$SubItemsCopyWithImpl<$Res, $Val extends SubItems>
+    implements $SubItemsCopyWith<$Res> {
+  _$SubItemsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+    Object? goto = freezed,
+    Object? key = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_value.copyWith(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      goto: freezed == goto
+          ? _value.goto
+          : goto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      key: freezed == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SubItemsImplCopyWith<$Res>
+    implements $SubItemsCopyWith<$Res> {
+  factory _$$SubItemsImplCopyWith(
+          _$SubItemsImpl value, $Res Function(_$SubItemsImpl) then) =
+      __$$SubItemsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? title, String? goto, String? key, int? id});
+}
+
+/// @nodoc
+class __$$SubItemsImplCopyWithImpl<$Res>
+    extends _$SubItemsCopyWithImpl<$Res, _$SubItemsImpl>
+    implements _$$SubItemsImplCopyWith<$Res> {
+  __$$SubItemsImplCopyWithImpl(
+      _$SubItemsImpl _value, $Res Function(_$SubItemsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = freezed,
+    Object? goto = freezed,
+    Object? key = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_$SubItemsImpl(
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      goto: freezed == goto
+          ? _value.goto
+          : goto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      key: freezed == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SubItemsImpl implements _SubItems {
+  const _$SubItemsImpl({this.title, this.goto, this.key, this.id});
+
+  factory _$SubItemsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SubItemsImplFromJson(json);
+
+  @override
+  final String? title;
+  @override
+  final String? goto;
+  @override
+  final String? key;
+  @override
+  final int? id;
+
+  @override
+  String toString() {
+    return 'SubItems(title: $title, goto: $goto, key: $key, id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SubItemsImpl &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.goto, goto) || other.goto == goto) &&
+            (identical(other.key, key) || other.key == key) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, title, goto, key, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SubItemsImplCopyWith<_$SubItemsImpl> get copyWith =>
+      __$$SubItemsImplCopyWithImpl<_$SubItemsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SubItemsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SubItems implements SubItems {
+  const factory _SubItems(
+      {final String? title,
+      final String? goto,
+      final String? key,
+      final int? id}) = _$SubItemsImpl;
+
+  factory _SubItems.fromJson(Map<String, dynamic> json) =
+      _$SubItemsImpl.fromJson;
+
+  @override
+  String? get title;
+  @override
+  String? get goto;
+  @override
+  String? get key;
+  @override
+  int? get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$SubItemsImplCopyWith<_$SubItemsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

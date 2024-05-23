@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../model/item_model.dart';
+import '../util/navigation_helper.dart';
 
 class SimpleListCardWidget extends StatelessWidget {
-  final List<ItemModel>? items;
+  final List<SubItems>? items;
 
   const SimpleListCardWidget({super.key, this.items});
 
@@ -17,7 +18,9 @@ class SimpleListCardWidget extends StatelessWidget {
       padding: EdgeInsets.zero,
       itemCount: items?.length ?? 0,
       itemBuilder: (context, index) {
-        return Container(
+        return GestureDetector(
+            onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: items?[index], goto: items?[index].goto ?? '',),
+        child: Container(
           alignment: Alignment.centerRight,
           margin: const EdgeInsets.all(8),
           padding: const EdgeInsets.all(8),
@@ -39,7 +42,7 @@ class SimpleListCardWidget extends StatelessWidget {
               ),
             ],
           ),
-        );
+        ));
       },
     );
   }

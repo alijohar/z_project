@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../model/item_model.dart';
+import '../util/navigation_helper.dart';
 
 class ThreeItemsCardWidget extends StatelessWidget {
-  final List<ItemModel>? items;
+  final List<SubItems>? items;
 
   const ThreeItemsCardWidget({super.key, required this.items});
 
@@ -22,7 +23,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width/3.7,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            image: DecorationImage(
+            image: const DecorationImage(
               image: AssetImage('assets/image/squarelist_light.jpg'),
               fit: BoxFit.cover,
             ),
@@ -33,12 +34,14 @@ class ThreeItemsCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
-                  child: Text(
+                  child: GestureDetector(
+                    onTap: () => NavigationHelper.navigateTo(context: context, goto: item.goto ?? '', subItem: item),
+          child: Text(
                     textAlign: TextAlign.right,
                     item.title??'',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                ),
+                  )),
                 Container(
                   margin: const EdgeInsets.all(8),
                   width: 10,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../model/item_model.dart';
+import '../util/navigation_helper.dart';
 
 class SingleDarkCardWidget extends StatelessWidget {
   final ItemModel item;
@@ -27,13 +28,15 @@ class SingleDarkCardWidget extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: Text(
+      child: GestureDetector(
+        onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item),
+    child: Text(
         textAlign: TextAlign.center,
         item.title??'',
         style: Theme.of(context)
             .textTheme
             .titleLarge
             ?.copyWith(color: Colors.white),
-      ),);
+      ),));
   }
 }
