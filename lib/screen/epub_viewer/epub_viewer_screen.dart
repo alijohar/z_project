@@ -354,39 +354,41 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                     constraints: BoxConstraints(minHeight: screenHeight), // Set minHeight to screenHeight
                     child: Container(
                       color: Theme.of(context).colorScheme.background,
-                      child: Html(
-                        data: content[index],
-                        style: {
-                          ".pagen, .fm": Style(
-                            padding: HtmlPaddings.only(top: 40),
-                            color: Colors.red,
-                            textAlign: TextAlign.center,
-                          ),
-                          ".fnote": Style(
-                            color: Colors.blueGrey,
-                            fontSize: FontSize(fontSize.size-fontSize.size/4),
-
-                          ),
-                          "html": Style(
-                            textAlign: TextAlign.justify,
-                            direction: TextDirection.rtl,
-                            fontSize: FontSize(fontSize.size),
-                            padding: HtmlPaddings.only(right: 10, left: 10),
-                            fontFamily: fontFamily.name,
-                            lineHeight: LineHeight(lineHeight.size),
-                          ),
-                          "h1,h2,h3,h4,h5,h6": Style(
-                            textAlign: TextAlign.right,
-                            direction: TextDirection.rtl,
-                            padding: HtmlPaddings.only(top: 30),
-                            fontSize: FontSize(fontSize.size * 1.2),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: fontFamily.name,
-                          ),
-                          "mark": Style(
-                            backgroundColor: Colors.yellow, // Highlight color
-                          ),
-                        },
+                      child: SelectionArea(
+                        child: Html(
+                          data: content[index],
+                          style: {
+                            ".pagen, .fm": Style(
+                              padding: HtmlPaddings.only(top: 40),
+                              color: Colors.red,
+                              textAlign: TextAlign.center,
+                            ),
+                            ".fnote": Style(
+                              color: Colors.blueGrey,
+                              fontSize: FontSize(fontSize.size-fontSize.size/4),
+                        
+                            ),
+                            "html": Style(
+                              textAlign: TextAlign.justify,
+                              direction: TextDirection.rtl,
+                              fontSize: FontSize(fontSize.size),
+                              padding: HtmlPaddings.only(right: 10, left: 10),
+                              fontFamily: fontFamily.name,
+                              lineHeight: LineHeight(lineHeight.size),
+                            ),
+                            "h1,h2,h3,h4,h5,h6": Style(
+                              textAlign: TextAlign.right,
+                              direction: TextDirection.rtl,
+                              padding: HtmlPaddings.only(top: 30),
+                              fontSize: FontSize(fontSize.size * 1.2),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: fontFamily.name,
+                            ),
+                            "mark": Style(
+                              backgroundColor: Colors.yellow, // Highlight color
+                            ),
+                          },
+                        ),
                       ),
                     ),
                   ),
