@@ -19,16 +19,13 @@ class NavigationHelper {
 
   static void navigateToToc(SubItems? subItem, ItemModel? item, BuildContext context) {
     int id = subItem?.id ?? item?.linkTo?.id ?? 0;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('it must open toc from jsonList.json with id $id')),
-    );
+    Navigator.of(context).pushNamed('/toc', arguments: id);
   }
 
   static void navigateToDetail(SubItems? subItem, ItemModel? item, BuildContext context) {
     int id = subItem?.id ?? item?.linkTo?.id ?? 0;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('it must open jsonGraphic from jsonGraphic.json with id $id')),
-    );
+    Navigator.of(context).pushNamed('/detail', arguments: id);
+
   }
 
   static void navigateToEpub(ItemModel? item, BuildContext context) {

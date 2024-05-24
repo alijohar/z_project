@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/image/main_light.jpg"),
                 fit: BoxFit.cover, // This will cover the whole area of the Scaffold body

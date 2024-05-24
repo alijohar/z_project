@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/repository/json_repository.dart';
+import 'package:zahra/route_generator.dart';
 import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:zahra/screen/home/home_screen.dart';
 
@@ -63,10 +64,8 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      home: BlocProvider(
-        create: (context) => HomeCubit(JsonRepository()),
-        child: HomeScreen(),
-      ),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }

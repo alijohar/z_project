@@ -20,4 +20,10 @@ class JsonRepository {
       return DetailItem.fromJson(item as Map<String, dynamic>);
     }).toList();
   }
+
+  Future<List<ItemModel>> fetchDetailItemsById(int id) async {
+      final allDetailItem = await fetchDetailItems();
+      final detailItem = allDetailItem.firstWhere((element) => element.id == id);
+      return detailItem.items;
+  }
 }
