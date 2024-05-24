@@ -611,3 +611,184 @@ abstract class _LinkTo implements LinkTo {
   _$$LinkToImplCopyWith<_$LinkToImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+DetailItem _$DetailItemFromJson(Map<String, dynamic> json) {
+  return _DetailItem.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DetailItem {
+  int get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  List<ItemModel> get items => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DetailItemCopyWith<DetailItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DetailItemCopyWith<$Res> {
+  factory $DetailItemCopyWith(
+          DetailItem value, $Res Function(DetailItem) then) =
+      _$DetailItemCopyWithImpl<$Res, DetailItem>;
+  @useResult
+  $Res call({int id, String title, List<ItemModel> items});
+}
+
+/// @nodoc
+class _$DetailItemCopyWithImpl<$Res, $Val extends DetailItem>
+    implements $DetailItemCopyWith<$Res> {
+  _$DetailItemCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? title = null,
+    Object? items = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: null == items
+          ? _value.items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<ItemModel>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$DetailItemImplCopyWith<$Res>
+    implements $DetailItemCopyWith<$Res> {
+  factory _$$DetailItemImplCopyWith(
+          _$DetailItemImpl value, $Res Function(_$DetailItemImpl) then) =
+      __$$DetailItemImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int id, String title, List<ItemModel> items});
+}
+
+/// @nodoc
+class __$$DetailItemImplCopyWithImpl<$Res>
+    extends _$DetailItemCopyWithImpl<$Res, _$DetailItemImpl>
+    implements _$$DetailItemImplCopyWith<$Res> {
+  __$$DetailItemImplCopyWithImpl(
+      _$DetailItemImpl _value, $Res Function(_$DetailItemImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? title = null,
+    Object? items = null,
+  }) {
+    return _then(_$DetailItemImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      items: null == items
+          ? _value._items
+          : items // ignore: cast_nullable_to_non_nullable
+              as List<ItemModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DetailItemImpl implements _DetailItem {
+  const _$DetailItemImpl(
+      {required this.id,
+      required this.title,
+      required final List<ItemModel> items})
+      : _items = items;
+
+  factory _$DetailItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DetailItemImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String title;
+  final List<ItemModel> _items;
+  @override
+  List<ItemModel> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
+  @override
+  String toString() {
+    return 'DetailItem(id: $id, title: $title, items: $items)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DetailItemImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            const DeepCollectionEquality().equals(other._items, _items));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, title, const DeepCollectionEquality().hash(_items));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DetailItemImplCopyWith<_$DetailItemImpl> get copyWith =>
+      __$$DetailItemImplCopyWithImpl<_$DetailItemImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DetailItemImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DetailItem implements DetailItem {
+  const factory _DetailItem(
+      {required final int id,
+      required final String title,
+      required final List<ItemModel> items}) = _$DetailItemImpl;
+
+  factory _DetailItem.fromJson(Map<String, dynamic> json) =
+      _$DetailItemImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  String get title;
+  @override
+  List<ItemModel> get items;
+  @override
+  @JsonKey(ignore: true)
+  _$$DetailItemImplCopyWith<_$DetailItemImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

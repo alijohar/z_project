@@ -56,3 +56,19 @@ Map<String, dynamic> _$$LinkToImplToJson(_$LinkToImpl instance) =>
       'key': instance.key,
       'id': instance.id,
     };
+
+_$DetailItemImpl _$$DetailItemImplFromJson(Map<String, dynamic> json) =>
+    _$DetailItemImpl(
+      id: (json['id'] as num).toInt(),
+      title: json['title'] as String,
+      items: (json['items'] as List<dynamic>)
+          .map((e) => ItemModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$DetailItemImplToJson(_$DetailItemImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'items': instance.items,
+    };

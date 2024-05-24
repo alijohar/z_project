@@ -7,12 +7,17 @@ class JsonRepository {
     final String response = await rootBundle.loadString('assets/json/main.json');
     final List<dynamic> data = json.decode(response) as List<dynamic>;
 
-    // Log the raw data to see what's being parsed
-    print('Raw data: $data');
+    return data.map((item) {
+      return ItemModel.fromJson(item as Map<String, dynamic>);
+    }).toList();
+  }
+
+  Future<List<DetailItem>> fetchDetailItems() async {
+    final String response = await rootBundle.loadString('assets/json/jsonGraphic.json');
+    final List<dynamic> data = json.decode(response) as List<dynamic>;
 
     return data.map((item) {
-      print('Processing item: $item'); // Log each item being processed
-      return ItemModel.fromJson(item as Map<String, dynamic>);
+      return DetailItem.fromJson(item as Map<String, dynamic>);
     }).toList();
   }
 }

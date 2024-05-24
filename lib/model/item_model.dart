@@ -38,3 +38,15 @@ class LinkTo with _$LinkTo {
 
   factory LinkTo.fromJson(Map<String, dynamic> json) => _$LinkToFromJson(json);
 }
+
+
+@freezed
+class DetailItem with _$DetailItem {
+  const factory DetailItem({
+    required int id,
+    required String title,
+    required List<ItemModel> items,
+  }) = _DetailItem;
+
+  factory DetailItem.fromJson(Map<String, dynamic> json) => _$DetailItemFromJson(json);
+}
