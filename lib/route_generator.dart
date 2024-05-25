@@ -39,7 +39,7 @@ class RouteGenerator {
           return MaterialPageRoute(
             builder: (context) =>
                 BlocProvider(
-                  create: (context) => TocCubit(),
+                  create: (context) => TocCubit(_jsonRepository),
                   child: TocScreen(id: args,),
                 ),
           );
