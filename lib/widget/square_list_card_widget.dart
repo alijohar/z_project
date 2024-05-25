@@ -27,8 +27,8 @@ class SquareListCardWidget extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                image: NetworkImage("https://picsum.photos/200/100"),
+              image: const DecorationImage(
+                image: AssetImage('assets/image/squarelist_light.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../model/item_model.dart';
 import '../util/navigation_helper.dart';
@@ -31,9 +32,11 @@ class SimpleListCardWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(items?[index].title ?? '',
-                  textAlign: TextAlign.right,
-                  style: Theme.of(context).textTheme.titleLarge),
+              Expanded(
+                child: Text(items?[index].title ?? '',
+                    textAlign: TextAlign.right,
+                    style: Theme.of(context).textTheme.titleLarge),
+              ),
               Container(
                 margin: const EdgeInsets.all(8),
                 width: 10,

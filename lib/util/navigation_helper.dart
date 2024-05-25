@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:zahra/model/item_model.dart';
+import 'package:zahra/widget/big_image_card_widget.dart';
+import 'package:zahra/widget/blue_list_card_widget.dart';
+import 'package:zahra/widget/circle_list_card_widget.dart';
+import 'package:zahra/widget/multi_dark_card_widget.dart';
+import 'package:zahra/widget/normal_list_card_widget.dart';
+import 'package:zahra/widget/single_dark_card_widget.dart';
+import 'package:zahra/widget/small_image_card_widget.dart';
+import 'package:zahra/widget/square_list_card_widget.dart';
+import 'package:zahra/widget/three_items_card_widget.dart';
 
+import '../widget/simple_list_card_widget.dart';
 
 class NavigationHelper {
   static void navigateTo({required String goto, ItemModel? item, SubItems? subItem, required BuildContext context}) {
@@ -36,5 +46,33 @@ class NavigationHelper {
     );
   }
 
+  static Widget buildItem(BuildContext context, ItemModel item) {
+    switch (item.type) {
+      case 'bigimage':
+        return BigImageCardWidget(item: item);
+      case 'blue_list':
+        return BlueListCardWidget(items: item.items);
+      case 'circleList':
+        return CircleListCardWidget(items: item.items);
+      case 'normalList':
+        return NormalListCardWidget(items: item.items);
+      case 'singleDark':
+        return SingleDarkCardWidget(item: item);
+      case 'dubleLight':
+        return MultiDarkCardWidget(items: item.items);
+      case 'tripleDark':
+        return MultiDarkCardWidget(items: item.items);
+      case 'smallimage':
+        return SmallImageCardWidget(item: item);
+      case 'squareList':
+        return SquareListCardWidget(items: item.items);
+      case 'list':
+        return SimpleListCardWidget(items: item.items);
+      case 'threeitems':
+        return ThreeItemsCardWidget(items: item.items);
+      default:
+        return ListTile(title: Text('Unknown item type: ${item.type}'));
+    }
+  }
 
 }

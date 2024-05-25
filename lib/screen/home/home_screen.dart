@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zahra/util/navigation_helper.dart';
 
 import 'package:zahra/widget/big_image_card_widget.dart';
 import 'package:zahra/widget/blue_list_card_widget.dart';
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       loaded: (items) => SliverList(
                         delegate: SliverChildBuilderDelegate(
-                              (context, index) => _buildItem(context, items[index]),
+                              (context, index) => NavigationHelper.buildItem(context, items[index]),
                           childCount: items.length,
                         ),
                       ),
@@ -104,32 +105,4 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 
-  Widget _buildItem(BuildContext context, ItemModel item) {
-    switch (item.type) {
-      case 'bigimage':
-        return BigImageCardWidget(item: item);
-      case 'blue_list':
-        return BlueListCardWidget(items: item.items);
-      case 'circle_list':
-        return CircleListCardWidget(items: item.items);
-      case 'normal_list':
-        return NormalListCardWidget(items: item.items);
-      case 'singleDark':
-        return SingleDarkCardWidget(item: item);
-      case 'dubleLight':
-        return MultiDarkCardWidget(items: item.items);
-      case 'tripleDark':
-        return MultiDarkCardWidget(items: item.items);
-      case 'smallimage':
-        return SmallImageCardWidget(item: item);
-      case 'square_list':
-        return SquareListCardWidget(items: item.items);
-      case 'list':
-        return SimpleListCardWidget(items: item.items);
-      case 'threeitems':
-        return ThreeItemsCardWidget(items: item.items);
-      default:
-        return ListTile(title: Text('Unknown item type: ${item.type}'));
-    }
-  }
 
