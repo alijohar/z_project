@@ -15,6 +15,7 @@ class TocCubit extends Cubit<TocState> {
   Future<void> fetchItems(int id) async {
     try {
       emit(const TocState.loading());
+      print('id is $id');
       final items = await _jsonRepository.fetchJsonTocById(id);
       emit(TocState.loaded(items));
     } catch (e) {

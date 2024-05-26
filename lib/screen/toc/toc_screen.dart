@@ -25,7 +25,7 @@ class TocScreen extends StatelessWidget {
               print('Loaded items: $items'); // Debug print
               return _buildTocTree(items);
             },
-            error: (message) => Center(child: Text(message)),
+            error: (message) => Center(child: SelectionArea(child: Text(message))),
           );
         },
       ),
@@ -33,36 +33,21 @@ class TocScreen extends StatelessWidget {
   }
 
   Widget _buildTocTree(List<TocItem> items) {
-    Map<int, List<TocItem>> tree = {};
-    for (var item in items) {
-      print('Item in list: ${item.title}'); // Debug print
-      tree.putIfAbsent(item.parentId, () => []).add(item);
-    }
-
-    // Find the root parentId dynamically
-    int rootParentId = tree.keys.isNotEmpty ? tree.keys.reduce((a, b) => a < b ? a : b) : 0;
-
-    return _buildTreeNodes(tree, rootParentId);
+    return ListView(
+      children: items.map((item) => _buildTocItem(item)).toList(),
+    );
   }
 
-  Widget _buildTreeNodes(Map<int, List<TocItem>> tree, int parentId) {
-    if (!tree.containsKey(parentId)) {
-      print('No items for parentId: $parentId'); // Debug print
-      return Container();
+  Widget _buildTocItem(TocItem item) {
+    if (item.childs == null || item.childs!.isEmpty) {
+      return ListTile(
+        title: Text(item.title),
+      );
+    } else {
+      return ExpansionTile(
+        title: Text(item.title),
+        children: item.childs!.map((child) => _buildTocItem(child)).toList(),
+      );
     }
-
-    return ListView(
-      shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
-      children: tree[parentId]!.map((item) {
-        print('Item: ${item.title}'); // Debug print
-        return ExpansionTile(
-          title: Text(item.title),
-          children: [
-            _buildTreeNodes(tree, item.id),
-          ],
-        );
-      }).toList(),
-    );
   }
 }

@@ -13,7 +13,10 @@ _$TocItemImpl _$$TocItemImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       id: (json['id'] as num).toInt(),
       parentId: (json['parentId'] as num).toInt(),
-      childs: (json['childs'] as num).toInt(),
+      childs: (json['childs'] as List<dynamic>?)
+              ?.map((e) => TocItem.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$TocItemImplToJson(_$TocItemImpl instance) =>

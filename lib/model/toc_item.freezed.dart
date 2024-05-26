@@ -25,7 +25,7 @@ mixin _$TocItem {
   String get title => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   int get parentId => throw _privateConstructorUsedError;
-  int get childs => throw _privateConstructorUsedError;
+  List<TocItem>? get childs => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,12 @@ abstract class $TocItemCopyWith<$Res> {
       _$TocItemCopyWithImpl<$Res, TocItem>;
   @useResult
   $Res call(
-      {int level, String key, String title, int id, int parentId, int childs});
+      {int level,
+      String key,
+      String title,
+      int id,
+      int parentId,
+      List<TocItem>? childs});
 }
 
 /// @nodoc
@@ -59,7 +64,7 @@ class _$TocItemCopyWithImpl<$Res, $Val extends TocItem>
     Object? title = null,
     Object? id = null,
     Object? parentId = null,
-    Object? childs = null,
+    Object? childs = freezed,
   }) {
     return _then(_value.copyWith(
       level: null == level
@@ -82,10 +87,10 @@ class _$TocItemCopyWithImpl<$Res, $Val extends TocItem>
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int,
-      childs: null == childs
+      childs: freezed == childs
           ? _value.childs
           : childs // ignore: cast_nullable_to_non_nullable
-              as int,
+              as List<TocItem>?,
     ) as $Val);
   }
 }
@@ -98,7 +103,12 @@ abstract class _$$TocItemImplCopyWith<$Res> implements $TocItemCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int level, String key, String title, int id, int parentId, int childs});
+      {int level,
+      String key,
+      String title,
+      int id,
+      int parentId,
+      List<TocItem>? childs});
 }
 
 /// @nodoc
@@ -117,7 +127,7 @@ class __$$TocItemImplCopyWithImpl<$Res>
     Object? title = null,
     Object? id = null,
     Object? parentId = null,
-    Object? childs = null,
+    Object? childs = freezed,
   }) {
     return _then(_$TocItemImpl(
       level: null == level
@@ -140,10 +150,10 @@ class __$$TocItemImplCopyWithImpl<$Res>
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int,
-      childs: null == childs
-          ? _value.childs
+      childs: freezed == childs
+          ? _value._childs
           : childs // ignore: cast_nullable_to_non_nullable
-              as int,
+              as List<TocItem>?,
     ));
   }
 }
@@ -157,7 +167,8 @@ class _$TocItemImpl implements _TocItem {
       required this.title,
       required this.id,
       required this.parentId,
-      required this.childs});
+      final List<TocItem>? childs = const []})
+      : _childs = childs;
 
   factory _$TocItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$TocItemImplFromJson(json);
@@ -172,8 +183,16 @@ class _$TocItemImpl implements _TocItem {
   final int id;
   @override
   final int parentId;
+  final List<TocItem>? _childs;
   @override
-  final int childs;
+  @JsonKey()
+  List<TocItem>? get childs {
+    final value = _childs;
+    if (value == null) return null;
+    if (_childs is EqualUnmodifiableListView) return _childs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
@@ -191,13 +210,13 @@ class _$TocItemImpl implements _TocItem {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.parentId, parentId) ||
                 other.parentId == parentId) &&
-            (identical(other.childs, childs) || other.childs == childs));
+            const DeepCollectionEquality().equals(other._childs, _childs));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, level, key, title, id, parentId, childs);
+  int get hashCode => Object.hash(runtimeType, level, key, title, id, parentId,
+      const DeepCollectionEquality().hash(_childs));
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +239,7 @@ abstract class _TocItem implements TocItem {
       required final String title,
       required final int id,
       required final int parentId,
-      required final int childs}) = _$TocItemImpl;
+      final List<TocItem>? childs}) = _$TocItemImpl;
 
   factory _TocItem.fromJson(Map<String, dynamic> json) = _$TocItemImpl.fromJson;
 
@@ -235,7 +254,7 @@ abstract class _TocItem implements TocItem {
   @override
   int get parentId;
   @override
-  int get childs;
+  List<TocItem>? get childs;
   @override
   @JsonKey(ignore: true)
   _$$TocItemImplCopyWith<_$TocItemImpl> get copyWith =>

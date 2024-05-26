@@ -39,8 +39,21 @@ class JsonRepository {
 
   Future<List<TocItem>> fetchJsonTocById(int id) async {
     final allTocItem = await fetchJsonToc();
-    final tocItem = allTocItem.where((element) => element.parentId == id).toList();
-    return tocItem;
+    List<TocItem> result = [];
+
+    void searchTocItems(List<TocItem> items) {
+      for (var item in items) {
+        if (item.id == id) {
+          result.addAll(item.childs??[]);
+          return;
+        } else {
+          searchTocItems(item.childs??[]);
+        }
+      }
+    }
+
+    searchTocItems(allTocItem);
+    return result;
   }
 
   }

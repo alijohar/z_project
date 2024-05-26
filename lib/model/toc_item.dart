@@ -11,7 +11,7 @@ class TocItem with _$TocItem {
     required String title,
     required int id,
     required int parentId,
-    required int childs,
+    @Default([]) List<TocItem>? childs,
   }) = _TocItem;
 
   factory TocItem.fromJson(Map<String, dynamic> json) => _$TocItemFromJson(json);
