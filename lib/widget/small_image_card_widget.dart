@@ -13,7 +13,7 @@ class SmallImageCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item),
+      onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item, title: item.title ?? ''),
       child: Container(
       
         margin: const EdgeInsets.all(8),

@@ -9,6 +9,8 @@ import 'package:zahra/screen/home/home_screen.dart';
 import 'package:zahra/screen/toc/cubit/toc_cubit.dart';
 import 'package:zahra/screen/toc/toc_screen.dart';
 
+import 'model/item_model.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final _jsonRepository = JsonRepository();
@@ -24,23 +26,31 @@ class RouteGenerator {
           },
         );
       case '/detail':
-        if (args is int) {
+        if (args is Map<String, dynamic>) {
+          final int id = args['id'];
+          final ItemModel? item = args['item'];
+          final String? title = args['title'];
+
           return MaterialPageRoute(
             builder: (context) =>
                 BlocProvider(
                   create: (context) => DetailCubit(_jsonRepository),
-                  child: DetailScreen(id: args,),
+                  child: DetailScreen(id: id, item: item, title: title),
                 ),
           );
         }
         return _errorRoute();
       case '/toc':
-        if (args is int) {
+        if (args is Map<String, dynamic>) {
+          final int id = args['id'];
+          final ItemModel? item = args['item'];
+          final String? title = args['title'];
+
           return MaterialPageRoute(
             builder: (context) =>
                 BlocProvider(
                   create: (context) => TocCubit(_jsonRepository),
-                  child: TocScreen(id: args,),
+                  child: TocScreen(id: id, item: item, title: title),
                 ),
           );
         }

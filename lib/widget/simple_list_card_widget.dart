@@ -6,9 +6,9 @@ import '../model/item_model.dart';
 import '../util/navigation_helper.dart';
 
 class SimpleListCardWidget extends StatelessWidget {
-  final List<SubItems>? items;
+  final ItemModel item;
 
-  const SimpleListCardWidget({super.key, this.items});
+  const SimpleListCardWidget({super.key, required this.item});
 
   @override
   @override
@@ -17,10 +17,10 @@ class SimpleListCardWidget extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.zero,
-      itemCount: items?.length ?? 0,
+      itemCount: item.items?.length ?? 0,
       itemBuilder: (context, index) {
         return GestureDetector(
-            onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: items?[index], goto: items?[index].goto ?? '',),
+            onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: item.items?[index], goto: item.items?[index].goto ?? '', item: item, title: item.items?[index].title ?? ''),
         child: Container(
           alignment: Alignment.centerRight,
           margin: const EdgeInsets.all(8),
@@ -33,7 +33,7 @@ class SimpleListCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Expanded(
-                child: Text(items?[index].title ?? '',
+                child: Text(item.items?[index].title ?? '',
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.titleLarge),
               ),

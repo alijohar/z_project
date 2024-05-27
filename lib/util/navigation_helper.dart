@@ -13,36 +13,49 @@ import 'package:zahra/widget/three_items_card_widget.dart';
 import '../widget/simple_list_card_widget.dart';
 
 class NavigationHelper {
-  static void navigateTo({required String goto, ItemModel? item, SubItems? subItem, required BuildContext context}) {
+  static void navigateTo(
+      {required String goto,
+      ItemModel? item,
+      SubItems? subItem,
+      String? title,
+      required BuildContext context}) {
     switch (goto) {
       case 'text':
         navigateToEpub(item, context);
         break;
       case 'jsonGraphic':
-        navigateToDetail(subItem, item, context);
+        navigateToDetail(subItem, item, context, title);
         break;
       case 'jsonList':
-        navigateToToc(subItem, item, context);
+        navigateToToc(subItem, item, context, title);
         break;
     }
   }
 
-  static void navigateToToc(SubItems? subItem, ItemModel? item, BuildContext context) {
+  static void navigateToToc(
+      SubItems? subItem, ItemModel? item, BuildContext context, String? title) {
     int id = subItem?.id ?? item?.linkTo?.id ?? 0;
-    Navigator.of(context).pushNamed('/toc', arguments: id);
+    Navigator.of(context).pushNamed(
+      '/toc',
+      arguments: {'id': id, 'item': item, 'title': title},
+    );
   }
 
-  static void navigateToDetail(SubItems? subItem, ItemModel? item, BuildContext context) {
+  static void navigateToDetail(
+      SubItems? subItem, ItemModel? item, BuildContext context, String? title) {
     int id = subItem?.id ?? item?.linkTo?.id ?? 0;
-    Navigator.of(context).pushNamed('/detail', arguments: id);
-
+    Navigator.of(context).pushNamed(
+      '/detail',
+      arguments: {'id': id, 'item': item, 'title': title},
+    );
   }
 
   static void navigateToEpub(ItemModel? item, BuildContext context) {
     String? bookPath = item?.linkTo?.key?.split('_').first;
     String? sectionName = item?.linkTo?.key?.split('_').last;
     ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(content: Text('it must open $bookPath name and go to $sectionName')),
+      SnackBar(
+          content: Text('it must open $bookPath name and go to $sectionName')),
     );
   }
 
@@ -51,28 +64,29 @@ class NavigationHelper {
       case 'bigimage':
         return BigImageCardWidget(item: item);
       case 'blue_list':
-        return BlueListCardWidget(items: item.items);
+        return BlueListCardWidget(item: item);
       case 'circleList':
-        return CircleListCardWidget(items: item.items);
+        return CircleListCardWidget(item: item);
       case 'normalList':
-        return NormalListCardWidget(items: item.items);
+        return NormalListCardWidget(item: item);
       case 'singleDark':
         return SingleDarkCardWidget(item: item);
       case 'dubleLight':
-        return MultiDarkCardWidget(items: item.items);
+        return MultiDarkCardWidget(item: item);
+      case 'dubleDark':
+        return MultiDarkCardWidget(item: item);
       case 'tripleDark':
-        return MultiDarkCardWidget(items: item.items);
+        return MultiDarkCardWidget(item: item);
       case 'smallimage':
         return SmallImageCardWidget(item: item);
       case 'squareList':
-        return SquareListCardWidget(items: item.items);
+        return SquareListCardWidget(item: item);
       case 'list':
-        return SimpleListCardWidget(items: item.items);
+        return SimpleListCardWidget(item: item);
       case 'threeitems':
-        return ThreeItemsCardWidget(items: item.items);
+        return ThreeItemsCardWidget(item: item);
       default:
         return ListTile(title: Text('Unknown item type: ${item.type}'));
     }
   }
-
 }

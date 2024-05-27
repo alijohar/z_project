@@ -29,7 +29,7 @@ class SingleDarkCardWidget extends StatelessWidget {
         ),
       ),
       child: GestureDetector(
-        onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item),
+        onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item, ),
     child: Text(
         textAlign: TextAlign.center,
         item.title??'',

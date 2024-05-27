@@ -6,9 +6,9 @@ import '../model/item_model.dart';
 import '../util/navigation_helper.dart';
 
 class ThreeItemsCardWidget extends StatelessWidget {
-  final List<SubItems>? items;
+  final ItemModel item;
 
-  const ThreeItemsCardWidget({super.key, required this.items});
+  const ThreeItemsCardWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       child: Row(
-        children: items!.map((item) => Container(
+        children: item.items!.map((item) => Container(
           margin: const EdgeInsets.all(8),
           height: 130,
           width: MediaQuery.of(context).size.width/3.7,

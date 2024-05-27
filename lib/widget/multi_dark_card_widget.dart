@@ -6,11 +6,11 @@ import '../model/item_model.dart';
 import '../util/navigation_helper.dart';
 
 class MultiDarkCardWidget extends StatelessWidget {
-  final List<SubItems>? items;
+  final ItemModel item;
 
   const MultiDarkCardWidget({
     super.key,
-    required this.items,
+    required this.item,
   });
 
   @override
@@ -29,8 +29,7 @@ class MultiDarkCardWidget extends StatelessWidget {
         ),
       ),
       child: Row(
-        children: items
-        !.map((item) => Expanded(
+        children: item.items!.map((item) => Expanded(
           child: Row(children: [
             Expanded(
               child: GestureDetector(

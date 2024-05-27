@@ -6,9 +6,9 @@ import '../util/dodecagon_clipper.dart';
 import '../util/navigation_helper.dart';
 
 class BlueListCardWidget extends StatelessWidget {
-  final List<SubItems>? items;
+  final ItemModel item;
 
-  const BlueListCardWidget({super.key, required this.items});
+  const BlueListCardWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +19,10 @@ class BlueListCardWidget extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
-        itemCount: items?.length,
+        itemCount: item.items?.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-              onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: items?[index], goto: items?[index].goto ?? '',),
+              onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: item.items?[index], goto: item.items?[index].goto ?? '', item: item, title: item.items?[index].title ?? ''),
           child: ClipPath(
             clipper: DodecagonClipper(),  // Applying the custom clipper for hexagon shape
             child: Container(
@@ -36,7 +36,7 @@ class BlueListCardWidget extends StatelessWidget {
 
               child: Center(
                 child: Text(
-                  items?[index].title??'',
+                  item.items?[index].title??'',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),

@@ -5,9 +5,9 @@ import 'package:zahra/model/item_model.dart';
 import '../util/navigation_helper.dart';
 
 class SquareListCardWidget extends StatelessWidget {
-  final List<SubItems>? items;
+  final ItemModel item;
 
-  const SquareListCardWidget({super.key, required this.items});
+  const SquareListCardWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,10 @@ class SquareListCardWidget extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
-        itemCount: items?.length??0,
+        itemCount: item.items?.length??0,
         itemBuilder: (context, index) {
           return GestureDetector(
-              onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: items?[index], goto: items?[index].goto ?? '',),
+              onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: item.items?[index], goto: item.items?[index].goto ?? '', item: item, title: item.items?[index].title ?? ''),
           child: Container(
             width: MediaQuery.of(context).size.width / 3.5, // Slightly more space than the fixed width previously
             margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -40,7 +40,7 @@ class SquareListCardWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      items?[index].title??'',
+                      item.items?[index].title??'',
                       textAlign: TextAlign.right,
                       style: Theme.of(context)
                           .textTheme

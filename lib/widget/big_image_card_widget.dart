@@ -11,7 +11,7 @@ class BigImageCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item),
+        onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item, title: item.title ?? ''),
     child: Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(8),
