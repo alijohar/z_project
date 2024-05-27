@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:zahra/model/category_model.dart';
 import 'package:zahra/model/item_model.dart';
+import 'package:zahra/util/epub_helper.dart';
 import 'package:zahra/widget/big_image_card_widget.dart';
 import 'package:zahra/widget/blue_list_card_widget.dart';
 import 'package:zahra/widget/circle_list_card_widget.dart';
@@ -53,10 +55,11 @@ class NavigationHelper {
   static void navigateToEpub(ItemModel? item, BuildContext context) {
     String? bookPath = item?.linkTo?.key?.split('_').first;
     String? sectionName = item?.linkTo?.key?.split('_').last;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text('it must open $bookPath name and go to $sectionName')),
-    );
+    openBook(context, bookPath, sectionName);
+  }
+
+  static void openBook(BuildContext context, String? bookPath, String? sectionName) {
+      openEpub(context: context, cat: CategoryModel(bookPath: '1.epub'));
   }
 
   static Widget buildItem(BuildContext context, ItemModel item) {

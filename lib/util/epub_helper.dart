@@ -20,7 +20,7 @@ void openEpub({
   CategoryModel? cat,
   ReferenceModel? reference,
   EpubChaptersWithBookPath? toc,
-  SearchModel? search
+  SearchModel? search,
 }) {
   Navigator.push(
     context,

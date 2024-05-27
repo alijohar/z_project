@@ -74,6 +74,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
           .read<EpubViewerCubit>()
           .jumpToPage(chapterFileName: _chapter!.ContentFileName);
     }
+
     if (!isSliderVisible) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     } else {

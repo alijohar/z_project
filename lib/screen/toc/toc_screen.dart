@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/model/item_model.dart';
 import 'package:zahra/screen/toc/cubit/toc_cubit.dart';
+import 'package:zahra/util/navigation_helper.dart';
 
 import '../../model/toc_item.dart';
 
@@ -100,7 +101,8 @@ class TocScreen extends StatelessWidget {
   }
 
   void _navigateTo(BuildContext context, TocItem item) {
-    // Implement your navigation logic here
-    // Example: NavigationHelper.navigateTo(context: context, goto: item.goto ?? '', subItem: item);
+    String? bookPath = item.key.split('_').first;
+    String? sectionName = item.key.split('_').last;
+    NavigationHelper.openBook(context, bookPath, sectionName);
   }
 }
