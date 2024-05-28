@@ -35,13 +35,24 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/image/main_light.jpg"),
-                fit: BoxFit.cover,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          Align(
+            alignment: Alignment.topCenter, // Align the image to the top
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/image/main_light.jpg"),
+                  fit: BoxFit.fitWidth, // Keep fitWidth
+                  alignment: Alignment.topCenter, // Ensure the image starts from the top
+                ),
               ),
             ),
           ),
+
           AnimatedBuilder(
             animation: _opacityNotifier,
             builder: (_, __) => Container(

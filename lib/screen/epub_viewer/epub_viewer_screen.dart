@@ -565,7 +565,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                 return Stack(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 26, right: 16, left: 16),
+                      padding: const EdgeInsets.only(top: 26, right: 16, left: 16),
                       // Reserve space for the AppBar-like header
                       child: EpubChapterListWidget(
                         tocTreeList: _tocList ?? [],
