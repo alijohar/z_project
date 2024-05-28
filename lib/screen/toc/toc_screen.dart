@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/model/item_model.dart';
 import 'package:zahra/screen/toc/cubit/toc_cubit.dart';
@@ -56,12 +57,16 @@ class TocScreen extends StatelessWidget {
       return _buildCardView(item, context);
     } else {
       return Container(
-
-        child: ExpansionTile(
-          title: _buildCardView(item, context, isParent: true),
-          children: item.childs!.map((child) => _buildTocItem(child, context)).toList(),
-          iconColor: Colors.yellow,
-          collapsedIconColor: Colors.yellow,
+        margin: const EdgeInsets.all(16.0), // Margin between parent items
+        child: Card(
+          color: Theme.of(context).colorScheme.onPrimary,
+          elevation: 0,
+          child: ExpansionTile(
+            title: _buildCardTitle(item, context),
+            iconColor: Colors.yellow,
+            collapsedIconColor: Colors.yellow,
+            children: item.childs!.map((child) => _buildTocItem(child, context)).toList(),
+          ),
         ),
       );
     }
@@ -70,35 +75,62 @@ class TocScreen extends StatelessWidget {
   Widget _buildCardView(TocItem item, BuildContext context, {bool isParent = false}) {
     return Container(
       alignment: Alignment.center,
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: !isParent ? () => _navigateTo(context, item) : null,
-              child: Container(
-                margin: isParent ? const EdgeInsets.all(0): const EdgeInsets.only(right: 60),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+      margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: isParent ? 0.0 : 16.0),
+      child: Card(
+        color: Theme.of(context).colorScheme.onPrimary,
+        elevation: 0,
+        child: Container(
+          margin: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: !isParent ? () => _navigateTo(context, item) : null,
+                  child: Row(
+                    children: [
+                      Expanded(
                         child: Text(
                           item.title,
                           textAlign: TextAlign.right,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primary),
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        margin: const EdgeInsets.all(16),
+                        width: 10,
+                        height: 10,
+                        color: Color(0xFFCFA355),
+                      ),
+                    ],
+                  ),
                 ),
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCardTitle(TocItem item, BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Expanded(
+            child: Text(
+              item.title,
+              textAlign: TextAlign.right,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primary),
             ),
           ),
         ],
       ),
     );
   }
+
 
   void _navigateTo(BuildContext context, TocItem item) {
     String? bookPath = item.key.split('_').first;

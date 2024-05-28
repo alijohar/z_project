@@ -16,14 +16,14 @@ class MultiDarkCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 130,
       alignment: Alignment.center,
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(26),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.yellow[600]!),
-        image: DecorationImage(
+        image: const DecorationImage(
           image: AssetImage("assets/image/singledark.jpg"),
           fit: BoxFit.cover,
         ),

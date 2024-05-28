@@ -21,7 +21,7 @@ class SingleDarkCardWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(26),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.yellow[600]!),
         image: DecorationImage(
           image: AssetImage("assets/image/singledark.jpg"),

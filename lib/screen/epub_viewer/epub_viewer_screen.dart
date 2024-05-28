@@ -156,7 +156,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       onPressed: () => _toggleSearch(true),
                     ),
                     IconButton(
-                      icon: SvgPicture.asset('assets/icon/style.svg', color: Theme.of(context).colorScheme.onSurfaceVariant),
+                      icon: SvgPicture.asset('assets/icon/font.svg', color: Theme.of(context).colorScheme.onSurfaceVariant),
                       onPressed: () {
                         _showBottomSheet(
                             context, context.read<EpubViewerCubit>());
@@ -178,7 +178,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       },
                     ),
                     IconButton(
-                      icon: SvgPicture.asset('assets/icon/toc.svg', color: Theme.of(context).colorScheme.onSurfaceVariant),
+                      icon: SvgPicture.asset('assets/icon/list.svg', color: Theme.of(context).colorScheme.onSurfaceVariant),
                       onPressed: () {
                         _openInternalToc(context);
                       },
@@ -367,7 +367,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                             ".fnote": Style(
                               color: Colors.blueGrey,
                               fontSize: FontSize(fontSize.size-fontSize.size/4),
-                        
+
                             ),
                             "html": Style(
                               textAlign: TextAlign.justify,
@@ -399,50 +399,53 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
           ),
         ),
         if (isSliderVisible)
-          Column(
-            children: [
-              Slider(
-                value: _currentPage,
-                min: 0,
-                max: allPagesCount - 1,
-                onChanged: (newValue) {
-                  _isSliderChange = true;
-                  setState(() {
-                    _currentPage = newValue;
-                  });
-                },
-                onChangeEnd: (newValue) {
-                  _jumpTo(pageNumber: newValue.toInt());
-                  _isSliderChange = false;
-                },
-              ),
-              Padding(
-                padding:
-                const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 0.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        _bookName,
-                        style: Theme.of(context).textTheme.labelMedium,
-                        maxLines: 1,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        _showPageJumpDialog(context);
-                      },
-                      child: Text(
-                        '${_currentPage.toInt() + 1}/${allPagesCount.toInt()}',
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                    )
-
-                  ],
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Column(
+              children: [
+                Slider(
+                  value: _currentPage,
+                  min: 0,
+                  max: allPagesCount - 1,
+                  onChanged: (newValue) {
+                    _isSliderChange = true;
+                    setState(() {
+                      _currentPage = newValue;
+                    });
+                  },
+                  onChangeEnd: (newValue) {
+                    _jumpTo(pageNumber: newValue.toInt());
+                    _isSliderChange = false;
+                  },
                 ),
-              ),
-            ],
+                Padding(
+                  padding:
+                  const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 0.0, top: 0.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          _bookName,
+                          style: Theme.of(context).textTheme.labelMedium,
+                          maxLines: 1,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          _showPageJumpDialog(context);
+                        },
+                        child: Text(
+                          '${allPagesCount.toInt()}/${_currentPage.toInt() + 1}',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      )
+
+                    ],
+                  ),
+                ),
+              ],
+            ),
           )
       ],
     );
@@ -551,58 +554,61 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
             showAppBar.value = notification.extent == notification.maxExtent;
             return true; // Return true to cancel the notification bubbling.
           },
-          child: DraggableScrollableSheet(
-            expand: false,
-            initialChildSize: 0.5,
-            minChildSize: 0.25,
-            maxChildSize: 1.0,
-            builder: (BuildContext context, ScrollController scrollController) {
-              return Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 56),
-                    // Reserve space for the AppBar-like header
-                    child: EpubChapterListWidget(
-                      tocTreeList: _tocList ?? [],
-                      scrollController: scrollController,
-                      epubViewerCubit: this.context.read<EpubViewerCubit>(),
-                      onClose: () {
-                        Future.delayed(const Duration(milliseconds: 300), () {
-                          Navigator.pop(context);
-                        });
-                      },
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: DraggableScrollableSheet(
+              expand: false,
+              initialChildSize: 0.5,
+              minChildSize: 0.25,
+              maxChildSize: 1.0,
+              builder: (BuildContext context, ScrollController scrollController) {
+                return Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 26, right: 16, left: 16),
+                      // Reserve space for the AppBar-like header
+                      child: EpubChapterListWidget(
+                        tocTreeList: _tocList ?? [],
+                        scrollController: scrollController,
+                        epubViewerCubit: this.context.read<EpubViewerCubit>(),
+                        onClose: () {
+                          Future.delayed(const Duration(milliseconds: 300), () {
+                            Navigator.pop(context);
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  // Use ValueListenableBuilder to react to changes in showAppBar
-                  ValueListenableBuilder<bool>(
-                    valueListenable: showAppBar,
-                    builder: (context, value, child) {
-                      return value
-                          ? Positioned(
-                        top: 20,
-                        left: 0,
-                        right: 0,
-                        child: SafeArea(
-                          child: Container(
-                            height: 56,
-                            // Standard AppBar height
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            alignment: Alignment.centerRight,
-                            color: Colors.transparent,
-                            // Adjust the color as needed
-                            child: IconButton(
-                              icon: Icon(Icons.arrow_back),
-                              onPressed: () => Navigator.pop(context),
+                    // Use ValueListenableBuilder to react to changes in showAppBar
+                    ValueListenableBuilder<bool>(
+                      valueListenable: showAppBar,
+                      builder: (context, value, child) {
+                        return value
+                            ? Positioned(
+                          top: 20,
+                          left: 0,
+                          right: 0,
+                          child: SafeArea(
+                            child: Container(
+                              height: 56,
+                              // Standard AppBar height
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              alignment: Alignment.centerRight,
+                              color: Colors.transparent,
+                              // Adjust the color as needed
+                              child: IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: () => Navigator.pop(context),
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                          : SizedBox.shrink(); // If false, don't show anything
-                    },
-                  ),
-                ],
-              );
-            },
+                        )
+                            : SizedBox.shrink(); // If false, don't show anything
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         );
       },

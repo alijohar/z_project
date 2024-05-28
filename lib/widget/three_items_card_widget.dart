@@ -46,7 +46,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
                   margin: const EdgeInsets.all(8),
                   width: 10,
                   height: 10,
-                  color: Colors.yellow[600],
+                  color: Color(0xFFCFA355),
                 ),
               ],
             ),

@@ -12,7 +12,7 @@ class SquareListCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130, // Fixed height for the container
+      height: 150, // Fixed height for the container
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       child: ListView.builder(
@@ -51,7 +51,7 @@ class SquareListCardWidget extends StatelessWidget {
                     margin: const EdgeInsets.all(8),
                     width: 10,
                     height: 10,
-                    color: Colors.yellow[600],
+                    color: Color(0xFFCFA355),
                   ),
                 ],
               ),

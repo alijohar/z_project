@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../model/style_model.dart';
@@ -91,163 +92,167 @@ class _StyleSheetState extends State<StyleSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // SizedBox(height: 16),
-          // Text(
-          //   'Text setting wizard',
-          //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          // ),
-          // SizedBox(height: 26),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   children: [
-          //     Column(
-          //       children: [
-          //         IconButton(
-          //           icon: Icon(Icons.contrast),
-          //           onPressed: () {
-          //
-          //           },
-          //         ),
-          //         const Text(
-          //           'High Contrast',
-          //           style: TextStyle(fontSize: 10),
-          //         ),
-          //       ],
-          //     ),
-          //     Column(
-          //       children: [
-          //         IconButton(
-          //           icon: Icon(Icons.dark_mode),
-          //           onPressed: () {
-          //
-          //           },
-          //         ),
-          //         Text(
-          //           'Dark Mode',
-          //           style: TextStyle(fontSize: 10),
-          //         ),
-          //       ],
-          //     ),
-          //     Column(
-          //       children: [
-          //         IconButton(
-          //           icon: Icon(Icons.zoom_out_map),
-          //           onPressed: () {
-          //             _handleFontSizeSliderChange(0.8);
-          //             _handleLineHeightSliderChange(0.8);
-          //           },
-          //         ),
-          //         Text(
-          //           'More readability',
-          //           style: TextStyle(fontSize: 10),
-          //         ),
-          //       ],
-          //     ),
-          //     Column(
-          //       children: [
-          //         IconButton(
-          //           icon: Icon(Icons.article),
-          //           onPressed: () {
-          //           },
-          //         ),
-          //         Text(
-          //           'High Contrast',
-          //           style: TextStyle(fontSize: 10),
-          //         ),
-          //       ],
-          //     ),
-          //   ],
-          // ),
-          // SizedBox(height: 18,),
-          // Divider(), // Add a divider here
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // SizedBox(height: 16),
+            // Text(
+            //   'Text setting wizard',
+            //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            // ),
+            // SizedBox(height: 26),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Column(
+            //       children: [
+            //         IconButton(
+            //           icon: Icon(Icons.contrast),
+            //           onPressed: () {
+            //
+            //           },
+            //         ),
+            //         const Text(
+            //           'High Contrast',
+            //           style: TextStyle(fontSize: 10),
+            //         ),
+            //       ],
+            //     ),
+            //     Column(
+            //       children: [
+            //         IconButton(
+            //           icon: Icon(Icons.dark_mode),
+            //           onPressed: () {
+            //
+            //           },
+            //         ),
+            //         Text(
+            //           'Dark Mode',
+            //           style: TextStyle(fontSize: 10),
+            //         ),
+            //       ],
+            //     ),
+            //     Column(
+            //       children: [
+            //         IconButton(
+            //           icon: Icon(Icons.zoom_out_map),
+            //           onPressed: () {
+            //             _handleFontSizeSliderChange(0.8);
+            //             _handleLineHeightSliderChange(0.8);
+            //           },
+            //         ),
+            //         Text(
+            //           'More readability',
+            //           style: TextStyle(fontSize: 10),
+            //         ),
+            //       ],
+            //     ),
+            //     Column(
+            //       children: [
+            //         IconButton(
+            //           icon: Icon(Icons.article),
+            //           onPressed: () {
+            //           },
+            //         ),
+            //         Text(
+            //           'High Contrast',
+            //           style: TextStyle(fontSize: 10),
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(height: 18,),
+            // Divider(), // Add a divider here
 
-          SizedBox(height: 18,),
-          Text('إعدادات النص', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-          SizedBox(height: 18), // Add spacing before the Chip widgets
+            const SizedBox(height: 18,),
+             Padding(padding: EdgeInsets.only(right: 26, left: 26),
+            child: Text('إعدادات النص', style: Theme.of(context).textTheme.titleMedium),
+            ),
+             SizedBox(height: 18), // Add spacing before the Chip widgets
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InputChip(
-                label: Text('خط ١'),
-                selected: _selectedChipIndex == 0,
-                onSelected: (isSelected) {
-                  _handleChipSelection(isSelected ? 0 : -1);
-                },
-              ),
-              InputChip(
-                label: Text('خط ٢'),
-                selected: _selectedChipIndex == 1,
-                onSelected: (isSelected) {
-                  _handleChipSelection(isSelected ? 1 : -1);
-                },
-              ),
-              InputChip(
-                label: Text('خط ٣'),
-                selected: _selectedChipIndex == 2,
-                onSelected: (isSelected) {
-                  _handleChipSelection(isSelected ? 2 : -1);
-                },
-              ),
-              InputChip(
-                label: Text('خط ٤'),
-                selected: _selectedChipIndex == 3,
-                onSelected: (isSelected) {
-                  _handleChipSelection(isSelected ? 3 : -1);
-                },
-              ),
-              InputChip(
-                label: Text('خط ٥'),
-                selected: _selectedChipIndex == 4,
-                onSelected: (isSelected) {
-                  _handleChipSelection(isSelected ? 4 : -1);
-                },
-              ),
-            ],
-          ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     InputChip(
+            //       label: Text('خط ١'),
+            //       selected: _selectedChipIndex == 0,
+            //       onSelected: (isSelected) {
+            //         _handleChipSelection(isSelected ? 0 : -1);
+            //       },
+            //     ),
+            //     InputChip(
+            //       label: Text('خط ٢'),
+            //       selected: _selectedChipIndex == 1,
+            //       onSelected: (isSelected) {
+            //         _handleChipSelection(isSelected ? 1 : -1);
+            //       },
+            //     ),
+            //     InputChip(
+            //       label: Text('خط ٣'),
+            //       selected: _selectedChipIndex == 2,
+            //       onSelected: (isSelected) {
+            //         _handleChipSelection(isSelected ? 2 : -1);
+            //       },
+            //     ),
+            //     InputChip(
+            //       label: Text('خط ٤'),
+            //       selected: _selectedChipIndex == 3,
+            //       onSelected: (isSelected) {
+            //         _handleChipSelection(isSelected ? 3 : -1);
+            //       },
+            //     ),
+            //     InputChip(
+            //       label: Text('خط ٥'),
+            //       selected: _selectedChipIndex == 4,
+            //       onSelected: (isSelected) {
+            //         _handleChipSelection(isSelected ? 4 : -1);
+            //       },
+            //     ),
+            //   ],
+            // ),
 
-          const SizedBox(height: 26), // Add spacing between the Chip and Slider widgets
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Slider(
-                  divisions: FontSizeCustom.values.length - 1,
-                  value: _fontSizeSliderValue,
-                  onChanged: _handleFontSizeSliderChange,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Slider(
+                    divisions: FontSizeCustom.values.length - 1,
+                    value: _fontSizeSliderValue,
+                    onChanged: _handleFontSizeSliderChange,
+                  ),
                 ),
-              ),
-              const Icon(Icons.text_increase, size: 18, color: Colors.grey,),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Slider(
-                  divisions: LineHeightCustom.values.length - 1,
-                  value: _lineHeightSliderValue,
-                  onChanged: _handleLineHeightSliderChange,
+                const Icon(Icons.text_increase, size: 18, color: Colors.grey,),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Slider(
+                    divisions: LineHeightCustom.values.length - 1,
+                    value: _lineHeightSliderValue,
+                    onChanged: _handleLineHeightSliderChange,
+                  ),
                 ),
-              ),
-              Icon(Icons.format_line_spacing, size: 18, color: Colors.grey,),
-            ],
-          ),
-          // IconButton(
-          //   icon: Icon(Icons.color_lens),
-          //   onPressed: _showColorPicker,
-          // ),
-        ],
+                Icon(Icons.format_line_spacing, size: 18, color: Colors.grey,),
+              ],
+            ),
+            // IconButton(
+            //   icon: Icon(Icons.color_lens),
+            //   onPressed: _showColorPicker,
+            // ),
+          ],
+        ),
+
+
       ),
-
-
     );
   }
 }

@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/image/main_light.jpg"),
-                fit: BoxFit.cover, // This will cover the whole area of the Scaffold body
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       loaded: (items) => SliverList(
                         delegate: SliverChildBuilderDelegate(
-                              (context, index) => NavigationHelper.buildItem(context, items[index]),
+                              (context, index) => Padding(padding: const EdgeInsets.only(right: 12, left: 12), child: NavigationHelper.buildItem(context, items[index])),
                           childCount: items.length,
                         ),
                       ),
