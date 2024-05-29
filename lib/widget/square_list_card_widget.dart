@@ -12,7 +12,7 @@ class SquareListCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150, // Fixed height for the container
+      height: 140, // Fixed height for the container
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       child: ListView.builder(

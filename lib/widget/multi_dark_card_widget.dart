@@ -16,7 +16,7 @@ class MultiDarkCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130,
+      height: 110,
       alignment: Alignment.center,
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
@@ -29,27 +29,39 @@ class MultiDarkCardWidget extends StatelessWidget {
         ),
       ),
       child: Row(
-        children: item.items!.map((item) => Expanded(
-          child: Row(children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  print('item.goto: ${item.goto}');
-                  NavigationHelper.navigateTo(context: context, subItem: item, goto: item.goto ?? '',);
-                },
-          child: Text(
-                textAlign: TextAlign.center,
-                item.title??'',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: Colors.white),
-              ),
+        children: item.items!.map((item) {
+          return Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      print('item.goto: ${item.goto}');
+                      NavigationHelper.navigateTo(
+                        context: context,
+                        subItem: item,
+                        goto: item.goto ?? '',
+                      );
+                    },
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      item.title ?? '',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
+                if (item != this.item.items!.last) // Add condition to avoid adding divider after the last item
+                   VerticalDivider(
+                    color: Theme.of(context).colorScheme.primary,
+                    thickness: 2,
+                  ),
+              ],
             ),
-
-            )]),
-        ))
-            .toList(),
+          );
+        }).toList(),
       ),
     );
   }

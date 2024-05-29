@@ -17,43 +17,44 @@ class ThreeItemsCardWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       child: Row(
-        children: item.items!.map((item) => Container(
-          margin: const EdgeInsets.all(8),
-          height: 130,
-          width: MediaQuery.of(context).size.width/3.7,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            image: const DecorationImage(
-              image: AssetImage('assets/image/squarelist_light.jpg'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 36.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => NavigationHelper.navigateTo(context: context, goto: item.goto ?? '', subItem: item),
-          child: Text(
-                    textAlign: TextAlign.right,
-                    item.title??'',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  )),
-                Container(
+        children: item.items!
+            .map((item) => Container(
                   margin: const EdgeInsets.all(8),
-                  width: 10,
-                  height: 10,
-                  color: Color(0xFFCFA355),
-                ),
-              ],
-            ),
-          ),
-        )).toList(),
+                  height: 110,
+                  width: MediaQuery.of(context).size.width / 4,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: const DecorationImage(
+                      image: AssetImage('assets/image/squarelist_light.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                          child: GestureDetector(
+                        onTap: () => NavigationHelper.navigateTo(
+                            context: context,
+                            goto: item.goto ?? '',
+                            subItem: item),
+                        child: Text(
+                          textAlign: TextAlign.right,
+                          item.title ?? '',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      )),
+                      Container(
+                        margin: const EdgeInsets.all(8),
+                        width: 10,
+                        height: 10,
+                        color: Color(0xFFCFA355),
+                      ),
+                    ],
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
-
 }

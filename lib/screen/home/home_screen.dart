@@ -63,14 +63,14 @@ class _HomeScreenState extends State<HomeScreen> {
             onNotification: (scrollNotification) {
               if (scrollNotification is ScrollUpdateNotification) {
                 var pixels = scrollNotification.metrics.pixels;
-                _opacityNotifier.value = (pixels / 600).clamp(0.0, 1.0);
+                _opacityNotifier.value = (pixels / 560).clamp(0.0, 1.0);
               }
               return true;
             },
             child: CustomScrollView(
               slivers: <Widget>[
                 const SliverAppBar(
-                  expandedHeight: 600.0,
+                  expandedHeight: 560.0,
                   floating: false,
                   pinned: false,
                   backgroundColor: Colors.transparent,
