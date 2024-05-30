@@ -14,14 +14,12 @@ class ThreeItemsCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8),
       child: Row(
         children: item.items!
             .map((item) => Container(
                   margin: const EdgeInsets.all(8),
                   height: 110,
-                  width: MediaQuery.of(context).size.width / 4,
+                  width: MediaQuery.of(context).size.width / 3.6,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: const DecorationImage(
@@ -38,17 +36,26 @@ class ThreeItemsCardWidget extends StatelessWidget {
                             context: context,
                             goto: item.goto ?? '',
                             subItem: item),
-                        child: Text(
-                          textAlign: TextAlign.right,
-                          item.title ?? '',
-                          style: Theme.of(context).textTheme.titleLarge,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12.0, bottom: 12.0),
+                          child: Text(
+                            textAlign: TextAlign.left,
+                            item.title ?? '',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
                         ),
                       )),
-                      Container(
-                        margin: const EdgeInsets.all(8),
-                        width: 10,
-                        height: 10,
-                        color: Color(0xFFCFA355),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          margin: const EdgeInsets.all(16),
+                          width: 10,
+                          height: 10,
+                        ),
                       ),
                     ],
                   ),

@@ -13,7 +13,8 @@ class TocScreen extends StatelessWidget {
   final ItemModel? item;
   final String? title;
 
-  const TocScreen({super.key, required this.id, required this.item, this.title});
+  const TocScreen(
+      {super.key, required this.id, required this.item, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,9 @@ class TocScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Theme.of(context).colorScheme.surface, // Change this to your desired color
+          color: Theme.of(context)
+              .colorScheme
+              .surface, // Change this to your desired color
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
@@ -33,13 +36,15 @@ class TocScreen extends StatelessWidget {
       body: BlocBuilder<TocCubit, TocState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: Text('Tap to start fetching...')),
+            initial: () =>
+                const Center(child: Text('Tap to start fetching...')),
             loading: () => const Center(child: CircularProgressIndicator()),
             loaded: (items) {
               print('Loaded items: $items'); // Debug print
               return _buildTocTree(items, context);
             },
-            error: (message) => Center(child: SelectionArea(child: Text(message))),
+            error: (message) =>
+                Center(child: SelectionArea(child: Text(message))),
           );
         },
       ),
@@ -57,25 +62,30 @@ class TocScreen extends StatelessWidget {
       return _buildCardView(item, context);
     } else {
       return Container(
-        margin: const EdgeInsets.all(16.0), // Margin between parent items
+        margin: const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 6), // Margin between parent items
         child: Card(
           color: Theme.of(context).colorScheme.onPrimary,
           elevation: 0,
           child: ExpansionTile(
             title: _buildCardTitle(item, context),
-            iconColor: Colors.yellow,
-            collapsedIconColor: Colors.yellow,
-            children: item.childs!.map((child) => _buildTocItem(child, context)).toList(),
+            iconColor: Color(0xFFCFA355),
+            collapsedIconColor: Color(0xFFCFA355),
+
+            children: item.childs!
+                .map((child) => _buildTocItem(child, context))
+                .toList(),
           ),
         ),
       );
     }
   }
 
-  Widget _buildCardView(TocItem item, BuildContext context, {bool isParent = false}) {
+  Widget _buildCardView(TocItem item, BuildContext context,
+      {bool isParent = false}) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: isParent ? 0.0 : 16.0),
+      margin: EdgeInsets.symmetric(
+          vertical: 0.0, horizontal: isParent ? 0.0 : 16.0),
       child: Card(
         color: Theme.of(context).colorScheme.onPrimary,
         elevation: 0,
@@ -88,16 +98,21 @@ class TocScreen extends StatelessWidget {
                 child: GestureDetector(
                   onTap: !isParent ? () => _navigateTo(context, item) : null,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Text(
                           item.title,
                           textAlign: TextAlign.right,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primary),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary),
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.only(right: 16, left: 16, top: 8),
                         width: 10,
                         height: 10,
                         color: Color(0xFFCFA355),
@@ -123,14 +138,16 @@ class TocScreen extends StatelessWidget {
             child: Text(
               item.title,
               textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primary),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: Theme.of(context).colorScheme.primary),
             ),
           ),
         ],
       ),
     );
   }
-
 
   void _navigateTo(BuildContext context, TocItem item) {
     String? bookPath = item.key.split('_').first;

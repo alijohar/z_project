@@ -13,8 +13,7 @@ class CircleListCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100, // Adjusted for better visibility of the hexagon
-      margin: const EdgeInsets.all(8),
+      height: 120, // Adjusted for better visibility of the hexagon
       padding: const EdgeInsets.all(8),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -28,12 +27,12 @@ class CircleListCardWidget extends StatelessWidget {
             child: CustomPaint(
               child: Container(
                 width: MediaQuery.of(context).size.width / 4,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Color(0xFF2f7c9c),
                 alignment: Alignment.center,
                 child: Text(
                   item.items?[index].title??'',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Color(0xFFcac37a))
                 ),
               ),
             ),

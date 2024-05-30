@@ -13,8 +13,7 @@ class NormalListCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60, // Fixed height for the container
-      margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(6),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
@@ -26,13 +25,15 @@ class NormalListCardWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 3.5, // Slightly more space than the fixed width previously
             margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
+              border: Border.all(color: Color(0xFFCFA355), width: 2),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(20),  // Top right corner
                 bottomLeft: Radius.circular(20),  // Bottom left corner
               ),
               color: Theme.of(context).colorScheme.onPrimary,
             ),
-            child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
               child: Text(
                   item.items?[index].title??'',
                   textAlign: TextAlign.center,

@@ -32,13 +32,13 @@ class SmallImageCardWidget extends StatelessWidget {
             ),
             Container(
               width: 2,
-              height: 90,
+              height: 84,
               margin: EdgeInsets.all(8.0),
               color: Theme.of(context).colorScheme.primary,
             ),
             Container(
               width: MediaQuery.of(context).size.width/2,
-              height: 110,
+              height: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(8),  // Top right corner

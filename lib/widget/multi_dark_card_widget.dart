@@ -16,13 +16,13 @@ class MultiDarkCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 110,
+      height: 90,
       alignment: Alignment.center,
       margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.yellow[600]!),
+        border: Border.all(color: Color(0xFFdfad52)),
         image: const DecorationImage(
           image: AssetImage("assets/image/singledark.jpg"),
           fit: BoxFit.cover,
@@ -56,7 +56,7 @@ class MultiDarkCardWidget extends StatelessWidget {
                 if (item != this.item.items!.last) // Add condition to avoid adding divider after the last item
                    VerticalDivider(
                     color: Theme.of(context).colorScheme.primary,
-                    thickness: 2,
+                    thickness: 5,
                   ),
               ],
             ),

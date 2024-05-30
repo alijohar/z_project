@@ -12,9 +12,8 @@ class SquareListCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140, // Fixed height for the container
+      height: 110,
       margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(8),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
@@ -23,7 +22,7 @@ class SquareListCardWidget extends StatelessWidget {
           return GestureDetector(
               onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: item.items?[index], goto: item.items?[index].goto ?? '', item: item, title: item.items?[index].title ?? ''),
           child: Container(
-            width: MediaQuery.of(context).size.width / 3.5, // Slightly more space than the fixed width previously
+            width: MediaQuery.of(context).size.width / 3.7, // Slightly more space than the fixed width previously
             margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -39,19 +38,31 @@ class SquareListCardWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
-                    child: Text(
-                      item.items?[index].title??'',
-                      textAlign: TextAlign.right,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge),
-
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    width: 10,
-                    height: 10,
-                    color: Color(0xFFCFA355),
+                      child: GestureDetector(
+                        onTap: () => NavigationHelper.navigateTo(
+                            context: context,
+                            goto: item.items?[index].goto ?? '',
+                            subItem: item.items?[index]),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12.0, bottom: 12.0),
+                          child: Text(
+                            textAlign: TextAlign.left,
+                            item.items?[index].title??'',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      margin: const EdgeInsets.all(16),
+                      width: 10,
+                      height: 10,
+                    ),
                   ),
                 ],
               ),

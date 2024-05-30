@@ -23,7 +23,7 @@ class SimpleListCardWidget extends StatelessWidget {
             onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: item.items?[index], goto: item.items?[index].goto ?? '', item: item, title: item.items?[index].title ?? ''),
         child: Container(
           alignment: Alignment.centerRight,
-          margin: const EdgeInsets.all(8),
+          margin: const EdgeInsets.all(6),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.onPrimary,

@@ -359,31 +359,119 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                         child: Html(
                           data: content[index],
                           style: {
-                            ".pagen, .fm": Style(
-                              padding: HtmlPaddings.only(top: 40),
+                            "body": Style(
+                              direction: TextDirection.rtl,
+                              textAlign: TextAlign.justify,
+                              lineHeight: LineHeight(lineHeight.size),
+                              padding: HtmlPaddings.all(20),
+                              textDecoration: TextDecoration.none,
+                            ),
+                            "p": Style(
+                              textAlign: TextAlign.justify,
+                              fontSize: FontSize(fontSize.size),
+                              margin: Margins.symmetric(vertical: 10),
+                              fontFamily: fontFamily.name,
+                            ),
+                            ".tit1": Style(
+                              color: Colors.green[700],
+                              fontSize: FontSize(fontSize.size),
+                              margin: Margins.symmetric(vertical: 10),
+                              textAlign: TextAlign.center,
+                              fontFamily: fontFamily.name,
+                            ),
+                            ".tit2": Style(
+                              color: Colors.black87,
+                              fontSize: FontSize(fontSize.size),
+                              margin: Margins.symmetric(vertical: 10),
+                              textAlign: TextAlign.center,
+                              fontFamily: fontFamily.name,
+                            ),
+                            ".tit3": Style(
+                              color: Colors.black87,
+                              fontSize: FontSize(fontSize.size),
+                              margin: Margins.symmetric(vertical: 10),
+                              fontFamily: fontFamily.name,
+                            ),
+                            ".tit4": Style(
                               color: Colors.red,
+                              fontSize: FontSize(fontSize.size),
+                              margin: Margins.zero,
+                              textAlign: TextAlign.right,
+                              fontFamily: fontFamily.name,
+                            ),
+                            
+                            ".pagen": Style(
+                              textAlign: TextAlign.center,
+                              color: Colors.red,
+                              fontSize: FontSize(fontSize.size*0.7),
+                            ),
+                            ".asl": Style(
+                              color: Colors.deepOrange,
+                              fontSize: FontSize(fontSize.size),
+                              fontWeight: FontWeight.bold,
+                              margin: Margins.symmetric(vertical: 10),
+                              fontFamily: 'Lotus Qazi Bold',
+                            ),
+                            ".center": Style(
                               textAlign: TextAlign.center,
                             ),
                             ".fnote": Style(
-                              color: Colors.blueGrey,
-                              fontSize: FontSize(fontSize.size-fontSize.size/4),
-
+                              color: Colors.blue,
+                              fontSize: FontSize(fontSize.size*0.8),
+                              margin: Margins.zero,
                             ),
-                            "html": Style(
-                              textAlign: TextAlign.justify,
-                              direction: TextDirection.rtl,
+                            ".sher": Style(
+                              textAlign: TextAlign.center,
+                              color: Colors.red[800],
                               fontSize: FontSize(fontSize.size),
-                              padding: HtmlPaddings.only(right: 10, left: 10),
-                              fontFamily: fontFamily.name,
-                              lineHeight: LineHeight(lineHeight.size),
+                              margin: Margins.symmetric(vertical: 10),
                             ),
-                            "h1,h2,h3,h4,h5,h6": Style(
-                              textAlign: TextAlign.right,
-                              direction: TextDirection.rtl,
-                              padding: HtmlPaddings.only(top: 30),
-                              fontSize: FontSize(fontSize.size * 1.2),
+                            ".fnotesher": Style(
+                              textAlign: TextAlign.center,
+                              color: Colors.red[800],
+                              fontSize: FontSize(fontSize.size),
+                              margin: Margins.zero,
+                            ),
+                            ".psm": Style(
+                              textAlign: TextAlign.center,
+                              color: Colors.red[800],
+                              fontSize: FontSize(fontSize.size),
+                              margin: Margins.symmetric(vertical: 10),
+                            ),
+                            ".msaleh": Style(
+                              color: Colors.purple,
                               fontWeight: FontWeight.bold,
-                              fontFamily: fontFamily.name,
+                            ),
+                            ".fn": Style(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.normal,
+                              fontSize: FontSize(fontSize.size*0.8),
+                              textDecoration: TextDecoration.none,
+                              verticalAlign: VerticalAlign.top,
+                            ),
+                            ".fm": Style(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: FontSize(fontSize.size*0.7),
+                              textDecoration: TextDecoration.none,
+                            ),
+                            ".quran": Style(
+                              fontWeight: FontWeight.bold,
+                              fontSize: FontSize(fontSize.size),
+                              color: Colors.green,
+                            ),
+                            ".hadith": Style(
+                              fontWeight: FontWeight.bold,
+                              fontSize: FontSize(fontSize.size),
+                              color: Colors.teal,
+                            ),
+                            ".shreah": Style(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.purple[900],
+                            ),
+                            ".kalema": Style(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.pink[700],
                             ),
                             "mark": Style(
                               backgroundColor: Colors.yellow, // Highlight color
