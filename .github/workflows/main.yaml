@@ -36,42 +36,4 @@ jobs:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           token: ${{ secrets.FIREBASE_TOKEN }}
           groups: 'masahaTeam'
-name: "Build and Release Unsigned Android App"
-
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-  build:
-    name: Build and Release
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.19.5'
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build Unsigned Release APK
-        run: flutter build apk --release --no-shrink
-
-      - name: Upload artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          token: ${{ secrets.FIREBASE_TOKEN }}
-          groups: 'masahaTeam'
           file: build/app/outputs/flutter-apk/app-debug.apk
