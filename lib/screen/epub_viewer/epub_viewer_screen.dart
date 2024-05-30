@@ -399,7 +399,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                               textAlign: TextAlign.right,
                               fontFamily: fontFamily.name,
                             ),
-                            
+
                             ".pagen": Style(
                               textAlign: TextAlign.center,
                               color: Colors.red,

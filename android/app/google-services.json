@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "48071450543",
+    "project_id": "alzahra-app",
+    "storage_bucket": "alzahra-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48071450543:android:a3fd0de7d140f95acdd95a",
+        "android_client_info": {
+          "package_name": "org.masaha.alzahra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv8L8qn_u2KSRc_p5psIhMXq9ckvRhKys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
