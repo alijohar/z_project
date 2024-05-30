@@ -1,4 +1,4 @@
-name: "Build and Release Unsigned Android App"
+name: "Build and Release Debug Android App"
 
 on:
   push:
@@ -27,8 +27,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build Unsigned Release APK
-        run: flutter build apk --release --no-shrink
+      - name: Build Debug APK
+        run: flutter build apk --debug
 
       - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
