@@ -104,6 +104,10 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     }
   }
 
+  Future<void> emitCustomPageSeen(String customPage) async {
+    jumpToPage(newPage: int.parse(customPage));
+    }
+
   void _storeEpubDetails(EpubBook epubBook, List<HtmlFileInfo> epubContent,
       String assetPath) {
     _epubBook = epubBook;

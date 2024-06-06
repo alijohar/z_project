@@ -197,6 +197,9 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       loaded: (content, _, tocList) {
                         _storeContentLoaded(content, context, state, tocList);
                         context.read<EpubViewerCubit>().emitLastPageSeen();
+                        if (widget.referenceModel?.navIndex !=null){
+                          context.read<EpubViewerCubit>().emitCustomPageSeen(widget.referenceModel?.navIndex ?? '0');
+                        }
                         context.read<EpubViewerCubit>().loadUserPreferences();
                         context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
                         return _buildCurrentUi(context, _content);

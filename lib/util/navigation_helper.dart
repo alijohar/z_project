@@ -12,6 +12,7 @@ import 'package:zahra/widget/small_image_card_widget.dart';
 import 'package:zahra/widget/square_list_card_widget.dart';
 import 'package:zahra/widget/three_items_card_widget.dart';
 
+import '../model/reference_model.dart';
 import '../widget/simple_list_card_widget.dart';
 
 class NavigationHelper {
@@ -59,7 +60,8 @@ class NavigationHelper {
   }
 
   static void openBook(BuildContext context, String? bookPath, String? sectionName) {
-      openEpub(context: context, cat: CategoryModel(bookPath: '1.epub'));
+      final _bookPath = '$bookPath.epub';
+      openEpub(context: context, reference: ReferenceModel(title: '', bookName: '',bookPath: _bookPath, navIndex: sectionName.toString()));
   }
 
   static Widget buildItem(BuildContext context, ItemModel item) {
