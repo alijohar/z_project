@@ -33,7 +33,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 android {
-    namespace "com.amorphteam.zahra"
+    namespace "org.masaha.alzahra"
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
