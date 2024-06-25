@@ -56,7 +56,9 @@ class NavigationHelper {
   static void navigateToEpub(ItemModel? item, BuildContext context) {
     String? bookPath = item?.linkTo?.key?.split('_').first;
     String? sectionName = item?.linkTo?.key?.split('_').last;
-    openBook(context, bookPath, sectionName);
+    int sectionNumber = int.parse(sectionName ?? '0');
+    String sectionNumberString = (sectionNumber-1).toString();
+    openBook(context, bookPath, sectionNumberString);
   }
 
   static void openBook(BuildContext context, String? bookPath, String? sectionName) {

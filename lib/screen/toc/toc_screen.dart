@@ -152,6 +152,8 @@ class TocScreen extends StatelessWidget {
   void _navigateTo(BuildContext context, TocItem item) {
     String? bookPath = item.key.split('_').first;
     String? sectionName = item.key.split('_').last;
-    NavigationHelper.openBook(context, bookPath, sectionName);
+    int sectionNumber = int.parse(sectionName ?? '0');
+    String sectionNumberString = (sectionNumber-1).toString();
+    NavigationHelper.openBook(context, bookPath, sectionNumberString);
   }
 }

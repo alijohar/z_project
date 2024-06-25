@@ -48,7 +48,7 @@ class SquareListCardWidget extends StatelessWidget {
                           child: Text(
                             textAlign: TextAlign.left,
                             item.items?[index].title??'',
-                            style: Theme.of(context).textTheme.titleLarge,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
                       )),

@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final halfMediaHeight = MediaQuery.of(context).size.height / 2.0;
     context.read<HomeCubit>().fetchItems();
 
     return Scaffold(
@@ -69,8 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: CustomScrollView(
               slivers: <Widget>[
-                const SliverAppBar(
-                  expandedHeight: 560.0,
+                 SliverAppBar(
+                  expandedHeight: halfMediaHeight,
                   floating: false,
                   pinned: false,
                   backgroundColor: Colors.transparent,

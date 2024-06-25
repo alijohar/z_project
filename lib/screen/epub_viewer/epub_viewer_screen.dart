@@ -355,9 +355,13 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                     });
                   },
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: screenHeight), // Set minHeight to screenHeight
+                    constraints: BoxConstraints(minHeight: screenHeight),
                     child: Container(
-                      color: Theme.of(context).colorScheme.background,
+                      margin: EdgeInsets.only(right: 16, left: 16),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background, // Set color here to use rounded corners
+                        borderRadius: BorderRadius.circular(10), // Adjust the radius to your liking
+                      ),
                       child: SelectionArea(
                         child: Html(
                           data: content[index],
@@ -419,7 +423,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                               textAlign: TextAlign.center,
                             ),
                             ".fnote": Style(
-                              color: Colors.blue,
+                              color: Colors.blue[900],
                               fontSize: FontSize(fontSize.size*0.8),
                               margin: Margins.zero,
                             ),
@@ -446,7 +450,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                             ".fn": Style(
-                              color: Colors.blue,
+                              color: Colors.blue[900],
                               fontWeight: FontWeight.normal,
                               fontSize: FontSize(fontSize.size*0.8),
                               textDecoration: TextDecoration.none,
