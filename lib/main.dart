@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       onSurface: Color(0xFF1B1C17),
       primaryContainer: Color(0xFFCDEF84),
       onPrimaryContainer: Color(0xFF141F00),
-      secondaryContainer: Color(0xFFCDEF84),
+      secondaryContainer: Color(0xFFCFA355),
       onSecondaryContainer: Color(0xFF171E09),
       tertiaryContainer: Color(0xFFBCECE4),
       onTertiaryContainer: Color(0xFF00201D),
@@ -56,12 +56,25 @@ class MyApp extends StatelessWidget {
 
     final ThemeData lightTheme = ThemeData(
       useMaterial3: true,
+      navigationBarTheme: NavigationBarThemeData(
+        labelTextStyle: MaterialStateProperty.all(
+          TextStyle(
+            color: lightColorScheme.primary,
+          ),
+        ),),
       colorScheme: lightColorScheme,
       fontFamily: 'tajwal',
     );
 
     final ThemeData darkTheme = ThemeData(
       useMaterial3: true,
+      navigationBarTheme: NavigationBarThemeData(
+        labelTextStyle: MaterialStateProperty.all(
+          TextStyle(
+            color: lightColorScheme.primary,
+          ),
+        ),),
+
       colorScheme: ColorScheme.fromSeed(
         seedColor: lightColorScheme.primary,
         brightness: Brightness.dark,

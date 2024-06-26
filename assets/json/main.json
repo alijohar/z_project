@@ -1,6 +1,6 @@
 [
   {
-    "title": "فاطمة في سطور",
+    "title": "فاطمة\nفي سطور",
     "type": "smallimage",
     "picName": "1.jpg",
     "items": [],
@@ -54,7 +54,7 @@
     }
   },
   {
-    "title": "فاطمة في الحديث",
+    "title": "فاطمة\nفي الحديث",
     "type": "smallimage",
     "picName": "3.jpg",
     "items": [],
@@ -147,7 +147,7 @@
   {
     "title": "زواج المبارك",
     "type": "bigimage",
-    "picName": "6.png",
+    "picName": "6.jpg",
     "items": [],
     "linkTo": {
       "goto": "jsonGraphic",
@@ -172,19 +172,19 @@
     "picName": "",
     "items": [
       {
-        "title": "تسبيح فاطمة",
+        "title": "تسبيح\nفاطمة",
         "goto": "jsonGraphic",
         "key": "",
         "id": 8
       },
       {
-        "title": "صلوات فاطمة",
+        "title": "صلوات\nفاطمة",
         "goto": "jsonList",
         "key": "",
         "id": 5713
       },
       {
-        "title": "أدعية فاطمة",
+        "title": "أدعية\nفاطمة",
         "goto": "jsonGraphic",
         "key": "",
         "id": 9
@@ -195,7 +195,7 @@
   {
     "title": "الظلامة الكبرى",
     "type": "bigimage",
-    "picName": "7.png",
+    "picName": "7.jpg",
     "items": [],
     "linkTo": {
       "goto": "jsonGraphic",
@@ -220,13 +220,13 @@
     "picName": "",
     "items": [
       {
-        "title": "الخطب الغراء",
+        "title": "الخطب\nالغراء",
         "goto": "jsonGraphic",
         "key": "",
         "id": 12
       },
       {
-        "title": "مسند فاطمة",
+        "title": "مسند\nفاطمة",
         "goto": "jsonGraphic",
         "key": "",
         "id": 13
