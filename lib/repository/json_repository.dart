@@ -3,6 +3,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:zahra/model/item_model.dart';
 import 'package:zahra/model/toc_item.dart';
 
+import '../model/book_json_model.dart';
+
 class JsonRepository {
   Future<List<ItemModel>> fetchItems() async {
     final String response = await rootBundle.loadString('assets/json/main.json');
@@ -56,4 +58,14 @@ class JsonRepository {
     return result;
   }
 
+  Future<List<Book>> fetchBooks() async {
+    final String response = await rootBundle.loadString('assets/json/library.json');
+    final List<dynamic> data = json.decode(response) as List<dynamic>;
+
+    return data.map((item) {
+      return Book.fromJson(item as Map<String, dynamic>);
+    }).toList();
   }
+
+
+}

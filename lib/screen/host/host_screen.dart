@@ -4,6 +4,7 @@ import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:zahra/util/navigation_helper.dart';
 
 import '../home/home_screen.dart';
+import '../library/library_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +33,7 @@ class _HostScreenState extends State<HostScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    Container(color: Colors.red), // Replace with your actual widget for second tab
+    const LibraryScreen(), // Replace with your actual widget for second tab
     Container(color: Colors.green), // Replace with your actual widget for third tab
     Container(color: Colors.yellow), // Replace with your actual widget for fourth tab
   ];
