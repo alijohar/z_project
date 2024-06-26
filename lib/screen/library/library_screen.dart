@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zahra/model/category_model.dart';
+import '../../model/reference_model.dart';
+import '../../util/epub_helper.dart';
 import 'cubit/library_cubit.dart';
 
 class LibraryScreen extends StatelessWidget {
@@ -46,9 +49,9 @@ class LibraryScreen extends StatelessWidget {
                                           .textTheme
                                           .titleLarge
                                           ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary),
                                     ),
                                     Text(
                                       book.title2,
@@ -56,9 +59,9 @@ class LibraryScreen extends StatelessWidget {
                                           .textTheme
                                           .titleLarge
                                           ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary),
                                     ),
                                   ],
                                 ),
@@ -85,10 +88,10 @@ class LibraryScreen extends StatelessWidget {
                                             .textTheme
                                             .titleSmall
                                             ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                        ),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -111,10 +114,10 @@ class LibraryScreen extends StatelessWidget {
                                             .textTheme
                                             .titleSmall
                                             ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                        ),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -122,7 +125,8 @@ class LibraryScreen extends StatelessWidget {
                                 const SizedBox(height: 10),
                                 if (book.subtitle.sub3 != null)
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Container(
@@ -138,10 +142,10 @@ class LibraryScreen extends StatelessWidget {
                                               .textTheme
                                               .titleSmall
                                               ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -149,7 +153,8 @@ class LibraryScreen extends StatelessWidget {
                                 const SizedBox(height: 10),
                                 if (book.subtitle.sub4 != null)
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Container(
@@ -165,10 +170,10 @@ class LibraryScreen extends StatelessWidget {
                                               .textTheme
                                               .titleSmall
                                               ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -176,7 +181,8 @@ class LibraryScreen extends StatelessWidget {
                                 const SizedBox(height: 10),
                                 if (book.subtitle.sub5 != null)
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Container(
@@ -192,10 +198,10 @@ class LibraryScreen extends StatelessWidget {
                                               .textTheme
                                               .titleSmall
                                               ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                          ),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -212,22 +218,36 @@ class LibraryScreen extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.bottomCenter,
                             child: GestureDetector(
-                              onTap: (){
-                                print('woooow');
+                              onTap: () {
+                                final _bookPath = '${book.epubName}.epub';
+                                openEpub(
+                                    context: context, cat: CategoryModel(bookPath: _bookPath));
                               },
                               child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Color(0xFFdfad52)),
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/image/singledark.jpg"),
-                                    fit: BoxFit.cover,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border:
+                                        Border.all(color: Color(0xFFdfad52)),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          "assets/image/singledark.jpg"),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                                width: 130,
-                                height: 30,
-                                child: Center(child: Text('مطالعة', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.background),),)
-                              ),
+                                  width: 130,
+                                  height: 30,
+                                  child: Center(
+                                    child: Text(
+                                      'مطالعة',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .background),
+                                    ),
+                                  )),
                             ),
                           ),
                         ),
