@@ -70,13 +70,13 @@ class LibraryScreen extends StatelessWidget {
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 12),
                                 Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.all(8),
+                                      margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
                                       width: 10,
                                       height: 10,
                                       color: const Color(0xFFCFA355),
@@ -102,7 +102,7 @@ class LibraryScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.all(8),
+                                      margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
                                       width: 10,
                                       height: 10,
                                       color: const Color(0xFFCFA355),
@@ -130,7 +130,7 @@ class LibraryScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.all(8),
+                                        margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
                                         width: 10,
                                         height: 10,
                                         color: const Color(0xFFCFA355),
@@ -158,7 +158,7 @@ class LibraryScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.all(8),
+                                        margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
                                         width: 10,
                                         height: 10,
                                         color: const Color(0xFFCFA355),
@@ -186,7 +186,7 @@ class LibraryScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.all(8),
+                                        margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
                                         width: 10,
                                         height: 10,
                                         color: const Color(0xFFCFA355),

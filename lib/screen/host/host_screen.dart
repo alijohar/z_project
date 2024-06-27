@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zahra/screen/about/about_app_screen.dart';
 import 'package:zahra/screen/home/cubit/home_cubit.dart';
+import 'package:zahra/screen/search/search_screen.dart';
 import 'package:zahra/util/navigation_helper.dart';
 
 import '../home/home_screen.dart';
@@ -34,8 +36,8 @@ class _HostScreenState extends State<HostScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const LibraryScreen(), // Replace with your actual widget for second tab
-    Container(color: Colors.green), // Replace with your actual widget for third tab
-    Container(color: Colors.yellow), // Replace with your actual widget for fourth tab
+    SearchScreen(), // Replace with your actual widget for third tab
+    AboutAppScreen(), // Replace with your actual widget for fourth tab
   ];
 
   @override
