@@ -18,8 +18,8 @@ class Book with _$Book {
 @freezed
 class Subtitle with _$Subtitle {
   const factory Subtitle({
-    required String sub1,
-    required String sub2,
+    String? sub1,
+    String? sub2,
     String? sub3,
     String? sub4,
     String? sub5,

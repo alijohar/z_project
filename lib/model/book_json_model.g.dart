@@ -23,8 +23,8 @@ Map<String, dynamic> _$$BookImplToJson(_$BookImpl instance) =>
 
 _$SubtitleImpl _$$SubtitleImplFromJson(Map<String, dynamic> json) =>
     _$SubtitleImpl(
-      sub1: json['sub1'] as String,
-      sub2: json['sub2'] as String,
+      sub1: json['sub1'] as String?,
+      sub2: json['sub2'] as String?,
       sub3: json['sub3'] as String?,
       sub4: json['sub4'] as String?,
       sub5: json['sub5'] as String?,

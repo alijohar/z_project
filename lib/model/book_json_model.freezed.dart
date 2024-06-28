@@ -223,8 +223,8 @@ Subtitle _$SubtitleFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Subtitle {
-  String get sub1 => throw _privateConstructorUsedError;
-  String get sub2 => throw _privateConstructorUsedError;
+  String? get sub1 => throw _privateConstructorUsedError;
+  String? get sub2 => throw _privateConstructorUsedError;
   String? get sub3 => throw _privateConstructorUsedError;
   String? get sub4 => throw _privateConstructorUsedError;
   String? get sub5 => throw _privateConstructorUsedError;
@@ -241,7 +241,7 @@ abstract class $SubtitleCopyWith<$Res> {
       _$SubtitleCopyWithImpl<$Res, Subtitle>;
   @useResult
   $Res call(
-      {String sub1, String sub2, String? sub3, String? sub4, String? sub5});
+      {String? sub1, String? sub2, String? sub3, String? sub4, String? sub5});
 }
 
 /// @nodoc
@@ -257,21 +257,21 @@ class _$SubtitleCopyWithImpl<$Res, $Val extends Subtitle>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sub1 = null,
-    Object? sub2 = null,
+    Object? sub1 = freezed,
+    Object? sub2 = freezed,
     Object? sub3 = freezed,
     Object? sub4 = freezed,
     Object? sub5 = freezed,
   }) {
     return _then(_value.copyWith(
-      sub1: null == sub1
+      sub1: freezed == sub1
           ? _value.sub1
           : sub1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      sub2: null == sub2
+              as String?,
+      sub2: freezed == sub2
           ? _value.sub2
           : sub2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       sub3: freezed == sub3
           ? _value.sub3
           : sub3 // ignore: cast_nullable_to_non_nullable
@@ -297,7 +297,7 @@ abstract class _$$SubtitleImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String sub1, String sub2, String? sub3, String? sub4, String? sub5});
+      {String? sub1, String? sub2, String? sub3, String? sub4, String? sub5});
 }
 
 /// @nodoc
@@ -311,21 +311,21 @@ class __$$SubtitleImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sub1 = null,
-    Object? sub2 = null,
+    Object? sub1 = freezed,
+    Object? sub2 = freezed,
     Object? sub3 = freezed,
     Object? sub4 = freezed,
     Object? sub5 = freezed,
   }) {
     return _then(_$SubtitleImpl(
-      sub1: null == sub1
+      sub1: freezed == sub1
           ? _value.sub1
           : sub1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      sub2: null == sub2
+              as String?,
+      sub2: freezed == sub2
           ? _value.sub2
           : sub2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       sub3: freezed == sub3
           ? _value.sub3
           : sub3 // ignore: cast_nullable_to_non_nullable
@@ -345,20 +345,15 @@ class __$$SubtitleImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SubtitleImpl implements _Subtitle {
-  const _$SubtitleImpl(
-      {required this.sub1,
-      required this.sub2,
-      this.sub3,
-      this.sub4,
-      this.sub5});
+  const _$SubtitleImpl({this.sub1, this.sub2, this.sub3, this.sub4, this.sub5});
 
   factory _$SubtitleImpl.fromJson(Map<String, dynamic> json) =>
       _$$SubtitleImplFromJson(json);
 
   @override
-  final String sub1;
+  final String? sub1;
   @override
-  final String sub2;
+  final String? sub2;
   @override
   final String? sub3;
   @override
@@ -403,8 +398,8 @@ class _$SubtitleImpl implements _Subtitle {
 
 abstract class _Subtitle implements Subtitle {
   const factory _Subtitle(
-      {required final String sub1,
-      required final String sub2,
+      {final String? sub1,
+      final String? sub2,
       final String? sub3,
       final String? sub4,
       final String? sub5}) = _$SubtitleImpl;
@@ -413,9 +408,9 @@ abstract class _Subtitle implements Subtitle {
       _$SubtitleImpl.fromJson;
 
   @override
-  String get sub1;
+  String? get sub1;
   @override
-  String get sub2;
+  String? get sub2;
   @override
   String? get sub3;
   @override

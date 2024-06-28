@@ -62,6 +62,32 @@ class SearchHelper {
     return tempResult;
   }
 
+  Future<void> searchingAllBooks(
+      List<String> allBooks, String word, Function(List<SearchModel>) onResultsFound) async {
+    final List<SearchModel> allResults = [];
+    for (final book in allBooks) {
+      if (_isSearchStopped) break;
+      final EpubBook epubBook = await loadEpubFromAsset(book);
+      final List<HtmlFileInfo> epubContent =
+      await extractHtmlContentWithEmbeddedImages(epubBook);
+      var spineItems = epubBook.Schema?.Package?.Spine?.Items;
+      List<String> idRefs = [];
+
+      if (spineItems != null) {
+        for (var item in spineItems) {
+          if (item.IdRef != null) {
+            idRefs.add(item.IdRef!);
+          }
+        }
+      }
+      final epubNewContent = reorderHtmlFilesBasedOnSpine(epubContent, idRefs);
+      final spineHtmlContent =
+          epubNewContent.map((info) => info.modifiedHtmlContent).toList();
+      final result = await searchHtmlContents(spineHtmlContent, word);
+      allResults.addAll(result);
+      onResultsFound(allResults);
+    }
+  }
   Future<List<SearchModel>> searchHtmlContents(List<String> htmlContents, String searchWord) async {
     List<SearchModel> results = [];
 

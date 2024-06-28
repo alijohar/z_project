@@ -79,22 +79,6 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     }
   }
 
-  List<HtmlFileInfo> reorderHtmlFilesBasedOnSpine(List<HtmlFileInfo> htmlFiles, List<String>? spineItems) {
-    if (spineItems == null || spineItems.isEmpty) return htmlFiles;
-
-    Map<String, HtmlFileInfo> htmlFilesMap = {
-      for (var file in htmlFiles) file.fileName.replaceAll('Text/', ''): file
-    };
-
-    List<HtmlFileInfo> orderedFiles = [];
-    for (var spineItem in spineItems) {
-      HtmlFileInfo? file = htmlFilesMap[spineItem.replaceFirst('x', '')];
-      if (file != null) {
-        orderedFiles.add(file);
-      }
-    }
-    return orderedFiles;
-  }
 
   Future<void> emitLastPageSeen() async {
     final lastPageNumber = await getLastPageNumberForBook(

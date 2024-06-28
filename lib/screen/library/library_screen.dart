@@ -82,7 +82,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 12),
-                              Row(
+                              if (book.subtitle.sub1 != null)
+                                Row(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -94,7 +95,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      book.subtitle.sub1,
+                                      book.subtitle.sub1!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall
@@ -108,7 +109,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                 ],
                               ),
                               const SizedBox(height: 10),
-                              Row(
+                              if (book.subtitle.sub2 != null)
+                                Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -120,7 +122,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      book.subtitle.sub2,
+                                      book.subtitle.sub2!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall

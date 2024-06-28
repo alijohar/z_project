@@ -77,6 +77,25 @@ String embedImagesInHtmlContent(EpubTextContentFile htmlFile,
   return htmlContent;
 }
 
+
+List<HtmlFileInfo> reorderHtmlFilesBasedOnSpine(List<HtmlFileInfo> htmlFiles, List<String>? spineItems) {
+  if (spineItems == null || spineItems.isEmpty) return htmlFiles;
+
+  Map<String, HtmlFileInfo> htmlFilesMap = {
+    for (var file in htmlFiles) file.fileName.replaceAll('Text/', ''): file
+  };
+
+  List<HtmlFileInfo> orderedFiles = [];
+  for (var spineItem in spineItems) {
+    HtmlFileInfo? file = htmlFilesMap[spineItem.replaceFirst('x', '')];
+    if (file != null) {
+      orderedFiles.add(file);
+    }
+  }
+  return orderedFiles;
+}
+
+
 Future<double?> getLastPageNumberForBook({required String assetPath}) async {
   final pageHelper = PageHelper();
   final parts = assetPath.split('/'); // Split the string by '/'
