@@ -8,14 +8,6 @@ class AboutAppScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Stack(
         children: <Widget>[
-          // Full screen background SVG
-          Positioned.fill(
-            child: SvgPicture.asset(
-              'assets/images/bk_large.svg', // Replace with your SVG file path
-              fit: BoxFit.cover,
-            ),
-          ),
-          // Content at the bottom
           Positioned(
             bottom: 0,
             left: 0,

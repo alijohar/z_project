@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final halfMediaHeight = MediaQuery.of(context).size.height / 2.0;
+    final halfMediaHeight = MediaQuery.of(context).size.height / 1.7;
     context.read<HomeCubit>().fetchItems();
 
     return Scaffold(

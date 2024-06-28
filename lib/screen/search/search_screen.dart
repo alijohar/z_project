@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/widget/search_bar_widget.dart';
+
+import 'cubit/search_cubit.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -7,15 +10,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<String> _searchResults = [];
-
-  void handleSearch(String query) {
-    // Implement your search logic here
-    // For now, it just clears the search results
-    setState(() {
-      _searchResults.add(query); // Replace with actual search logic
-    });
-  }
 
 
   @override
@@ -26,25 +20,28 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.transparent,
         title: SearchBarWiget(
           onClicked: (query) {
-            handleSearch(query);
+            context.read<SearchCubit>().search(query);
           },
-
-      ),),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: _searchResults.length,
+        child: BlocBuilder<SearchCubit, SearchState>(
+          builder: (context, state) {
+            return state.when(
+              initial: () => Center(child: Text('Start your search')),
+              loading: () => Center(child: CircularProgressIndicator()),
+              loaded: (searchResults) => ListView.builder(
+                itemCount: searchResults.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(_searchResults[index]),
+                    title: Text(searchResults[index].spanna??''),
                   );
                 },
               ),
-            ),
-          ],
+              error: (error) => Center(child: Text('Error: $error')),
+            );
+          },
         ),
       ),
     );

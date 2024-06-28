@@ -6,6 +6,7 @@ import 'package:zahra/screen/detail/cubit/detail_cubit.dart';
 import 'package:zahra/screen/detail/detail_screen.dart';
 import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:zahra/screen/home/home_screen.dart';
+import 'package:zahra/screen/host/cubit/host_cubit.dart';
 import 'package:zahra/screen/host/host_screen.dart';
 import 'package:zahra/screen/toc/cubit/toc_cubit.dart';
 import 'package:zahra/screen/toc/toc_screen.dart';
@@ -21,7 +22,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) {
             return BlocProvider(
-              create: (context) => HomeCubit(_jsonRepository),
+              create: (context) => HostCubit(),
               child: HostScreen(),
             );
           },

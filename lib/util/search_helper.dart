@@ -6,7 +6,7 @@ import 'epub_helper.dart';
 import 'package:html/parser.dart' show parse;
 
 class SearchHelper {
-  final int searchSurroundCharNum = 60;
+  final int searchSurroundCharNum = 40;
   bool _isSearchStopped = false;
 
   Future<void> searchAllBooks(

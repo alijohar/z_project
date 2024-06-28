@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zahra/screen/about/about_app_screen.dart';
 import 'package:zahra/screen/home/cubit/home_cubit.dart';
+import 'package:zahra/screen/library/cubit/library_cubit.dart';
+import 'package:zahra/screen/search/cubit/search_cubit.dart';
 import 'package:zahra/screen/search/search_screen.dart';
 import 'package:zahra/util/navigation_helper.dart';
 
+import '../../repository/json_repository.dart';
 import '../home/home_screen.dart';
 import '../library/library_screen.dart';
 
@@ -34,9 +38,18 @@ class _HostScreenState extends State<HostScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const HomeScreen(),
-    const LibraryScreen(), // Replace with your actual widget for second tab
-    SearchScreen(), // Replace with your actual widget for third tab
+    BlocProvider(
+      create: (context) => HomeCubit(JsonRepository()),
+      child: HomeScreen(),
+    ),
+    BlocProvider(
+      create: (context) => LibraryCubit(),
+      child: LibraryScreen(),
+    ), // Replace with your actual widget for second tab
+    BlocProvider(
+      create: (context) => SearchCubit(),
+      child: SearchScreen(),
+    ), // Replace with your actual widget for third tab
     AboutAppScreen(), // Replace with your actual widget for fourth tab
   ];
 
@@ -50,20 +63,23 @@ class _HostScreenState extends State<HostScreen> {
       bottomNavigationBar: Directionality(
         textDirection: TextDirection.rtl,
         child: NavigationBar(
-          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .onPrimary,
           selectedIndex: _currentIndex,
           onDestinationSelected: (index) {
             setState(() {
               _currentIndex = index;
             });
           },
-          destinations: const [
+          destinations: [
             NavigationDestination(
               icon: Icon(Icons.home_rounded),
               label: 'الرئيسية',
             ),
             NavigationDestination(
-              icon: Icon(Icons.library_books_rounded),
+              icon: SvgPicture.asset('assets/icon/library_filled.svg'),
               label: 'المكتبة',
             ),
             NavigationDestination(
