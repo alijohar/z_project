@@ -22,20 +22,18 @@ void openEpub({
   EpubChaptersWithBookPath? toc,
   SearchModel? search,
 }) {
-  Navigator.push(
+  Navigator.pushNamed(
     context,
-    MaterialPageRoute(
-      builder: (context) =>
-          BlocProvider(
-            create: (context) => EpubViewerCubit(),
-            child: EpubViewerScreen(catModel: cat,
-                referenceModel: reference,
-                searchModel: search,
-                tocModel: toc),
-          ),
-    ),
+    '/epubViewer',
+    arguments: {
+      'cat': cat,
+      'reference': reference,
+      'toc': toc,
+      'search': search,
+    },
   );
 }
+
 
 Future<List<HtmlFileInfo>> extractHtmlContentWithEmbeddedImages(
     EpubBook epubBook) async {

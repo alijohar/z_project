@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/model/category_model.dart';
@@ -42,41 +43,47 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         color: Theme.of(context).colorScheme.onPrimary,
                         margin: const EdgeInsets.all(16),
                         child: ListTile(
-                          title: Row(
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.all(8),
-                                width: 3,
-                                height: 60,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    book.title1,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary),
+                          title: Padding(
+                            padding: EdgeInsets.only(top: 16.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                                  width: 3,
+                                  height: 60,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        book.title1,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge
+                                            ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary),
+                                      ),
+                                      Text(
+                                        book.title2,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge
+                                            ?.copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    book.title2,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

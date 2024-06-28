@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:zahra/screen/search/widget/search_results_widget.dart';
+import 'package:zahra/util/epub_helper.dart';
 import 'package:zahra/widget/search_bar_widget.dart';
 
 import 'cubit/search_cubit.dart';
@@ -29,16 +34,9 @@ class _SearchScreenState extends State<SearchScreen> {
         child: BlocBuilder<SearchCubit, SearchState>(
           builder: (context, state) {
             return state.when(
-              initial: () => Center(child: Text('Start your search')),
+              initial: () => Center(child: Text('ابدأ البحث', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.background),)),
               loading: () => Center(child: CircularProgressIndicator()),
-              loaded: (searchResults) => ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(searchResults[index].spanna??''),
-                  );
-                },
-              ),
+              loaded: (searchResults) => SearchResultsWidget(searchResults: searchResults),
               error: (error) => Center(child: Text('Error: $error')),
             );
           },

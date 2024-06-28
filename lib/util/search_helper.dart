@@ -62,14 +62,29 @@ class SearchHelper {
     return tempResult;
   }
 
+  // Your existing searchHtmlContents function remains as is
+
   Future<void> searchingAllBooks(
-      List<String> allBooks, String word, Function(List<SearchModel>) onResultsFound) async {
+      List<String> allBooks,
+      String word,
+      Function(List<SearchModel>) onResultsFound,
+      ) async {
     final List<SearchModel> allResults = [];
+
+    // Iterate through each book asynchronously
     for (final book in allBooks) {
       if (_isSearchStopped) break;
+
+      // Load EPUB book (assuming loadEpubFromAsset is a custom or library function)
       final EpubBook epubBook = await loadEpubFromAsset(book);
+
+      // Extract necessary information
+      final bookName = epubBook.Title;
+      final bookAddress = book.split('/').last;
       final List<HtmlFileInfo> epubContent =
       await extractHtmlContentWithEmbeddedImages(epubBook);
+
+      // Extract spine items from EPUB (assuming this structure exists)
       var spineItems = epubBook.Schema?.Package?.Spine?.Items;
       List<String> idRefs = [];
 
@@ -80,15 +95,25 @@ class SearchHelper {
           }
         }
       }
+
+      // Reorder HTML files based on spine
       final epubNewContent = reorderHtmlFilesBasedOnSpine(epubContent, idRefs);
       final spineHtmlContent =
-          epubNewContent.map((info) => info.modifiedHtmlContent).toList();
-      final result = await searchHtmlContents(spineHtmlContent, word);
+      epubNewContent.map((info) => info.modifiedHtmlContent).toList();
+
+      // Search HTML contents in the book
+      final result = await searchHtmlContents(spineHtmlContent, word, bookName, bookAddress);
+
+      // Accumulate results for this book
       allResults.addAll(result);
-      onResultsFound(allResults);
+
+      // Emit current accumulated results
+      onResultsFound(List.of(allResults)); // Emit a copy of allResults to avoid mutation
+
+      // You can handle UI update here or wherever onResultsFound is called
     }
   }
-  Future<List<SearchModel>> searchHtmlContents(List<String> htmlContents, String searchWord) async {
+  Future<List<SearchModel>> searchHtmlContents(List<String> htmlContents, String searchWord, String? bookName, String? bookAddress) async {
     List<SearchModel> results = [];
 
     for (int i = 0; i < htmlContents.length; i++) {
@@ -100,6 +125,8 @@ class SearchHelper {
           pageIndex: i +1,  // Use the loop index as the page index
           searchCount: results.length + 1,  // Directly use the length of results for search count
           spanna: _getHighlightedSection(searchIndex, pageContent),
+          bookAddress: bookAddress,
+          bookTitle: bookName
         ));
 
         // Continue searching from the end of the last found index

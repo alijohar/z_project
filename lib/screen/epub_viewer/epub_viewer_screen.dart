@@ -200,6 +200,9 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                         if (widget.referenceModel?.navIndex !=null){
                           context.read<EpubViewerCubit>().emitCustomPageSeen(widget.referenceModel?.navIndex ?? '0');
                         }
+                        if (widget.searchModel?.pageIndex !=null){
+                          context.read<EpubViewerCubit>().emitCustomPageSeen((widget.searchModel!.pageIndex - 1).toString() ?? '0');
+                        }
                         context.read<EpubViewerCubit>().loadUserPreferences();
                         context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
                         return _buildCurrentUi(context, _content);
@@ -767,9 +770,9 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   }
 
   _loadEpubFromSearchResult() {
-    _bookPath = widget.searchModel!.pageId;
+    _bookPath = widget.searchModel!.bookAddress;
     _loadAndParseEpub(
-        bookPath: widget.searchModel!.bookAddress!, fileName: _bookPath!);
+        bookPath: _bookPath!);
   }
 
   _loadEpubFromCategory() {

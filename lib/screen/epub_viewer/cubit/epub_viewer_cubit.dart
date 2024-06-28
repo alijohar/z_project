@@ -209,7 +209,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
 
     try {
       // Assuming searchHtmlContents expects the book title, which we stored in _bookTitle
-      List<SearchModel> results = await searchHelper.searchHtmlContents(_spineHtmlContent!, searchTerm);
+      List<SearchModel> results = await searchHelper.searchHtmlContents(_spineHtmlContent!, searchTerm, null, null);
 
       // Emit the search results to the state
       emit(EpubViewerState.searchResultsFound(searchResults: results));
