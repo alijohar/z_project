@@ -62,6 +62,17 @@ class AboutAppScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              height: 40,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/image/masaha_logo.png"),
+                  alignment: Alignment.topCenter, // Ensure the image starts from the top
+                ),
+              ),
+            ),
+
           ],
         ));
   }
