@@ -52,7 +52,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
                             color: Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          margin: const EdgeInsets.all(16),
+                          margin: const EdgeInsets.only(right: 16, bottom: 16),
                           width: 10,
                           height: 10,
                         ),

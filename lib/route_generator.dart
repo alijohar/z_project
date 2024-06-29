@@ -32,13 +32,12 @@ class RouteGenerator {
       case '/detail':
         if (args != null) {
           final int id = args['id'];
-          final ItemModel? item = args['item'];
           final String? title = args['title'];
 
           return MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (context) => DetailCubit(_jsonRepository),
-              child: DetailScreen(id: id, item: item, title: title),
+              child: DetailScreen(id: id, title: title),
             ),
           );
         }

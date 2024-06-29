@@ -317,10 +317,10 @@
         "picName": "",
         "items": [],
         "linkTo": {
-			"goto": "jsonList",
-            "key": "",
-            "id": 5787
-		}
+          "goto": "jsonList",
+          "key": "",
+          "id": 5787
+        }
       }
     ]
   },
@@ -999,7 +999,7 @@
   },
   {
     "id": 8,
-    "title": "تسبيح\nفاطمة",
+    "title": "تسبيح فاطمة",
     "items": [
       {
         "title": "",
@@ -1037,7 +1037,7 @@
   },
   {
     "id": 9,
-    "title": "أدعية\nفاطمة",
+    "title": "أدعية فاطمة",
     "items": [
       {
         "title": "",
@@ -1295,7 +1295,7 @@
             "key": "",
             "id": 4520
           },
-		  {
+          {
             "title": "ضرورة تصديق نحلة فاطمة",
             "goto": "jsonList",
             "key": "",
@@ -1893,60 +1893,71 @@
     "id": 17,
     "title": "حول",
     "items": [
-	  {
+      {
         "title": "",
         "type": "list",
         "picName": "",
         "items": [
-          
-		  {
+
+          {
             "title": "كلمة آية االله العظمى السيد تقي الطباطبائي القمي",
             "goto": "text",
             "key": "1_11",
             "id": 0
           },
-		  {
+          {
             "title": "كلمة آية االله العظمى السيد أبو القاسم الكوكبي",
             "goto": "text",
             "key": "1_15",
             "id": 0
           },
-		  {
+          {
             "title": "كلمة آية االله العظمى السيد محمد صادق الروحاني ",
             "goto": "text",
             "key": "1_19",
             "id": 0
           }
-		  ],
+        ],
         "linkTo": {}
       },
-	  {
+      {
         "title": "",
         "type": "threeitems",
         "picName": "",
         "items": [
-		{
+          {
             "title": "إهداء\nالموسوعة",
             "goto": "text",
             "key": "1_7",
             "id": 0
           },
-		  {
+          {
             "title": "مقدمة\nالموسوعة",
             "goto": "text",
             "key": "1_25",
             "id": 0
           },
-		  {
+          {
             "title": "منهجية\nالموسوعة",
             "goto": "text",
             "key": "1_25",
             "id": 0
           }
-		  ],
+        ],
         "linkTo": {}
+      },
+      {
+        "title": "حول التطبيق",
+        "type": "singleDark",
+        "picName": "",
+        "items": [],
+        "linkTo": {
+          "goto": "text",
+          "key": "about.html",
+          "id": 0
+        }
       }
-	  
+
     ]
   }
 ]

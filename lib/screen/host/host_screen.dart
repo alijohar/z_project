@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zahra/screen/about/about_app_screen.dart';
+import 'package:zahra/screen/about/cubit/about_app_cubit.dart';
 import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:zahra/screen/library/cubit/library_cubit.dart';
 import 'package:zahra/screen/search/cubit/search_cubit.dart';
@@ -50,7 +51,10 @@ class _HostScreenState extends State<HostScreen> {
       create: (context) => SearchCubit(),
       child: SearchScreen(),
     ), // Replace with your actual widget for third tab
-    AboutAppScreen(), // Replace with your actual widget for fourth tab
+    BlocProvider(
+      create: (context) => AboutAppCubit(JsonRepository()),
+      child: AboutAppScreen(id: 17,),
+    ), // Replace with your actual widget for fourth tab
   ];
 
   @override

@@ -9,11 +9,10 @@ import '../../widget/simple_list_card_widget.dart';
 
 class DetailScreen extends StatelessWidget {
   final int id;
-  final ItemModel? item;
   final String? title;
 
   const DetailScreen(
-      {super.key, required this.id, required this.item, this.title});
+      {super.key, required this.id, this.title});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 import '../../../model/search_model.dart';
@@ -44,31 +46,29 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '${currentBookResults.length}',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.secondaryContainer),
-                          ),
-                          Row(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Card(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-
                               Text(
-                                '${widget.searchResults[index].bookTitle}',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.secondaryContainer),
+                                '${currentBookResults.length}',
+                                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.primary),
                               ),
-                              Container(
-                                margin: const EdgeInsets.all(8),
-                                width: 10,
-                                height: 10,
-                                color: const Color(0xFFCFA355),
+                              Expanded(
+                                child: Text(
+                                  textAlign: TextAlign.right,
+                                  '${widget.searchResults[index].bookTitle}',
+                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+                                ),
                               ),
+
                             ],
                           ),
-
-                        ],
+                        ),
                       ),
                     ),
                     ListTile(
@@ -94,7 +94,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                       color: Theme.of(context).colorScheme.background,
                                     ),
                                     "mark": Style(
-                                      backgroundColor: Colors.yellow,
+                                      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
                                     ),
                                   },
                                 ),
@@ -129,7 +129,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                 color: Theme.of(context).colorScheme.background,
                               ),
                               "mark": Style(
-                                backgroundColor: Colors.yellow,
+                                backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
                               ),
                             },
                           ),

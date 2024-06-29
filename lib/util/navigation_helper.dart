@@ -49,7 +49,7 @@ class NavigationHelper {
     int id = subItem?.id ?? item?.linkTo?.id ?? 0;
     Navigator.of(context).pushNamed(
       '/detail',
-      arguments: {'id': id, 'item': item, 'title': title},
+      arguments: {'id': id, 'title': title},
     );
   }
 
