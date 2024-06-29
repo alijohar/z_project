@@ -80,15 +80,15 @@ class _HostScreenState extends State<HostScreen> {
             ),
             NavigationDestination(
               icon: SvgPicture.asset('assets/icon/library_filled.svg'),
-              label: 'المكتبة',
+              label: 'الأجزاء',
             ),
             NavigationDestination(
               icon: Icon(Icons.search_rounded),
-              label: 'البحث',
+              label: 'بحث',
             ),
             NavigationDestination(
               icon: Icon(Icons.info_rounded),
-              label: 'حول التطبيق',
+              label: 'حول',
             ),
           ],
         ),
