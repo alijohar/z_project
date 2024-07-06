@@ -16,7 +16,7 @@ class BigImageCardWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(8),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16), // Apply the same radius here
+        borderRadius: BorderRadius.circular(8), // Apply the same radius here
         child: Image.asset(
           'assets/image/${item.picName}'??'',
           fit: BoxFit.cover,

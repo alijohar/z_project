@@ -255,13 +255,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   ),
                                 ),
                                 width: 130,
-                                height: 30,
+                                height: 40,
                                 child: Center(
                                   child: Text(
                                     'مطالعة',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .titleMedium
+                                        .titleLarge
                                         ?.copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme

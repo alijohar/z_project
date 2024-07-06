@@ -21,7 +21,7 @@ class MultiDarkCardWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Color(0xFFdfad52)),
         image: const DecorationImage(
           image: AssetImage("assets/image/singledark.jpg"),
@@ -40,7 +40,7 @@ class MultiDarkCardWidget extends StatelessWidget {
                       NavigationHelper.navigateTo(
                         context: context,
                         subItem: item,
-                        goto: item.goto ?? '',
+                        goto: item.goto ?? '', title: item.title ?? ''
                       );
                     },
                     child: Text(

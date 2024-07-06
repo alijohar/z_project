@@ -70,7 +70,6 @@ class TocScreen extends StatelessWidget {
             title: _buildCardTitle(item, context),
             iconColor: Color(0xFFCFA355),
             collapsedIconColor: Color(0xFFCFA355),
-
             children: item.childs!
                 .map((child) => _buildTocItem(child, context))
                 .toList(),
@@ -85,7 +84,7 @@ class TocScreen extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(
-          vertical: 0.0, horizontal: isParent ? 0.0 : 16.0),
+          vertical: 0.0, horizontal: isParent ? 0.0 : 8.0),
       child: Card(
         color: Theme.of(context).colorScheme.onPrimary,
         elevation: 0,
@@ -101,14 +100,17 @@ class TocScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Text(
-                          item.title,
-                          textAlign: TextAlign.right,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary),
+                        child: Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Text(
+                            item.title,
+                            textAlign: TextAlign.justify,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                    color: Theme.of(context).colorScheme.primary),
+                          ),
                         ),
                       ),
                       Container(
@@ -130,18 +132,21 @@ class TocScreen extends StatelessWidget {
 
   Widget _buildCardTitle(TocItem item, BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
-            child: Text(
-              item.title,
-              textAlign: TextAlign.right,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: Theme.of(context).colorScheme.primary),
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: Text(
+                item.title,
+                textAlign: TextAlign.justify,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: Theme.of(context).colorScheme.primary),
+              ),
             ),
           ),
         ],

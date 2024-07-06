@@ -21,7 +21,7 @@ class SingleDarkCardWidget extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Color(0xFFdfad52)),
         image: DecorationImage(
           image: AssetImage("assets/image/singledark.jpg"),
@@ -29,13 +29,13 @@ class SingleDarkCardWidget extends StatelessWidget {
         ),
       ),
       child: GestureDetector(
-        onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item, ),
+        onTap: () => NavigationHelper.navigateTo(context: context, goto: item.linkTo?.goto ?? '', item: item, title: item.title ?? ''),
     child: Text(
         textAlign: TextAlign.center,
         item.title??'',
         style: Theme.of(context)
             .textTheme
-            .headlineMedium
+            .headlineSmall
             ?.copyWith(color: Colors.white),
       ),));
   }

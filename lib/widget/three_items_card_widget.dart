@@ -19,7 +19,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
             .map((item) => Container(
                   margin: const EdgeInsets.all(8),
                   height: 110,
-                  width: MediaQuery.of(context).size.width / 3.6,
+                  width: MediaQuery.of(context).size.width / 3.7,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: const DecorationImage(
@@ -28,7 +28,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
                     ),
                   ),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                           child: GestureDetector(
@@ -37,26 +37,15 @@ class ThreeItemsCardWidget extends StatelessWidget {
                             goto: item.goto ?? '',
                             subItem: item),
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 12.0, bottom: 12.0),
+                          padding: const EdgeInsets.all(12),
                           child: Text(
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.center,
                             item.title ?? '',
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
                       )),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          margin: const EdgeInsets.only(right: 16, bottom: 16),
-                          width: 10,
-                          height: 10,
-                        ),
-                      ),
+
                     ],
                   ),
                 ))

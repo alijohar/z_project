@@ -22,8 +22,8 @@ class AboutAppScreen extends StatelessWidget {
           children: [
           Container(
             margin: EdgeInsets.only(top: 100),
-          width: 200,
-          height: 200,
+          width: 120,
+          height: 120,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/image/icon1024.png"),
@@ -63,7 +63,7 @@ class AboutAppScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 20),
+              margin: EdgeInsets.only(bottom: 20, top: 20),
               height: 40,
               decoration: const BoxDecoration(
                 image: DecorationImage(

@@ -9,15 +9,20 @@ import '../../widget/simple_list_card_widget.dart';
 
 class DetailScreen extends StatelessWidget {
   final int id;
-  final String? title;
+  String? title;
 
-  const DetailScreen(
+  DetailScreen(
       {super.key, required this.id, this.title});
 
   @override
   Widget build(BuildContext context) {
     context.read<DetailCubit>().fetchItems(id);
 
+    if (title != null){
+      if (title!.contains('\n')){
+        title = title!.replaceAll('\n', ' ');
+      }
+    }
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(

@@ -35,7 +35,7 @@ class SimpleListCardWidget extends StatelessWidget {
               Expanded(
                 child: Text(item.items?[index].title ?? '',
                     textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.titleLarge),
+                    style: Theme.of(context).textTheme.titleMedium),
               ),
               Container(
                 margin: const EdgeInsets.all(8),

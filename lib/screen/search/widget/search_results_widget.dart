@@ -25,7 +25,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(right: 16.0, left: 16, top: 8, bottom: 8),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text('كل النتائج: ${widget.searchResults.length}',
@@ -76,31 +76,28 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                         onTap: () {
                           openEpub(context: context, search: widget.searchResults[index]);
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 28.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                '${widget.searchResults[index].pageIndex}',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.background),
+                        child: Row(
+                          children: [
+                            Text(
+                              '${widget.searchResults[index].pageIndex}',
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.background),
+                            ),
+                            Expanded(
+                              child: Html(
+                                data: widget.searchResults[index].spanna ?? '',
+                                style: {
+                                  "html": Style(
+                                    fontSize: FontSize.medium,
+                                    textAlign: TextAlign.right,
+                                    color: Theme.of(context).colorScheme.background,
+                                  ),
+                                  "mark": Style(
+                                    backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                                  ),
+                                },
                               ),
-                              Expanded(
-                                child: Html(
-                                  data: widget.searchResults[index].spanna ?? '',
-                                  style: {
-                                    "html": Style(
-                                      fontSize: FontSize.medium,
-                                      textAlign: TextAlign.right,
-                                      color: Theme.of(context).colorScheme.background,
-                                    ),
-                                    "mark": Style(
-                                      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-                                    ),
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
