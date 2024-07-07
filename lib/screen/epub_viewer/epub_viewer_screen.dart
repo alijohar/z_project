@@ -6,6 +6,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:zahra/screen/epub_viewer/widgets/toc_tree_list_widget.dart';
+import 'package:zahra/widget/search_bar_widget.dart';
 
 import '../../model/category_model.dart';
 import '../../model/reference_model.dart';
@@ -278,51 +279,55 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('نتائج البحث'),
-              Text(searchResults.last.searchCount.toString())
-            ],
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Padding(
+            padding: const EdgeInsets.only(right: 16.0, left: 16, top: 8, bottom: 8),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('كل النتائج: ${searchResults.length}',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.background)),
+            ),
           ),
           content: Container(
             width: double.maxFinite,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: searchResults.length,
-              itemBuilder: (BuildContext context, int index) {
-                final result = searchResults[index];
-                return ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                          child: Html(
-                            data: result.spanna.toString(),
-                            style: {
-                              "html": Style(
-                                fontSize: FontSize.medium,
-                                textAlign: TextAlign.right,
+            child: Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: searchResults.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final result = searchResults[index];
+                  return ListTile(
+                    title: GestureDetector(
+                      onTap: () {
+                        this.context.read<EpubViewerCubit>().highlightContent(result.pageIndex, searchedWord);
+                        Navigator.of(context)
+                            .pop(); // Close the dialog on selection
+                      },
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: Html(
+                                data: result.spanna.toString(),
+                                style: {
+                                  "html": Style(
+                                    fontSize: FontSize.small,
+                                    textAlign: TextAlign.justify,
+                                    color: Theme.of(context).colorScheme.background,
+                                  ),
+                                  "mark": Style(
+                                    backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                                  ),
+                                },
                               ),
-
-                              "mark": Style(
-                                backgroundColor: Colors.yellow,
-                              ),
-                            },
-                          )),
-                      Text(
-                        result.pageIndex.toString(),
-                        style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  onTap: () {
-                    this.context.read<EpubViewerCubit>().highlightContent(result.pageIndex, searchedWord);
-                    Navigator.of(context)
-                        .pop(); // Close the dialog on selection
-                  },
-                );
-              },
+                    ),
+                  );},
+              ),
             ),
           ),
         );
