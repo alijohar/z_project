@@ -24,7 +24,7 @@ class NavigationHelper {
       required BuildContext context}) {
     switch (goto) {
       case 'text':
-        navigateToEpub(item, context);
+        navigateToEpub(subItem, item, context);
         break;
       case 'jsonGraphic':
         navigateToDetail(subItem, item, context, title);
@@ -53,9 +53,9 @@ class NavigationHelper {
     );
   }
 
-  static void navigateToEpub(ItemModel? item, BuildContext context) {
-    String? bookPath = item?.linkTo?.key?.split('_').first;
-    String? sectionName = item?.linkTo?.key?.split('_').last;
+  static void navigateToEpub(SubItems? subItem, ItemModel? item, BuildContext context) {
+    String? bookPath = item?.linkTo?.key?.split('_').first ?? subItem?.key?.split('_').first;
+    String? sectionName = item?.linkTo?.key?.split('_').last ?? subItem?.key?.split('_').last;
     int sectionNumber = int.parse(sectionName ?? '0');
     String sectionNumberString = (sectionNumber-1).toString();
     openBook(context, bookPath, sectionNumberString);
