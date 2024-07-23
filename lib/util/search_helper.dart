@@ -1,25 +1,92 @@
 import 'dart:async';
+import 'dart:isolate';
 import 'package:epub_parser/epub_parser.dart';
+import 'package:flutter/foundation.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:zahra/model/epubBookLocal.dart';
 import '../model/search_model.dart';
 import 'epub_helper.dart';
 import 'package:html/parser.dart' show parse;
 
 class SearchHelper {
+  // Singleton instance
+  static final SearchHelper _instance = SearchHelper._internal();
+
+  // Private constructor
+  SearchHelper._internal();
+
+  // Factory constructor
+  factory SearchHelper() {
+    return _instance;
+  }
+
   final int searchSurroundCharNum = 40;
   bool _isSearchStopped = false;
 
-  Future<void> searchAllBooks(
-      List<String> allBooks, String word, Function(List<SearchModel>) onResultsFound, EpubBook? epub, [List<HtmlFileInfo>? spineFile]) async {
-    spineFile ??= [];
-    final List<SearchModel> allResults = [];
-    for (final book in allBooks) {
-      if (_isSearchStopped) break;
-      final result = await _searchSingleBook(book, word, epub, spineFile);
-      allResults.addAll(result);
-      onResultsFound(allResults);
+
+  Future<void> searchAllBooks(List<EpubBookLocal> allBooks, String word, Function(List<SearchModel>) onPartialResults) async {
+    final receivePort = ReceivePort();
+    await Isolate.spawn(_searchAllBooks, SearchTask(allBooks, word, receivePort.sendPort));
+
+    await for (final message in receivePort) {
+      if (message is List<SearchModel>) {
+        onPartialResults(message);
+      } else if (message is String && message == 'done') {
+        break;
+      } else if (message is SendPort) {
+        message.send(null);
+      }
     }
   }
+
+
+  Future<void> _searchAllBooks(SearchTask task) async {
+    // Create a ReceivePort to get messages from the main isolate
+    final port = ReceivePort();
+    // Send the port to the main isolate
+    task.sendPort.send(port.sendPort);
+
+    final List<SearchModel> allResults = [];
+
+    for (final epubBook in task.allBooks) {
+      if (_isSearchStopped) break;
+
+      // Extract necessary information
+      final bookName = epubBook.epubBook?.Title;
+      final bookAddress =epubBook.bookPath;
+      final List<HtmlFileInfo> epubContent = await extractHtmlContentWithEmbeddedImages(epubBook.epubBook!);
+
+      // Extract spine items from EPUB
+      var spineItems = epubBook.epubBook?.Schema?.Package?.Spine?.Items;
+      List<String> idRefs = [];
+
+      if (spineItems != null) {
+        for (var item in spineItems) {
+          if (item.IdRef != null) {
+            idRefs.add(item.IdRef!);
+          }
+        }
+      }
+
+      // Reorder HTML files based on spine
+      final epubNewContent = reorderHtmlFilesBasedOnSpine(epubContent, idRefs);
+      final spineHtmlContent = epubNewContent.map((info) => info.modifiedHtmlContent).toList();
+
+      // Search HTML contents in the book
+      final result = await searchHtmlContents(spineHtmlContent, task.word, bookName, bookAddress);
+
+      // Accumulate results for this book
+      allResults.addAll(result);
+
+      // Send intermediate results back to the main isolate
+      task.sendPort.send(List<SearchModel>.from(allResults)); // Send a copy to avoid race conditions
+
+    }
+
+    // Send the final accumulated results after processing all books
+    task.sendPort.send('done');
+  }
+
 
   Future<List<SearchModel>> _searchSingleBook(String bookPath, String sw, EpubBook? epub, [List<HtmlFileInfo>? spineFile]) async {
     spineFile ??= [];
@@ -44,6 +111,7 @@ class SearchHelper {
         var searchIndex = _searchInString(page, sw, 0);
         while (searchIndex.startIndex >= 0) {
           tempResult.add(SearchModel(
+            searchedWord: sw,
             pageIndex: spineHtmlIndex[i],
             bookAddress: bookPath,
             bookTitle: epubBook.Title,
@@ -64,55 +132,6 @@ class SearchHelper {
 
   // Your existing searchHtmlContents function remains as is
 
-  Future<void> searchingAllBooks(
-      List<String> allBooks,
-      String word,
-      Function(List<SearchModel>) onResultsFound,
-      ) async {
-    final List<SearchModel> allResults = [];
-
-    // Iterate through each book asynchronously
-    for (final book in allBooks) {
-      if (_isSearchStopped) break;
-
-      // Load EPUB book (assuming loadEpubFromAsset is a custom or library function)
-      final EpubBook epubBook = await loadEpubFromAsset(book);
-
-      // Extract necessary information
-      final bookName = epubBook.Title;
-      final bookAddress = book.split('/').last;
-      final List<HtmlFileInfo> epubContent =
-      await extractHtmlContentWithEmbeddedImages(epubBook);
-
-      // Extract spine items from EPUB (assuming this structure exists)
-      var spineItems = epubBook.Schema?.Package?.Spine?.Items;
-      List<String> idRefs = [];
-
-      if (spineItems != null) {
-        for (var item in spineItems) {
-          if (item.IdRef != null) {
-            idRefs.add(item.IdRef!);
-          }
-        }
-      }
-
-      // Reorder HTML files based on spine
-      final epubNewContent = reorderHtmlFilesBasedOnSpine(epubContent, idRefs);
-      final spineHtmlContent =
-      epubNewContent.map((info) => info.modifiedHtmlContent).toList();
-
-      // Search HTML contents in the book
-      final result = await searchHtmlContents(spineHtmlContent, word, bookName, bookAddress);
-
-      // Accumulate results for this book
-      allResults.addAll(result);
-
-      // Emit current accumulated results
-      onResultsFound(List.of(allResults)); // Emit a copy of allResults to avoid mutation
-
-      // You can handle UI update here or wherever onResultsFound is called
-    }
-  }
   Future<List<SearchModel>> searchHtmlContents(List<String> htmlContents, String searchWord, String? bookName, String? bookAddress) async {
     List<SearchModel> results = [];
 
@@ -123,6 +142,7 @@ class SearchHelper {
       while (searchIndex.startIndex >= 0) {
         results.add(SearchModel(
           pageIndex: i +1,  // Use the loop index as the page index
+          searchedWord: searchWord,
           searchCount: results.length + 1,  // Directly use the length of results for search count
           spanna: _getHighlightedSection(searchIndex, pageContent),
           bookAddress: bookAddress,
@@ -168,4 +188,13 @@ class SearchIndex {
   final int lastIndex;
 
   SearchIndex(this.startIndex, this.lastIndex);
+}
+
+
+class SearchTask {
+  final List<EpubBookLocal> allBooks;
+  final String word;
+  final SendPort sendPort;
+
+  SearchTask(this.allBooks, this.word, this.sendPort);
 }

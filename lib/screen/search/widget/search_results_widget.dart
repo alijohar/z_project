@@ -75,6 +75,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                       title: GestureDetector(
                         onTap: () {
                           openEpub(context: context, search: widget.searchResults[index]);
+
                         },
                         child: Row(
                           children: [

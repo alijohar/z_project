@@ -3,12 +3,14 @@ import 'package:flutter/cupertino.dart';
 class SearchModel {
   final String? bookAddress;
   final String? bookTitle;
+  final String? searchedWord;
   final String? pageId;
   final String? spanna;
   final int pageIndex;
   final int searchCount;
 
   SearchModel({
+    this.searchedWord,
      this.bookAddress,
      this.bookTitle,
      this.pageId,

@@ -74,6 +74,9 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
       }
 
       _storeEpubDetails(epubBook, reorderHtmlFilesBasedOnSpine(epubContent, idRefs), assetPath);
+      emit(EpubViewerState.loaded(content: _spineHtmlContent!,
+          epubTitle: _bookTitle ?? '',
+          tocTreeList: _tocTreeList));
     } catch (error) {
       emit(EpubViewerState.error(error: error.toString()));
     }
@@ -103,9 +106,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     _assetPath = assetPath;
     _bookTitle = epubBook.Title;
     _tocTreeList = epubBook.Chapters;
-    emit(EpubViewerState.loaded(content: _spineHtmlContent!,
-        epubTitle: _bookTitle ?? '',
-        tocTreeList: _tocTreeList));
+
   }
 
   void changeStyle({FontSizeCustom? fontSize, LineHeightCustom? lineSpace, FontFamily? fontFamily}) {
@@ -187,20 +188,6 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     }
   }
 
-  Future<void> search(String searchTerm) async {
-    if (_assetPath == null || searchTerm.isEmpty) {
-      return;
-    }
-
-    try {
-      List<String> allBooks = [_assetPath!];
-      await searchHelper.searchAllBooks(allBooks, searchTerm, (List<SearchModel> results) {
-        emit(EpubViewerState.searchResultsFound(searchResults: results));
-      }, _epubBook, _epubContent);
-    } catch (error) {
-      emit(EpubViewerState.error(error: error.toString()));
-    }
-  }
 
   Future<void> searchUsingHtmlList(String searchTerm) async {
     if (_assetPath == null || searchTerm.isEmpty || _spineHtmlContent == null) {
