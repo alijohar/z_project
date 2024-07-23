@@ -14,6 +14,7 @@ class SearchCubit extends Cubit<SearchState> {
   List<EpubBook> epubBooks = [];
   Future<void> search(String searchTerm) async {
     try {
+      emit(SearchState.loading());
       await SearchHelper().searchAllBooks(epubBooks, searchTerm, (List<SearchModel> results) {
         emit(SearchState.loaded(searchResults: results));
       });
