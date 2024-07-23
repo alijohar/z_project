@@ -16,17 +16,28 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
 
-
+  @override
+  void initState() {
+    context.read<SearchCubit>().storeEpubBooks();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: SearchBarWiget(
-          onClicked: (query) {
-            context.read<SearchCubit>().search(query);
-          },
+        title: Row(
+          children: [
+            CircularProgressIndicator(color: Colors.red,),
+            Expanded(
+              child: SearchBarWiget(
+                onClicked: (query) {
+                  context.read<SearchCubit>().search(query);
+                },
+              ),
+            ),
+          ],
         ),
       ),
       body: Padding(

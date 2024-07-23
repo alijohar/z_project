@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:epub_parser/epub_parser.dart';
+import 'package:flutter/foundation.dart';
 import 'package:html/dom.dart' as dom;
 import '../model/search_model.dart';
 import 'epub_helper.dart';
@@ -9,17 +10,55 @@ class SearchHelper {
   final int searchSurroundCharNum = 40;
   bool _isSearchStopped = false;
 
-  Future<void> searchAllBooks(
-      List<String> allBooks, String word, Function(List<SearchModel>) onResultsFound, EpubBook? epub, [List<HtmlFileInfo>? spineFile]) async {
-    spineFile ??= [];
-    final List<SearchModel> allResults = [];
-    for (final book in allBooks) {
-      if (_isSearchStopped) break;
-      final result = await _searchSingleBook(book, word, epub, spineFile);
-      allResults.addAll(result);
-      onResultsFound(allResults);
-    }
+// Entry point for the isolate
+  static Future<List<SearchModel>> _isolateSearchAllBooks(SearchTask task) async {
+    return SearchHelper()._searchAllBooks(task.allBooks, task.word);
   }
+
+  // Original searchAllBooks method now just calls the isolate function
+  Future<void> searchAllBooks(List<EpubBook> allBooks, String word, Function(List<SearchModel>) onResultsFound) async {
+    // Use the compute function to run the search in an isolate
+    final results = await compute(_isolateSearchAllBooks, SearchTask(allBooks, word));
+    onResultsFound(results);
+  }
+
+  Future<List<SearchModel>> _searchAllBooks(List<EpubBook> allBooks, String word) async {
+    final List<SearchModel> allResults = [];
+
+    for (final epubBook in allBooks) {
+      if (_isSearchStopped) break;
+
+      // Extract necessary information
+      final bookName = epubBook.Title;
+      final bookAddress = "unknown";
+      final List<HtmlFileInfo> epubContent = await extractHtmlContentWithEmbeddedImages(epubBook);
+
+      // Extract spine items from EPUB
+      var spineItems = epubBook.Schema?.Package?.Spine?.Items;
+      List<String> idRefs = [];
+
+      if (spineItems != null) {
+        for (var item in spineItems) {
+          if (item.IdRef != null) {
+            idRefs.add(item.IdRef!);
+          }
+        }
+      }
+
+      // Reorder HTML files based on spine
+      final epubNewContent = reorderHtmlFilesBasedOnSpine(epubContent, idRefs);
+      final spineHtmlContent = epubNewContent.map((info) => info.modifiedHtmlContent).toList();
+
+      // Search HTML contents in the book
+      final result = await searchHtmlContents(spineHtmlContent, word, bookName, bookAddress);
+
+      // Accumulate results for this book
+      allResults.addAll(result);
+    }
+
+    return allResults;
+  }
+
 
   Future<List<SearchModel>> _searchSingleBook(String bookPath, String sw, EpubBook? epub, [List<HtmlFileInfo>? spineFile]) async {
     spineFile ??= [];
@@ -64,55 +103,6 @@ class SearchHelper {
 
   // Your existing searchHtmlContents function remains as is
 
-  Future<void> searchingAllBooks(
-      List<String> allBooks,
-      String word,
-      Function(List<SearchModel>) onResultsFound,
-      ) async {
-    final List<SearchModel> allResults = [];
-
-    // Iterate through each book asynchronously
-    for (final book in allBooks) {
-      if (_isSearchStopped) break;
-
-      // Load EPUB book (assuming loadEpubFromAsset is a custom or library function)
-      final EpubBook epubBook = await loadEpubFromAsset(book);
-
-      // Extract necessary information
-      final bookName = epubBook.Title;
-      final bookAddress = book.split('/').last;
-      final List<HtmlFileInfo> epubContent =
-      await extractHtmlContentWithEmbeddedImages(epubBook);
-
-      // Extract spine items from EPUB (assuming this structure exists)
-      var spineItems = epubBook.Schema?.Package?.Spine?.Items;
-      List<String> idRefs = [];
-
-      if (spineItems != null) {
-        for (var item in spineItems) {
-          if (item.IdRef != null) {
-            idRefs.add(item.IdRef!);
-          }
-        }
-      }
-
-      // Reorder HTML files based on spine
-      final epubNewContent = reorderHtmlFilesBasedOnSpine(epubContent, idRefs);
-      final spineHtmlContent =
-      epubNewContent.map((info) => info.modifiedHtmlContent).toList();
-
-      // Search HTML contents in the book
-      final result = await searchHtmlContents(spineHtmlContent, word, bookName, bookAddress);
-
-      // Accumulate results for this book
-      allResults.addAll(result);
-
-      // Emit current accumulated results
-      onResultsFound(List.of(allResults)); // Emit a copy of allResults to avoid mutation
-
-      // You can handle UI update here or wherever onResultsFound is called
-    }
-  }
   Future<List<SearchModel>> searchHtmlContents(List<String> htmlContents, String searchWord, String? bookName, String? bookAddress) async {
     List<SearchModel> results = [];
 
@@ -168,4 +158,12 @@ class SearchIndex {
   final int lastIndex;
 
   SearchIndex(this.startIndex, this.lastIndex);
+}
+
+
+class SearchTask {
+  final List<EpubBook> allBooks;
+  final String word;
+
+  SearchTask(this.allBooks, this.word);
 }

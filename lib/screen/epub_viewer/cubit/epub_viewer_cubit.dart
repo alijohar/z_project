@@ -187,20 +187,6 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     }
   }
 
-  Future<void> search(String searchTerm) async {
-    if (_assetPath == null || searchTerm.isEmpty) {
-      return;
-    }
-
-    try {
-      List<String> allBooks = [_assetPath!];
-      await searchHelper.searchAllBooks(allBooks, searchTerm, (List<SearchModel> results) {
-        emit(EpubViewerState.searchResultsFound(searchResults: results));
-      }, _epubBook, _epubContent);
-    } catch (error) {
-      emit(EpubViewerState.error(error: error.toString()));
-    }
-  }
 
   Future<void> searchUsingHtmlList(String searchTerm) async {
     if (_assetPath == null || searchTerm.isEmpty || _spineHtmlContent == null) {
