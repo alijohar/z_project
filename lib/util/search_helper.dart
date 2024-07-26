@@ -3,6 +3,7 @@ import 'dart:isolate';
 import 'package:epub_parser/epub_parser.dart';
 import 'package:flutter/foundation.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:zahra/model/epubBookLocal.dart';
 import '../model/search_model.dart';
 import 'epub_helper.dart';
 import 'package:html/parser.dart' show parse;
@@ -12,7 +13,7 @@ class SearchHelper {
   bool _isSearchStopped = false;
 
 
-  Future<void> searchAllBooks(List<EpubBook> allBooks, String word, Function(List<SearchModel>) onPartialResults) async {
+  Future<void> searchAllBooks(List<EpubBookLocal> allBooks, String word, Function(List<SearchModel>) onPartialResults) async {
     final receivePort = ReceivePort();
     await Isolate.spawn(_searchAllBooks, SearchTask(allBooks, word, receivePort.sendPort));
 
@@ -40,12 +41,12 @@ class SearchHelper {
       if (_isSearchStopped) break;
 
       // Extract necessary information
-      final bookName = epubBook.Title;
-      final bookAddress = "unknown";
-      final List<HtmlFileInfo> epubContent = await extractHtmlContentWithEmbeddedImages(epubBook);
+      final bookName = epubBook.epubBook?.Title;
+      final bookAddress =epubBook.bookPath;
+      final List<HtmlFileInfo> epubContent = await extractHtmlContentWithEmbeddedImages(epubBook.epubBook!);
 
       // Extract spine items from EPUB
-      var spineItems = epubBook.Schema?.Package?.Spine?.Items;
+      var spineItems = epubBook.epubBook?.Schema?.Package?.Spine?.Items;
       List<String> idRefs = [];
 
       if (spineItems != null) {
@@ -178,7 +179,7 @@ class SearchIndex {
 
 
 class SearchTask {
-  final List<EpubBook> allBooks;
+  final List<EpubBookLocal> allBooks;
   final String word;
   final SendPort sendPort;
 

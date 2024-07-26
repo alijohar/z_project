@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:epub_parser/epub_parser.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:zahra/model/epubBookLocal.dart';
 
 import '../../../model/search_model.dart';
 import '../../../util/search_helper.dart';
@@ -11,7 +12,7 @@ part 'search_cubit.freezed.dart';
 
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit() : super(const SearchState.initial());
-  List<EpubBook> epubBooks = [];
+  List<EpubBookLocal> epubBooks = [];
   Future<void> search(String searchTerm) async {
     try {
       emit(const SearchState.loading());
@@ -77,13 +78,23 @@ class SearchCubit extends Cubit<SearchState> {
     epubBooks = await getEpubsFromAssets(allBooks);
   }
 
-  Future<List<EpubBook>> getEpubsFromAssets(List<String> allBooks) async {
-    List<EpubBook> epubBooks = [];
+  Future<List<EpubBookLocal>> getEpubsFromAssets(List<String> allBooks) async {
+    List<EpubBookLocal> epubBooks = [];
     for (final bookPath in allBooks) {
       final epubData = await rootBundle.load(bookPath);
       final epubBook = await EpubReader.readBook(epubData.buffer.asUint8List());
-      epubBooks.add(epubBook);
+
+      String fileName = getFileNameFromPath(bookPath);
+
+      final epubBookLocal = EpubBookLocal(epubBook, fileName);
+      epubBooks.add(epubBookLocal);
     }
     return epubBooks;
+  }
+
+  String getFileNameFromPath(String bookPath) {
+    RegExp regExp = RegExp(r'[^/]+\.epub$');
+    String fileName = regExp.stringMatch(bookPath) ?? '';
+    return fileName;
   }
 }
