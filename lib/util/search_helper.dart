@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:isolate';
 import 'package:epub_parser/epub_parser.dart';
 import 'package:flutter/foundation.dart';
 import 'package:html/dom.dart' as dom;
@@ -10,22 +11,32 @@ class SearchHelper {
   final int searchSurroundCharNum = 40;
   bool _isSearchStopped = false;
 
-// Entry point for the isolate
-  static Future<List<SearchModel>> _isolateSearchAllBooks(SearchTask task) async {
-    return SearchHelper()._searchAllBooks(task.allBooks, task.word);
+
+  Future<void> searchAllBooks(List<EpubBook> allBooks, String word, Function(List<SearchModel>) onPartialResults) async {
+    final receivePort = ReceivePort();
+    await Isolate.spawn(_searchAllBooks, SearchTask(allBooks, word, receivePort.sendPort));
+
+    await for (final message in receivePort) {
+      if (message is List<SearchModel>) {
+        onPartialResults(message);
+      } else if (message is String && message == 'done') {
+        break;
+      } else if (message is SendPort) {
+        message.send(null);
+      }
+    }
   }
 
-  // Original searchAllBooks method now just calls the isolate function
-  Future<void> searchAllBooks(List<EpubBook> allBooks, String word, Function(List<SearchModel>) onResultsFound) async {
-    // Use the compute function to run the search in an isolate
-    final results = await compute(_isolateSearchAllBooks, SearchTask(allBooks, word));
-    onResultsFound(results);
-  }
 
-  Future<List<SearchModel>> _searchAllBooks(List<EpubBook> allBooks, String word) async {
+  Future<void> _searchAllBooks(SearchTask task) async {
+    // Create a ReceivePort to get messages from the main isolate
+    final port = ReceivePort();
+    // Send the port to the main isolate
+    task.sendPort.send(port.sendPort);
+
     final List<SearchModel> allResults = [];
 
-    for (final epubBook in allBooks) {
+    for (final epubBook in task.allBooks) {
       if (_isSearchStopped) break;
 
       // Extract necessary information
@@ -50,13 +61,18 @@ class SearchHelper {
       final spineHtmlContent = epubNewContent.map((info) => info.modifiedHtmlContent).toList();
 
       // Search HTML contents in the book
-      final result = await searchHtmlContents(spineHtmlContent, word, bookName, bookAddress);
+      final result = await searchHtmlContents(spineHtmlContent, task.word, bookName, bookAddress);
 
       // Accumulate results for this book
       allResults.addAll(result);
+
+      // Send intermediate results back to the main isolate
+      task.sendPort.send(List<SearchModel>.from(allResults)); // Send a copy to avoid race conditions
+
     }
 
-    return allResults;
+    // Send the final accumulated results after processing all books
+    task.sendPort.send('done');
   }
 
 
@@ -164,6 +180,7 @@ class SearchIndex {
 class SearchTask {
   final List<EpubBook> allBooks;
   final String word;
+  final SendPort sendPort;
 
-  SearchTask(this.allBooks, this.word);
+  SearchTask(this.allBooks, this.word, this.sendPort);
 }
