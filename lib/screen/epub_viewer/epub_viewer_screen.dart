@@ -89,9 +89,6 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
           pageChanged: (page) {
             _jumpTo(pageNumber: page);
           },
-          contentHighlighted: (_, page) {
-            _jumpTo(pageNumber: page);
-          },
           searchResultsFound: (searchResults) {
             showSearchResultsDialog(context, searchResults);
           },
@@ -198,19 +195,24 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       loaded: (content, _, tocList) {
                         _storeContentLoaded(content, context, state, tocList);
                         context.read<EpubViewerCubit>().emitLastPageSeen();
+
                         if (widget.referenceModel?.navIndex !=null){
                           context.read<EpubViewerCubit>().emitCustomPageSeen(widget.referenceModel?.navIndex ?? '0');
                         }
                         if (widget.searchModel?.pageIndex !=null){
                           context.read<EpubViewerCubit>().emitCustomPageSeen((widget.searchModel!.pageIndex - 1).toString() ?? '0');
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            context.read<EpubViewerCubit>().highlightContent(widget.searchModel!.pageIndex, widget.searchModel!.searchedWord!);
+                          });
                         }
                         context.read<EpubViewerCubit>().loadUserPreferences();
                         context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
                         return _buildCurrentUi(context, _content);
                       },
-                      contentHighlighted: (content, _) {
+                      contentHighlighted: (content, page) {
                         _orginalContent = _content;
                         _content = content;
+                        _jumpTo(pageNumber: page);
                         return _buildCurrentUi(context, content);
                       },
                       bookmarkAbsent: () => _buildCurrentUi(context, _content),
@@ -785,7 +787,6 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     _loadAndParseEpub(bookPath: _bookPath!);
   }
 
-  /// FileName for handling toc and search item to get number of section
   _loadAndParseEpub({required String bookPath, String? fileName}) {
     context.read<EpubViewerCubit>().loadAndParseEpub('$_pathUrl$bookPath');
   }

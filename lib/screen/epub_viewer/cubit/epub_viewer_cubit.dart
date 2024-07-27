@@ -74,6 +74,9 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
       }
 
       _storeEpubDetails(epubBook, reorderHtmlFilesBasedOnSpine(epubContent, idRefs), assetPath);
+      emit(EpubViewerState.loaded(content: _spineHtmlContent!,
+          epubTitle: _bookTitle ?? '',
+          tocTreeList: _tocTreeList));
     } catch (error) {
       emit(EpubViewerState.error(error: error.toString()));
     }
@@ -103,9 +106,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     _assetPath = assetPath;
     _bookTitle = epubBook.Title;
     _tocTreeList = epubBook.Chapters;
-    emit(EpubViewerState.loaded(content: _spineHtmlContent!,
-        epubTitle: _bookTitle ?? '',
-        tocTreeList: _tocTreeList));
+
   }
 
   void changeStyle({FontSizeCustom? fontSize, LineHeightCustom? lineSpace, FontFamily? fontFamily}) {

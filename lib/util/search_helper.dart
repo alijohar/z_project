@@ -9,6 +9,17 @@ import 'epub_helper.dart';
 import 'package:html/parser.dart' show parse;
 
 class SearchHelper {
+  // Singleton instance
+  static final SearchHelper _instance = SearchHelper._internal();
+
+  // Private constructor
+  SearchHelper._internal();
+
+  // Factory constructor
+  factory SearchHelper() {
+    return _instance;
+  }
+
   final int searchSurroundCharNum = 40;
   bool _isSearchStopped = false;
 
@@ -100,6 +111,7 @@ class SearchHelper {
         var searchIndex = _searchInString(page, sw, 0);
         while (searchIndex.startIndex >= 0) {
           tempResult.add(SearchModel(
+            searchedWord: sw,
             pageIndex: spineHtmlIndex[i],
             bookAddress: bookPath,
             bookTitle: epubBook.Title,
@@ -130,6 +142,7 @@ class SearchHelper {
       while (searchIndex.startIndex >= 0) {
         results.add(SearchModel(
           pageIndex: i +1,  // Use the loop index as the page index
+          searchedWord: searchWord,
           searchCount: results.length + 1,  // Directly use the length of results for search count
           spanna: _getHighlightedSection(searchIndex, pageContent),
           bookAddress: bookAddress,
