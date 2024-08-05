@@ -7,7 +7,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:zahra/screen/epub_viewer/widgets/toc_tree_list_widget.dart';
 import 'package:zahra/widget/search_bar_widget.dart';
-
+import 'package:html/parser.dart' as html_parser;
+import 'package:html/dom.dart' as dom;
 import '../../model/category_model.dart';
 import '../../model/reference_model.dart';
 import '../../model/search_model.dart';
@@ -108,6 +109,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
             children: [
               if (isSliderVisible)
                 AppBar(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   leading: IconButton(
                     icon: isSearchOpen
                         ? Icon(Icons.close, color: Theme.of(context).colorScheme.onSurfaceVariant)
@@ -194,10 +196,12 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                   child: state.when(
                       loaded: (content, _, tocList) {
                         _storeContentLoaded(content, context, state, tocList);
-                        context.read<EpubViewerCubit>().emitLastPageSeen();
+                        // context.read<EpubViewerCubit>().emitLastPageSeen();
 
                         if (widget.referenceModel?.navIndex !=null){
-                          context.read<EpubViewerCubit>().emitCustomPageSeen(widget.referenceModel?.navIndex ?? '0');
+                          double doubleValue = double.parse(widget.referenceModel!.navIndex);
+                          int intValue = doubleValue.toInt();
+                          context.read<EpubViewerCubit>().emitCustomPageSeen((intValue).toString());
                         }
                         if (widget.searchModel?.pageIndex !=null){
                           context.read<EpubViewerCubit>().emitCustomPageSeen((widget.searchModel!.pageIndex - 1).toString() ?? '0');
@@ -632,17 +636,18 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     );
   }
 
-  _addBookmark(BuildContext context) {
+  void _addBookmark(BuildContext context) {
+    String? headingTitle = _findPreviousHeading(_currentPage);
+
     final reference = ReferenceModel(
-      title: ' علامة مرجعية على كتاب $_bookName',
+      title: headingTitle ?? ' علامة مرجعية على كتاب $_bookName',
       bookName: _bookName,
-      bookPath: widget.catModel!.bookPath!,
+      bookPath: widget.referenceModel?.bookPath ?? _bookPath!,
       navIndex: _currentPage.toString(),
     );
 
     BlocProvider.of<EpubViewerCubit>(context).addBookmark(reference);
     context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
-
   }
 
   void _openInternalToc(BuildContext context) {
@@ -825,7 +830,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   @override
   dispose() {
     final pageHelper = PageHelper();
-    pageHelper.saveBookData(widget.catModel!.bookPath!, _currentPage);
+    pageHelper.saveBookData(widget.referenceModel?.bookPath?? _bookPath!, _currentPage);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
     itemPositionsListener.itemPositions.removeListener(() {});
@@ -867,6 +872,25 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   void _removeBookmark(BuildContext context) {
     context.read<EpubViewerCubit>().removeBookmark(_bookPath!, _currentPage.toString());
     context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
+  }
+
+  String? _findPreviousHeading(double currentPage) {
+    String? headingText;
+    int contentIndex = currentPage.toInt();
+
+    // Traverse the pages backward from the current page to find the first heading
+    for (int i = contentIndex; i >= 0; i--) {
+      dom.Document document = html_parser.parse(_content[i]);
+      List<dom.Element> headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+      if (headings.isNotEmpty) {
+        // Found the first heading on this page, return it
+        headingText = headings.last.text.trim();
+        break;
+      }
+    }
+
+    return headingText;
   }
 
 

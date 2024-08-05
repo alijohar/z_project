@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zahra/screen/about/about_app_screen.dart';
 import 'package:zahra/screen/about/cubit/about_app_cubit.dart';
+import 'package:zahra/screen/bookmark/bookmark_screen.dart';
+import 'package:zahra/screen/bookmark/cubit/bookmark_cubit.dart';
 import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:zahra/screen/library/cubit/library_cubit.dart';
 import 'package:zahra/screen/search/cubit/search_cubit.dart';
@@ -48,6 +50,10 @@ class _HostScreenState extends State<HostScreen> {
       child: LibraryScreen(),
     ), // Replace with your actual widget for second tab
     BlocProvider(
+      create: (context) => BookmarkCubit(),
+      child: BookmarkScreen(),
+    ),
+    BlocProvider(
       create: (context) => SearchCubit(),
       child: SearchScreen(),
     ), // Replace with your actual widget for third tab
@@ -83,8 +89,12 @@ class _HostScreenState extends State<HostScreen> {
               label: 'الرئيسية',
             ),
             NavigationDestination(
-              icon: SvgPicture.asset('assets/icon/library_filled.svg'),
-              label: 'الأجزاء',
+              icon: Icon(Icons.library_books_rounded),
+              label: 'الكتب',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.bookmarks_rounded),
+              label: 'العلامات',
             ),
             NavigationDestination(
               icon: Icon(Icons.search_rounded),
