@@ -1,10 +1,6 @@
 import 'package:epub_parser/epub_parser.dart';
 
 class TreeTocModel {
-  final int id;
-  final String bookTitle;
-  final String bookName;
-  final List<TreeTocModel>? childItems;
 
   TreeTocModel({
     required this.id,
@@ -12,17 +8,21 @@ class TreeTocModel {
     required this.bookName,
     required this.childItems,
   });
+  final int id;
+  final String bookTitle;
+  final String bookName;
+  final List<TreeTocModel>? childItems;
 }
 class TreeNode {
-  String label;
-  List<TreeNode> children;
 
   TreeNode(this.label, this.children);
+  String label;
+  List<TreeNode> children;
 }
 
 class EpubChaptersWithBookPath {
-  final EpubChapter epubChapter;
-  final String bookPath;
 
   EpubChaptersWithBookPath(this.epubChapter, this.bookPath);
+  final EpubChapter epubChapter;
+  final String bookPath;
 }

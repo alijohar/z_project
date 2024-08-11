@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/model/item_model.dart';
 import 'package:zahra/screen/toc/cubit/toc_cubit.dart';
@@ -9,12 +7,12 @@ import 'package:zahra/util/navigation_helper.dart';
 import '../../model/toc_item.dart';
 
 class TocScreen extends StatelessWidget {
+
+  const TocScreen(
+      {super.key, required this.id, required this.item, this.title,});
   final int id;
   final ItemModel? item;
   final String? title;
-
-  const TocScreen(
-      {super.key, required this.id, required this.item, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +32,7 @@ class TocScreen extends StatelessWidget {
         ),
       ),
       body: BlocBuilder<TocCubit, TocState>(
-        builder: (context, state) {
-          return state.when(
+        builder: (context, state) => state.when(
             initial: () =>
                 const Center(child: Text('Tap to start fetching...')),
             loading: () => const Center(child: CircularProgressIndicator()),
@@ -45,17 +42,14 @@ class TocScreen extends StatelessWidget {
             },
             error: (message) =>
                 Center(child: SelectionArea(child: Text(message))),
-          );
-        },
+          ),
       ),
     );
   }
 
-  Widget _buildTocTree(List<TocItem> items, BuildContext context) {
-    return ListView(
+  Widget _buildTocTree(List<TocItem> items, BuildContext context) => ListView(
       children: items.map((item) => _buildTocItem(item, context)).toList(),
     );
-  }
 
   Widget _buildTocItem(TocItem item, BuildContext context) {
     if (item.childs == null || item.childs!.isEmpty) {
@@ -68,8 +62,8 @@ class TocScreen extends StatelessWidget {
           elevation: 0,
           child: ExpansionTile(
             title: _buildCardTitle(item, context),
-            iconColor: Color(0xFFCFA355),
-            collapsedIconColor: Color(0xFFCFA355),
+            iconColor: const Color(0xFFCFA355),
+            collapsedIconColor: const Color(0xFFCFA355),
             children: item.childs!
                 .map((child) => _buildTocItem(child, context))
                 .toList(),
@@ -80,11 +74,10 @@ class TocScreen extends StatelessWidget {
   }
 
   Widget _buildCardView(TocItem item, BuildContext context,
-      {bool isParent = false}) {
-    return Container(
+      {bool isParent = false,}) => Container(
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(
-          vertical: 0.0, horizontal: isParent ? 0.0 : 8.0),
+          vertical: 0.0, horizontal: isParent ? 0.0 : 8.0,),
       child: Card(
         color: Theme.of(context).colorScheme.onPrimary,
         elevation: 0,
@@ -109,7 +102,7 @@ class TocScreen extends StatelessWidget {
                                 .textTheme
                                 .bodyMedium
                                 ?.copyWith(
-                                    color: Theme.of(context).colorScheme.primary),
+                                    color: Theme.of(context).colorScheme.primary,),
                           ),
                         ),
                       ),
@@ -117,7 +110,7 @@ class TocScreen extends StatelessWidget {
                         margin: const EdgeInsets.only(right: 16, left: 16, top: 8),
                         width: 10,
                         height: 10,
-                        color: Color(0xFFCFA355),
+                        color: const Color(0xFFCFA355),
                       ),
                     ],
                   ),
@@ -128,10 +121,8 @@ class TocScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 
-  Widget _buildCardTitle(TocItem item, BuildContext context) {
-    return Container(
+  Widget _buildCardTitle(TocItem item, BuildContext context) => Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -152,13 +143,12 @@ class TocScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 
   void _navigateTo(BuildContext context, TocItem item) {
-    String? bookPath = item.key.split('_').first;
-    String? sectionName = item.key.split('_').last;
-    int sectionNumber = int.parse(sectionName ?? '0');
-    String sectionNumberString = (sectionNumber-1).toString();
+    final String bookPath = item.key.split('_').first;
+    final String sectionName = item.key.split('_').last;
+    final int sectionNumber = int.parse(sectionName ?? '0');
+    final String sectionNumberString = (sectionNumber-1).toString();
     NavigationHelper.openBook(context, bookPath, sectionNumberString);
   }
 }

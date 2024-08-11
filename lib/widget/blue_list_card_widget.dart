@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../model/item_model.dart';
@@ -6,13 +5,12 @@ import '../util/dodecagon_clipper.dart';
 import '../util/navigation_helper.dart';
 
 class BlueListCardWidget extends StatelessWidget {
-  final ItemModel item;
 
   const BlueListCardWidget({super.key, required this.item});
+  final ItemModel item;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       height: 100, // Adjusted for better visibility of the hexagon
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(8),
@@ -20,8 +18,7 @@ class BlueListCardWidget extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         reverse: true,
         itemCount: item.items?.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
+        itemBuilder: (context, index) => GestureDetector(
               onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: item.items?[index], goto: item.items?[index].goto ?? '', item: item, title: item.items?[index].title ?? ''),
           child: ClipPath(
             clipper: DodecagonClipper(),  // Applying the custom clipper for hexagon shape
@@ -43,9 +40,7 @@ class BlueListCardWidget extends StatelessWidget {
               ),
               ),
             ),
-          ));
-        },
+          ),),
       ),
     );
-  }
 }

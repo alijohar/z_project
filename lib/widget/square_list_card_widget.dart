@@ -1,25 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zahra/model/item_model.dart';
 
 import '../util/navigation_helper.dart';
 
 class SquareListCardWidget extends StatelessWidget {
-  final ItemModel item;
 
   const SquareListCardWidget({super.key, required this.item});
+  final ItemModel item;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       height: 110,
       margin: const EdgeInsets.all(8),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
         itemCount: item.items?.length??0,
-        itemBuilder: (context, index) {
-          return GestureDetector(
+        itemBuilder: (context, index) => GestureDetector(
               onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: item.items?[index], goto: item.items?[index].goto ?? '', item: item, title: item.items?[index].title ?? ''),
           child: Container(
             width: MediaQuery.of(context).size.width / 3.7, // Slightly more space than the fixed width previously
@@ -42,7 +39,7 @@ class SquareListCardWidget extends StatelessWidget {
                         onTap: () => NavigationHelper.navigateTo(
                             context: context,
                             goto: item.items?[index].goto ?? '',
-                            subItem: item.items?[index]),
+                            subItem: item.items?[index],),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 12.0, bottom: 12.0),
                           child: Text(
@@ -51,7 +48,7 @@ class SquareListCardWidget extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
-                      )),
+                      ),),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: Container(
@@ -67,9 +64,7 @@ class SquareListCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-          ));
-        },
+          ),),
       ),
     );
-  }
 }

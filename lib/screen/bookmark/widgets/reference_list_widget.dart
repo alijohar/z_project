@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../model/reference_model.dart';
 import '../../../util/epub_helper.dart';
 import '../cubit/bookmark_cubit.dart';
 
 class ReferenceListWidget extends StatelessWidget {
-  final List<ReferenceModel> referenceList;
 
-  const ReferenceListWidget({Key? key, required this.referenceList})
-      : super(key: key);
+  const ReferenceListWidget({super.key, required this.referenceList});
+  final List<ReferenceModel> referenceList;
 
   @override
   Widget build(BuildContext context) {
     // Group the references by bookName
     final Map<String, List<ReferenceModel>> groupedReferences = {};
-    for (var reference in referenceList) {
+    for (final reference in referenceList) {
       groupedReferences.putIfAbsent(reference.bookName, () => []).add(reference);
     }
 
@@ -43,23 +41,24 @@ class ReferenceListWidget extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .labelLarge
-                        ?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+                        ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ),
               ),
             ),
             ...bookReferences.map((reference) {
-              String stringValue = reference.navIndex;
-              double doubleValue = double.parse(stringValue);
-              int intValue = doubleValue.toInt();
+              final String stringValue = reference.navIndex;
+              final double doubleValue = double.parse(stringValue);
+              final int intValue = doubleValue.toInt();
 
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        openEpub(context: context, reference: reference);
+                      onTap: () async {
+                        await openEpub(context: context, reference: reference);
+                        debugPrint('I came back');
                       },
                       child: Row(
                         children: [
@@ -92,7 +91,7 @@ class ReferenceListWidget extends StatelessWidget {
                                     .labelSmall
                                     ?.copyWith(color: Theme.of(context)
                                     .colorScheme
-                                    .surface),
+                                    .surface,),
                                 textAlign: TextAlign.right,
                               ),
                             ),
@@ -105,7 +104,7 @@ class ReferenceListWidget extends StatelessWidget {
                                 ?.copyWith(
                                 color: Theme.of(context)
                                     .colorScheme
-                                    .secondaryContainer),
+                                    .secondaryContainer,),
                           ),
                         ],
                       ),

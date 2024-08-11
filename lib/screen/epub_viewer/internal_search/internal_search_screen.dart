@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../model/search_model.dart';
@@ -8,8 +7,8 @@ import '../../../widget/search_bar_widget.dart';
 import '../cubit/epub_viewer_cubit.dart';
 
 class InternalSearchScreen extends StatefulWidget {
+  const InternalSearchScreen({super.key, required this.cubit});
   final EpubViewerCubit cubit;
-  const InternalSearchScreen({Key? key, required this.cubit}) : super(key: key);
 
   @override
   State<InternalSearchScreen> createState() => _InternalSearchScreenState();
@@ -20,9 +19,7 @@ class _InternalSearchScreenState extends State<InternalSearchScreen> {
   List<SearchModel> searchResults = [];
   final bookNameSearchingController = StreamController<String>();
 
-  bool shouldStartSearch() {
-    return searchWord.length > 3;
-  }
+  bool shouldStartSearch() => searchWord.length > 3;
 
   @override
   void dispose() {
@@ -32,11 +29,9 @@ class _InternalSearchScreenState extends State<InternalSearchScreen> {
 
 
   @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
-        title: SearchBarWiget(),
+        title: const SearchBarWiget(),
       ),
       body: Column(
         children: <Widget>[
@@ -46,10 +41,8 @@ class _InternalSearchScreenState extends State<InternalSearchScreen> {
         ],
       ),
     );
-  }
 
-  Widget buildSearchResultsList(List<SearchModel> results) {
-    return ListView.builder(
+  Widget buildSearchResultsList(List<SearchModel> results) => ListView.builder(
       itemCount: results.length,
       itemBuilder: (context, index) {
         final result = results[index];
@@ -65,7 +58,6 @@ class _InternalSearchScreenState extends State<InternalSearchScreen> {
         );
       },
     );
-  }
 
 
 _handleSearch(String sw, StreamController<String> bookNameSearching){

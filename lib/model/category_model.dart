@@ -1,12 +1,4 @@
 class CategoryModel {
-  final int? id;
-  final int? catId;
-  final String? bookPath;
-  final String? bookName;
-  final String? bookCover;
-  final String? bookStyle;
-  final String? bookAuthor;
-  final String? description;
 
   CategoryModel({
     this.id,
@@ -18,4 +10,12 @@ class CategoryModel {
     this.bookAuthor,
     this.description,
   });
+  final int? id;
+  final int? catId;
+  final String? bookPath;
+  final String? bookName;
+  final String? bookCover;
+  final String? bookStyle;
+  final String? bookAuthor;
+  final String? description;
 }

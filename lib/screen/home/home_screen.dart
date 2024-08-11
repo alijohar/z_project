@@ -1,21 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:zahra/util/navigation_helper.dart';
-
-import 'package:zahra/widget/big_image_card_widget.dart';
-import 'package:zahra/widget/blue_list_card_widget.dart';
-import 'package:zahra/widget/circle_list_card_widget.dart';
-import 'package:zahra/widget/multi_dark_card_widget.dart';
-import 'package:zahra/widget/normal_list_card_widget.dart';
-import 'package:zahra/widget/single_dark_card_widget.dart';
-import 'package:zahra/widget/small_image_card_widget.dart';
-import 'package:zahra/widget/square_list_card_widget.dart';
-import 'package:zahra/widget/three_items_card_widget.dart';
-
-import '../../model/item_model.dart';
-import '../../widget/simple_list_card_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -46,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/image/main_light.jpg"),
+                  image: AssetImage('assets/image/main_light.jpg'),
                   fit: BoxFit.fitWidth, // Keep fitWidth
                   alignment: Alignment.topCenter, // Ensure the image starts from the top
                 ),
@@ -63,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           NotificationListener<ScrollNotification>(
             onNotification: (scrollNotification) {
               if (scrollNotification is ScrollUpdateNotification) {
-                var pixels = scrollNotification.metrics.pixels;
+                final pixels = scrollNotification.metrics.pixels;
                 _opacityNotifier.value = (pixels / 560).clamp(0.0, 1.0);
               }
               return true;
@@ -75,12 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   floating: false,
                   pinned: false,
                   backgroundColor: Colors.transparent,
-                  flexibleSpace: FlexibleSpaceBar(),
+                  flexibleSpace: const FlexibleSpaceBar(),
                 ),
                 // Example BlocBuilder usage
                 BlocBuilder<HomeCubit, HomeState>(
-                  builder: (context, state) {
-                    return state.when(
+                  builder: (context, state) => state.when(
                       initial: () => const SliverFillRemaining(
                         child: Center(child: Text('Tap to start fetching...')),
                       ),
@@ -96,8 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       error: (message) => SliverFillRemaining(
                         child: Center(child: Text(message)),
                       ),
-                    );
-                  },
+                    ),
                 ),
               ],
             ),

@@ -16,7 +16,7 @@ class SearchCubit extends Cubit<SearchState> {
   Future<void> search(String searchTerm) async {
     try {
       emit(const SearchState.loading());
-      List<SearchModel> allResults = [];
+      final List<SearchModel> allResults = [];
 
       await SearchHelper().searchAllBooks(epubBooks, searchTerm, (partialResults) {
         allResults.addAll(partialResults);
@@ -32,7 +32,7 @@ class SearchCubit extends Cubit<SearchState> {
 
 
   Future<void> storeEpubBooks() async {
-    List<String> allBooks = [
+    final List<String> allBooks = [
       'assets/epub/1.epub',
       'assets/epub/2.epub',
       'assets/epub/3.epub',
@@ -72,19 +72,19 @@ class SearchCubit extends Cubit<SearchState> {
       'assets/epub/37.epub',
       'assets/epub/38.epub',
       'assets/epub/39.epub',
-      'assets/epub/40.epub'
+      'assets/epub/40.epub',
     ];
 
     epubBooks = await getEpubsFromAssets(allBooks);
   }
 
   Future<List<EpubBookLocal>> getEpubsFromAssets(List<String> allBooks) async {
-    List<EpubBookLocal> epubBooks = [];
+    final List<EpubBookLocal> epubBooks = [];
     for (final bookPath in allBooks) {
       final epubData = await rootBundle.load(bookPath);
       final epubBook = await EpubReader.readBook(epubData.buffer.asUint8List());
 
-      String fileName = getFileNameFromPath(bookPath);
+      final String fileName = getFileNameFromPath(bookPath);
 
       final epubBookLocal = EpubBookLocal(epubBook, fileName);
       epubBooks.add(epubBookLocal);
@@ -93,8 +93,8 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   String getFileNameFromPath(String bookPath) {
-    RegExp regExp = RegExp(r'[^/]+\.epub$');
-    String fileName = regExp.stringMatch(bookPath) ?? '';
+    final RegExp regExp = RegExp(r'[^/]+\.epub$');
+    final String fileName = regExp.stringMatch(bookPath) ?? '';
     return fileName;
   }
 }

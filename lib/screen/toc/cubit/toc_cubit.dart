@@ -8,9 +8,9 @@ part 'toc_state.dart';
 part 'toc_cubit.freezed.dart';
 
 class TocCubit extends Cubit<TocState> {
-  final JsonRepository _jsonRepository;
 
   TocCubit(this._jsonRepository) : super(const TocState.initial());
+  final JsonRepository _jsonRepository;
 
   Future<void> fetchItems(int id) async {
     try {

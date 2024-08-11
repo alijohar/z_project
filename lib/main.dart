@@ -2,13 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zahra/repository/json_repository.dart';
 import 'package:zahra/route_generator.dart';
-import 'package:zahra/screen/home/cubit/home_cubit.dart';
-import 'package:zahra/screen/home/home_screen.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,12 +41,10 @@ class MyApp extends StatelessWidget {
       onTertiaryContainer: Color(0xFF00201D),
       errorContainer: Color(0xFFFFDAD6),
       onErrorContainer: Color(0xFF410002),
-      surfaceVariant: Color(0xFFE2E4D4),
+      surfaceContainerHighest: Color(0xFFE2E4D4),
       onSurfaceVariant: Color(0xFF45483C),
       outline: Color(0xFF76786B),
       outlineVariant: Color(0xFFC6C8B9),
-      background: Color(0xFFFFFFFF),
-      onBackground: Color(0xFF1B1C17),
     );
     const ColorScheme darkColorScheme = ColorScheme(
       brightness: Brightness.dark,
@@ -69,7 +61,7 @@ class MyApp extends StatelessWidget {
     final ThemeData lightTheme = ThemeData(
       useMaterial3: true,
       navigationBarTheme: NavigationBarThemeData(
-        labelTextStyle: MaterialStateProperty.all(
+        labelTextStyle: WidgetStateProperty.all(
           TextStyle(
             color: lightColorScheme.primary,
           ),
@@ -82,7 +74,7 @@ class MyApp extends StatelessWidget {
     final ThemeData darkTheme = ThemeData(
       useMaterial3: true,
       navigationBarTheme: NavigationBarThemeData(
-        labelTextStyle: MaterialStateProperty.all(
+        labelTextStyle: WidgetStateProperty.all(
           TextStyle(
             color: lightColorScheme.primary,
           ),

@@ -1,18 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/screen/detail/cubit/detail_cubit.dart';
 import 'package:zahra/util/navigation_helper.dart';
 
-import '../../model/item_model.dart';
-import '../../widget/simple_list_card_widget.dart';
 
 class DetailScreen extends StatelessWidget {
-  final int id;
-  String? title;
 
   DetailScreen(
-      {super.key, required this.id, this.title});
+      {super.key, required this.id, this.title,});
+  final int id;
+  String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +29,11 @@ class DetailScreen extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.primary,
             title: Text(title ?? '',
                 style:
-                    TextStyle(color: Theme.of(context).colorScheme.surface))),
+                    TextStyle(color: Theme.of(context).colorScheme.surface),),),
         body: CustomScrollView(
           slivers: <Widget>[
             BlocBuilder<DetailCubit, DetailState>(
-              builder: (context, state) {
-                return state.when(
+              builder: (context, state) => state.when(
                   initial: () => const SliverFillRemaining(
                     child: Center(child: Text('Tap to start fetching...')),
                   ),
@@ -54,10 +50,9 @@ class DetailScreen extends StatelessWidget {
                   error: (message) => SliverFillRemaining(
                     child: Center(child: Text(message)),
                   ),
-                );
-              },
+                ),
             ),
           ],
-        ));
+        ),);
   }
 }

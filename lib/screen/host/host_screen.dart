@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zahra/screen/about/about_app_screen.dart';
 import 'package:zahra/screen/about/cubit/about_app_cubit.dart';
 import 'package:zahra/screen/bookmark/bookmark_screen.dart';
@@ -9,30 +8,31 @@ import 'package:zahra/screen/home/cubit/home_cubit.dart';
 import 'package:zahra/screen/library/cubit/library_cubit.dart';
 import 'package:zahra/screen/search/cubit/search_cubit.dart';
 import 'package:zahra/screen/search/search_screen.dart';
-import 'package:zahra/util/navigation_helper.dart';
 
 import '../../repository/json_repository.dart';
 import '../home/home_screen.dart';
 import '../library/library_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) => MaterialApp(
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: HostScreen(),
+      home: const HostScreen(),
     );
-  }
 }
 
 class HostScreen extends StatefulWidget {
+  const HostScreen({super.key});
+
   @override
   _HostScreenState createState() => _HostScreenState();
 }
@@ -43,29 +43,28 @@ class _HostScreenState extends State<HostScreen> {
   final List<Widget> _screens = [
     BlocProvider(
       create: (context) => HomeCubit(JsonRepository()),
-      child: HomeScreen(),
+      child: const HomeScreen(),
     ),
     BlocProvider(
       create: (context) => LibraryCubit(),
-      child: LibraryScreen(),
+      child: const LibraryScreen(),
     ), // Replace with your actual widget for second tab
     BlocProvider(
       create: (context) => BookmarkCubit(),
-      child: BookmarkScreen(),
+      child: const BookmarkScreen(),
     ),
     BlocProvider(
       create: (context) => SearchCubit(),
-      child: SearchScreen(),
+      child: const SearchScreen(),
     ), // Replace with your actual widget for third tab
     BlocProvider(
       create: (context) => AboutAppCubit(JsonRepository()),
-      child: AboutAppScreen(id: 17,),
+      child: const AboutAppScreen(id: 17,),
     ), // Replace with your actual widget for fourth tab
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
@@ -83,7 +82,7 @@ class _HostScreenState extends State<HostScreen> {
               _currentIndex = index;
             });
           },
-          destinations: [
+          destinations: const [
             NavigationDestination(
               icon: Icon(Icons.home_rounded),
               label: 'الرئيسية',
@@ -108,5 +107,4 @@ class _HostScreenState extends State<HostScreen> {
         ),
       ),
     );
-  }
 }

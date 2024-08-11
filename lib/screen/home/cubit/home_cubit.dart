@@ -7,9 +7,9 @@ part 'home_state.dart';
 part 'home_cubit.freezed.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  final JsonRepository _jsonRepository;
 
   HomeCubit(this._jsonRepository) : super(const HomeState.initial());
+  final JsonRepository _jsonRepository;
 
   Future<void> fetchItems() async {
     try {

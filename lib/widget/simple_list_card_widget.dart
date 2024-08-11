@@ -1,25 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../model/item_model.dart';
 import '../util/navigation_helper.dart';
 
 class SimpleListCardWidget extends StatelessWidget {
-  final ItemModel item;
 
   const SimpleListCardWidget({super.key, required this.item});
+  final ItemModel item;
 
   @override
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
+  Widget build(BuildContext context) => ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       itemCount: item.items?.length ?? 0,
-      itemBuilder: (context, index) {
-        return GestureDetector(
+      itemBuilder: (context, index) => GestureDetector(
             onTap: ()=> NavigationHelper.navigateTo(context: context, subItem: item.items?[index], goto: item.items?[index].goto ?? '', item: item, title: item.items?[index].title ?? ''),
         child: Container(
           alignment: Alignment.centerRight,
@@ -35,7 +31,7 @@ class SimpleListCardWidget extends StatelessWidget {
               Expanded(
                 child: Text(item.items?[index].title ?? '',
                     textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.titleMedium),
+                    style: Theme.of(context).textTheme.titleMedium,),
               ),
               Container(
                 margin: const EdgeInsets.all(8),
@@ -45,8 +41,6 @@ class SimpleListCardWidget extends StatelessWidget {
               ),
             ],
           ),
-        ));
-      },
+        ),),
     );
-  }
 }

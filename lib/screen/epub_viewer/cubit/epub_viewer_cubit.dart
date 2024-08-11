@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:collection/collection.dart';
-import 'package:html/parser.dart' as html_parser;
 
 import 'package:bloc/bloc.dart';
 import 'package:epub_parser/epub_parser.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:html/parser.dart' as html_parser;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/reference_model.dart';
@@ -17,8 +15,8 @@ import '../../../util/epub_helper.dart';
 import '../../../util/search_helper.dart';
 import '../../../util/style_helper.dart';
 
-part 'epub_viewer_state.dart';
 part 'epub_viewer_cubit.freezed.dart';
+part 'epub_viewer_state.dart';
 
 class EpubViewerCubit extends Cubit<EpubViewerState> {
   EpubViewerCubit() : super(const EpubViewerState.initial());
@@ -38,7 +36,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
 
 
   Future<void> checkBookmark(String bookPath, String pageIndex) async {
-    bool isBookmarked = await referencesDatabase.isBookmarkExist(bookPath, pageIndex);
+    final bool isBookmarked = await referencesDatabase.isBookmarkExist(bookPath, pageIndex);
     emit(isBookmarked ? const EpubViewerState.bookmarkPresent() : const EpubViewerState.bookmarkAbsent());
   }
 
@@ -47,7 +45,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     try {
       final int result = await referencesDatabase.deleteReferenceByBookPathAndPageNumber(bookPath, pageNumber);
       if (result != 0) {
-        emit(EpubViewerState.bookmarkAbsent());
+        emit(const EpubViewerState.bookmarkAbsent());
       } else {
       }
     } catch (error) {
@@ -62,11 +60,11 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
       final EpubBook epubBook = await loadEpubFromAsset(assetPath);
       final List<HtmlFileInfo> epubContent =
       await extractHtmlContentWithEmbeddedImages(epubBook);
-     var spineItems = epubBook.Schema?.Package?.Spine?.Items;
-      List<String> idRefs = [];
+     final spineItems = epubBook.Schema?.Package?.Spine?.Items;
+      final List<String> idRefs = [];
 
       if (spineItems != null) {
-        for (var item in spineItems) {
+        for (final item in spineItems) {
           if (item.IdRef != null) {
             idRefs.add(item.IdRef!);
           }
@@ -76,7 +74,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
       _storeEpubDetails(epubBook, reorderHtmlFilesBasedOnSpine(epubContent, idRefs), assetPath);
       emit(EpubViewerState.loaded(content: _spineHtmlContent!,
           epubTitle: _bookTitle ?? '',
-          tocTreeList: _tocTreeList));
+          tocTreeList: _tocTreeList,),);
     } catch (error) {
       emit(EpubViewerState.error(error: error.toString()));
     }
@@ -85,7 +83,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
 
   Future<void> emitLastPageSeen() async {
     final lastPageNumber = await getLastPageNumberForBook(
-        assetPath: _assetPath!);
+        assetPath: _assetPath!,);
     if (lastPageNumber != null) {
       jumpToPage(newPage: lastPageNumber.toInt());
     }
@@ -96,7 +94,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     }
 
   void _storeEpubDetails(EpubBook epubBook, List<HtmlFileInfo> epubContent,
-      String assetPath) {
+      String assetPath,) {
     _epubBook = epubBook;
     _epubContent = epubContent;
     _spineHtmlContent =
@@ -142,13 +140,13 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     prefs.setString('styleHelper', jsonEncode(styleJson));
   }
 
-  void loadUserPreferences() async {
+  Future<void> loadUserPreferences() async {
     StyleHelper.loadFromPrefs().then((_) {
       emit(EpubViewerState.styleChanged(
           fontSize: styleHelper.fontSize,
           lineHeight: styleHelper.lineSpace,
-          fontFamily: styleHelper.fontFamily
-      ));
+          fontFamily: styleHelper.fontFamily,
+      ),);
     });
   }
 
@@ -161,7 +159,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
         final int addStatus = await referencesDatabase.addReference(bookmark);
         emit(EpubViewerState.bookmarkAdded(status: addStatus));
       } else {
-        emit(EpubViewerState.bookmarkAdded(status: -1));
+        emit(const EpubViewerState.bookmarkAdded(status: -1));
       }
     } catch (error) {
       if (error is Exception) {
@@ -171,7 +169,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
   }
 
   Future<void> openEpubByChapter(EpubChapter item) async {
-    for (String fileName in _spineHtmlFileName!){
+    for (final String fileName in _spineHtmlFileName!){
       if (fileName == item.ContentFileName){
         final int spineNumber = await findPageIndexInEpub(_epubBook!, fileName);
         emit(EpubViewerState.pageChanged(pageNumber: spineNumber));
@@ -180,7 +178,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
   }
 
   Future<void> openEpubByName(String chapterName) async {
-    for (String fileName in _spineHtmlFileName!){
+    for (final String fileName in _spineHtmlFileName!){
       if (fileName == chapterName){
         final int spineNumber = await findPageIndexInEpub(_epubBook!, fileName);
         emit(EpubViewerState.pageChanged(pageNumber: spineNumber));
@@ -196,7 +194,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
 
     try {
       // Assuming searchHtmlContents expects the book title, which we stored in _bookTitle
-      List<SearchModel> results = await searchHelper.searchHtmlContents(_spineHtmlContent!, searchTerm, null, null);
+      final List<SearchModel> results = await searchHelper.searchHtmlContents(_spineHtmlContent!, searchTerm, null, null);
 
       // Emit the search results to the state
       emit(EpubViewerState.searchResultsFound(searchResults: results));
@@ -209,16 +207,16 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
     if (_spineHtmlContent == null || _spineHtmlContent!.isEmpty) return;
 
     // Decode HTML entities and remove extra HTML tags from searchTerm
-    var decodedSearchTerm = html_parser.parse(searchTerm).documentElement?.text ?? "";
+    var decodedSearchTerm = html_parser.parse(searchTerm).documentElement?.text ?? '';
     decodedSearchTerm = RegExp.escape(decodedSearchTerm);
     final regex = RegExp(decodedSearchTerm, caseSensitive: false);
 
     // Create a new list to store updated content
-    List<String> updatedContent = [];
+    final List<String> updatedContent = [];
 
     // Apply highlighting to each page content
-    for (var content in _spineHtmlContent!) {
-      var highlightedContent = content.replaceAllMapped(
+    for (final content in _spineHtmlContent!) {
+      final highlightedContent = content.replaceAllMapped(
         regex,
             (match) => '<mark>${match[0]}</mark>',
       );

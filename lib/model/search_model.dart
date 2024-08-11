@@ -1,13 +1,5 @@
-import 'package:flutter/cupertino.dart';
 
 class SearchModel {
-  final String? bookAddress;
-  final String? bookTitle;
-  final String? searchedWord;
-  final String? pageId;
-  final String? spanna;
-  final int pageIndex;
-  final int searchCount;
 
   SearchModel({
     this.searchedWord,
@@ -18,21 +10,28 @@ class SearchModel {
     required this.spanna,
     required this.searchCount,
   });
+  final String? bookAddress;
+  final String? bookTitle;
+  final String? searchedWord;
+  final String? pageId;
+  final String? spanna;
+  final int pageIndex;
+  final int searchCount;
 }
 
 
 class SearchHighlight {
-  final String searchHighlight;
-  final SearchIndex index;
 
   SearchHighlight(this.searchHighlight, this.index);
+  final String searchHighlight;
+  final SearchIndex index;
 }
 
 class SearchIndex {
-   int startIndex;
-   int lastIndex;
 
   SearchIndex(this.startIndex, this.lastIndex);
+   int startIndex;
+   int lastIndex;
 }
 
 class MySearcher {

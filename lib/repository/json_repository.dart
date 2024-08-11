@@ -10,18 +10,14 @@ class JsonRepository {
     final String response = await rootBundle.loadString('assets/json/main.json');
     final List<dynamic> data = json.decode(response) as List<dynamic>;
 
-    return data.map((item) {
-      return ItemModel.fromJson(item as Map<String, dynamic>);
-    }).toList();
+    return data.map((item) => ItemModel.fromJson(item as Map<String, dynamic>)).toList();
   }
 
   Future<List<DetailItem>> fetchDetailItems() async {
     final String response = await rootBundle.loadString('assets/json/jsonGraphic.json');
     final List<dynamic> data = json.decode(response) as List<dynamic>;
 
-    return data.map((item) {
-      return DetailItem.fromJson(item as Map<String, dynamic>);
-    }).toList();
+    return data.map((item) => DetailItem.fromJson(item as Map<String, dynamic>)).toList();
   }
 
   Future<List<ItemModel>> fetchDetailItemsById(int id) async {
@@ -34,17 +30,15 @@ class JsonRepository {
     final String response = await rootBundle.loadString('assets/json/jsonlist.json');
     final List<dynamic> data = json.decode(response) as List<dynamic>;
 
-    return data.map((item) {
-      return TocItem.fromJson(item as Map<String, dynamic>);
-    }).toList();
+    return data.map((item) => TocItem.fromJson(item as Map<String, dynamic>)).toList();
   }
 
   Future<List<TocItem>> fetchJsonTocById(int id) async {
     final allTocItem = await fetchJsonToc();
-    List<TocItem> result = [];
+    final List<TocItem> result = [];
 
     void searchTocItems(List<TocItem> items) {
-      for (var item in items) {
+      for (final item in items) {
         if (item.id == id) {
           result.addAll(item.childs??[]);
           return;
@@ -62,9 +56,7 @@ class JsonRepository {
     final String response = await rootBundle.loadString('assets/json/library.json');
     final List<dynamic> data = json.decode(response) as List<dynamic>;
 
-    return data.map((item) {
-      return Book.fromJson(item as Map<String, dynamic>);
-    }).toList();
+    return data.map((item) => Book.fromJson(item as Map<String, dynamic>)).toList();
   }
 
 

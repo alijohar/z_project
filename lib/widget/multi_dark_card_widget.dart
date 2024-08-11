@@ -1,36 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../model/item_model.dart';
 import '../util/navigation_helper.dart';
 
 class MultiDarkCardWidget extends StatelessWidget {
-  final ItemModel item;
 
   const MultiDarkCardWidget({
     super.key,
     required this.item,
   });
+  final ItemModel item;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       height: 90,
       alignment: Alignment.center,
       margin: const EdgeInsets.all(8),
       padding: const EdgeInsets.all(0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Color(0xFFdfad52)),
+        border: Border.all(color: const Color(0xFFdfad52)),
         image: const DecorationImage(
-          image: AssetImage("assets/image/singledark.jpg"),
+          image: AssetImage('assets/image/singledark.jpg'),
           fit: BoxFit.cover,
         ),
       ),
       child: Row(
-        children: item.items!.map((item) {
-          return Expanded(
+        children: item.items!.map((item) => Expanded(
             child: Row(
               children: [
                 Expanded(
@@ -40,7 +36,7 @@ class MultiDarkCardWidget extends StatelessWidget {
                       NavigationHelper.navigateTo(
                         context: context,
                         subItem: item,
-                        goto: item.goto ?? '', title: item.title ?? ''
+                        goto: item.goto ?? '', title: item.title ?? '',
                       );
                     },
                     child: Text(
@@ -60,9 +56,7 @@ class MultiDarkCardWidget extends StatelessWidget {
                   ),
               ],
             ),
-          );
-        }).toList(),
+          ),).toList(),
       ),
     );
-  }
 }

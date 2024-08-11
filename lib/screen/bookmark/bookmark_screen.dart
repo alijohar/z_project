@@ -1,13 +1,11 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'cubit/bookmark_cubit.dart';
 import 'widgets/reference_list_widget.dart';
 
 class BookmarkScreen extends StatefulWidget {
-  const BookmarkScreen();
+  const BookmarkScreen({super.key});
 
   @override
   State<BookmarkScreen> createState() => _BookmarkScreenState();
@@ -21,22 +19,16 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<BookmarkCubit, BookmarkState>(
-      builder: (context, state) {
-        return Scaffold(
+  Widget build(BuildContext context) => BlocBuilder<BookmarkCubit, BookmarkState>(
+      builder: (context, state) => Scaffold(
           backgroundColor: Theme.of(context).colorScheme.primary,
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
             title: Center(child: Text('إشارات مرجعية', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.surface),)),
           ),
           body: _buildBody(state),
-        );
-      },
+        ),
     );
-
-
-  }
 
 
   void _loadAllBookmarks() {
@@ -58,20 +50,20 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
           padding: const EdgeInsets.only(top: 100.0),
           child: Container(
             height: MediaQuery.of(context).size.height/3,
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             child: Stack(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 40.0, left: 40.0),
                   child: Column(
                     children: [
-                      SizedBox(height: 120),
+                      const SizedBox(height: 120),
                       Text(
                         'قائمة الإشارات المرجعية فارغة',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         textAlign: TextAlign.center,
                         'يمكنك إضافة إشارات مرجعية من الكتب التي تقرأها.',
@@ -98,8 +90,5 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
     }
   }
 
-  Widget _buildList(AllBookmarksLoadedState state) {
-    return ReferenceListWidget(referenceList: state.bookmarks);
-
-  }
+  Widget _buildList(AllBookmarksLoadedState state) => ReferenceListWidget(referenceList: state.bookmarks);
 }

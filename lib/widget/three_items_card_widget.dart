@@ -1,18 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../model/item_model.dart';
 import '../util/navigation_helper.dart';
 
 class ThreeItemsCardWidget extends StatelessWidget {
-  final ItemModel item;
 
   const ThreeItemsCardWidget({super.key, required this.item});
+  final ItemModel item;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       alignment: Alignment.center,
       child: Row(
         children: item.items!
@@ -35,7 +32,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
                         onTap: () => NavigationHelper.navigateTo(
                             context: context,
                             goto: item.goto ?? '',
-                            subItem: item),
+                            subItem: item,),
                         child: Padding(
                           padding: const EdgeInsets.all(12),
                           child: Text(
@@ -44,13 +41,12 @@ class ThreeItemsCardWidget extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
-                      )),
+                      ),),
 
                     ],
                   ),
-                ))
+                ),)
             .toList(),
       ),
     );
-  }
 }

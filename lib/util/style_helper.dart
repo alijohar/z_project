@@ -5,15 +5,15 @@ import '../model/style_model.dart';
 
 
 class StyleHelper {
+
+  factory StyleHelper() => _instance;
+
+  StyleHelper._();
   FontSizeCustom fontSize = FontSizeCustom.medium;
   FontFamily fontFamily = FontFamily.font1;
   LineHeightCustom lineSpace = LineHeightCustom.medium;
 
-  StyleHelper._();
-
   static final StyleHelper _instance = StyleHelper._();
-
-  factory StyleHelper() => _instance;
 
   // Methods to change properties
   void changeFontSize(FontSizeCustom newSize) => fontSize = newSize;
@@ -29,9 +29,9 @@ class StyleHelper {
 
   // Initialize StyleHelper from JSON
   void fromJson(Map<String, dynamic> json) {
-    fontSize = FontSizeCustom.values[json["fontSize"] ?? FontSizeCustom.medium.index];
-    lineSpace = LineHeightCustom.values[json["lineSpace"] ?? LineHeightCustom.medium.index];
-    fontFamily = FontFamily.values[json["fontFamily"] ?? FontFamily.font1.index];
+    fontSize = FontSizeCustom.values[json['fontSize'] ?? FontSizeCustom.medium.index];
+    lineSpace = LineHeightCustom.values[json['lineSpace'] ?? LineHeightCustom.medium.index];
+    fontFamily = FontFamily.values[json['fontFamily'] ?? FontFamily.font1.index];
   }
 
   // Load StyleHelper settings from SharedPreferences

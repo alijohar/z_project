@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/model/category_model.dart';
-import '../../model/reference_model.dart';
 import '../../util/epub_helper.dart';
 import 'cubit/library_cubit.dart';
 
@@ -23,12 +21,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: BlocBuilder<LibraryCubit, LibraryState>(
-        builder: (context, state) {
-          return state.when(
+        builder: (context, state) => state.when(
             initial: () => const Center(child: CircularProgressIndicator()),
             loading: () => const Center(child: CircularProgressIndicator()),
             loaded: (books) => ListView.builder(
@@ -44,12 +40,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         margin: const EdgeInsets.all(16),
                         child: ListTile(
                           title: Padding(
-                            padding: EdgeInsets.only(top: 16.0),
+                            padding: const EdgeInsets.only(top: 16.0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                                  margin: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
                                   width: 3,
                                   height: 60,
                                   color: Theme.of(context).colorScheme.primary,
@@ -67,7 +63,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             ?.copyWith(
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .primary),
+                                                    .primary,),
                                       ),
                                       Text(
                                         book.title2,
@@ -77,7 +73,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             ?.copyWith(
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .primary),
+                                                    .primary,),
                                       ),
                                     ],
                                   ),
@@ -239,18 +235,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
                           alignment: Alignment.bottomCenter,
                           child: GestureDetector(
                             onTap: () {
-                              final _bookPath = '${book.epubName}.epub';
+                              final bookPath = '${book.epubName}.epub';
                               openEpub(
-                                  context: context, cat: CategoryModel(bookPath: _bookPath));
+                                  context: context, cat: CategoryModel(bookPath: bookPath),);
                             },
                             child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   border:
-                                      Border.all(color: Color(0xFFdfad52)),
-                                  image: DecorationImage(
+                                      Border.all(color: const Color(0xFFdfad52)),
+                                  image: const DecorationImage(
                                     image: AssetImage(
-                                        "assets/image/singledark.jpg"),
+                                        'assets/image/singledark.jpg',),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -265,9 +261,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                         ?.copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .background),
+                                                .surface,),
                                   ),
-                                )),
+                                ),),
                           ),
                         ),
                       ),
@@ -277,9 +273,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
               },
             ),
             error: (message) => Center(child: Text(message)),
-          );
-        },
+          ),
       ),
     );
-  }
 }

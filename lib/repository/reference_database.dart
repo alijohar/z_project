@@ -1,14 +1,13 @@
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../model/reference_model.dart';
 
 class ReferencesDatabase {
-  static final ReferencesDatabase instance = ReferencesDatabase._init();
-  static Database? _database;
 
   ReferencesDatabase._init();
+  static final ReferencesDatabase instance = ReferencesDatabase._init();
+  static Database? _database;
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -42,21 +41,19 @@ class ReferencesDatabase {
   Future<List<ReferenceModel>> getAllReferences() async {
     final db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query('reference_database');
-    return List.generate(maps.length, (i) {
-      return ReferenceModel(
+    return List.generate(maps.length, (i) => ReferenceModel(
         id: maps[i]['id'],
         title: maps[i]['title'],
         bookName: maps[i]['bookName'],
         bookPath: maps[i]['bookPath'],
         navIndex: maps[i]['navIndex'],
-      );
-    });
+      ),);
   }
 
   Future<int> getCountOfAllReferences() async {
     final db = await instance.database;
     final List<Map<String, dynamic>> result = await db.rawQuery('SELECT COUNT(*) as count FROM reference_database');
-    int count = result.first["count"] as int;
+    final int count = result.first['count'] as int;
     return count;
   }
 
@@ -79,35 +76,29 @@ class ReferencesDatabase {
       whereArgs: [bookPath, pageNumber],
     );
 
-    return List.generate(maps.length, (i) {
-      return ReferenceModel(
+    return List.generate(maps.length, (i) => ReferenceModel(
         id: maps[i]['id'],
         title: maps[i]['title'],
         bookName: maps[i]['bookName'],
         bookPath: maps[i]['bookPath'],
         navIndex: maps[i]['navIndex'],
-      );
-    });
+      ),);
   }
 
   Future<List<ReferenceModel>> getFilterReference(String query) async {
     final db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query('reference_database');
 
-    List<ReferenceModel> filteredList = List.generate(maps.length, (i) {
-      return ReferenceModel(
+    List<ReferenceModel> filteredList = List.generate(maps.length, (i) => ReferenceModel(
         id: maps[i]['id'],
         title: maps[i]['title'],
         bookName: maps[i]['bookName'],
         bookPath: maps[i]['bookPath'],
         navIndex: maps[i]['navIndex'],
-      );
-    });
+      ),);
 
     if (query.isNotEmpty) {
-      filteredList = filteredList.where((item) {
-        return item.title.toLowerCase().contains(query.toLowerCase());
-      }).toList();
+      filteredList = filteredList.where((item) => item.title.toLowerCase().contains(query.toLowerCase())).toList();
     }
 
     return filteredList;

@@ -1,22 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../model/style_model.dart';
 import '../cubit/epub_viewer_cubit.dart';
 
 class StyleSheet extends StatefulWidget {
-  final EpubViewerCubit epubViewerCubit;
-  final FontSizeCustom fontSize;
-  final FontFamily fontFamily;
-  final LineHeightCustom lineSpace;
 
   const StyleSheet({
-    Key? key,
+    super.key,
     required this.epubViewerCubit,
     required this.fontSize,
     required this.fontFamily,
     required this.lineSpace,
-  }) : super(key: key);
+  });
+  final EpubViewerCubit epubViewerCubit;
+  final FontSizeCustom fontSize;
+  final FontFamily fontFamily;
+  final LineHeightCustom lineSpace;
 
   @override
   State<StyleSheet> createState() => _StyleSheetState();
@@ -87,12 +86,11 @@ class _StyleSheetState extends State<StyleSheet> {
     );
   }
 
-  Color _selectedColor = Colors.black; // Default color
+  final Color _selectedColor = Colors.black; // Default color
 
 
   @override
-  Widget build(BuildContext context) {
-    return Directionality(
+  Widget build(BuildContext context) => Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
         width: double.infinity,
@@ -171,10 +169,10 @@ class _StyleSheetState extends State<StyleSheet> {
             // Divider(), // Add a divider here
 
             const SizedBox(height: 18,),
-             Padding(padding: EdgeInsets.only(right: 26, left: 26),
+             Padding(padding: const EdgeInsets.only(right: 26, left: 26),
             child: Text('إعدادات النص', style: Theme.of(context).textTheme.titleMedium),
             ),
-             SizedBox(height: 18), // Add spacing before the Chip widgets
+             const SizedBox(height: 18), // Add spacing before the Chip widgets
 
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -241,7 +239,7 @@ class _StyleSheetState extends State<StyleSheet> {
                     onChanged: _handleLineHeightSliderChange,
                   ),
                 ),
-                Icon(Icons.format_line_spacing, size: 18, color: Colors.grey,),
+                const Icon(Icons.format_line_spacing, size: 18, color: Colors.grey,),
               ],
             ),
             // IconButton(
@@ -254,5 +252,4 @@ class _StyleSheetState extends State<StyleSheet> {
 
       ),
     );
-  }
 }

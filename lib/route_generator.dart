@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/repository/json_repository.dart';
 import 'package:zahra/screen/detail/cubit/detail_cubit.dart';
 import 'package:zahra/screen/detail/detail_screen.dart';
+import 'package:zahra/screen/epub_viewer/cubit/epub_viewer_cubit.dart';
+import 'package:zahra/screen/epub_viewer/epub_viewer_screen.dart';
 import 'package:zahra/screen/host/cubit/host_cubit.dart';
+import 'package:zahra/screen/host/host_screen.dart';
 import 'package:zahra/screen/toc/cubit/toc_cubit.dart';
 import 'package:zahra/screen/toc/toc_screen.dart';
-import 'package:zahra/screen/host/host_screen.dart';
-import 'package:zahra/screen/epub_viewer/epub_viewer_screen.dart';
-import 'package:zahra/screen/epub_viewer/cubit/epub_viewer_cubit.dart';
+
 import 'model/category_model.dart';
 import 'model/item_model.dart';
 import 'model/reference_model.dart';
@@ -17,17 +18,15 @@ import 'model/tree_toc_model.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final _jsonRepository = JsonRepository();
+    final jsonRepository = JsonRepository();
     final args = settings.arguments as Map<String, dynamic>?;
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
-          builder: (context) {
-            return BlocProvider(
+          builder: (context) => BlocProvider(
               create: (context) => HostCubit(),
-              child: HostScreen(),
-            );
-          },
+              child: const HostScreen(),
+            ),
         );
       case '/detail':
         if (args != null) {
@@ -36,7 +35,7 @@ class RouteGenerator {
 
           return MaterialPageRoute(
             builder: (context) => BlocProvider(
-              create: (context) => DetailCubit(_jsonRepository),
+              create: (context) => DetailCubit(jsonRepository),
               child: DetailScreen(id: id, title: title),
             ),
           );
@@ -50,7 +49,7 @@ class RouteGenerator {
 
           return MaterialPageRoute(
             builder: (context) => BlocProvider(
-              create: (context) => TocCubit(_jsonRepository),
+              create: (context) => TocCubit(jsonRepository),
               child: TocScreen(id: id, item: item, title: title),
             ),
           );
@@ -81,11 +80,9 @@ class RouteGenerator {
     }
   }
 
-  static Route _errorRoute() {
-    return MaterialPageRoute(
-      builder: (_) => Scaffold(
+  static Route _errorRoute() => MaterialPageRoute(
+      builder: (_) => const Scaffold(
         body: Center(child: Text('Error: Page not found')),
       ),
     );
-  }
 }

@@ -1,13 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SearchBarWiget extends StatefulWidget {
-  final Function(String)? onClicked;
-  final Function(String)? onChanged;
-  final Function? onClickedMic;
-  final String? query;
-  final String? hint;
 
   const SearchBarWiget({
     super.key,
@@ -17,6 +11,11 @@ class SearchBarWiget extends StatefulWidget {
     this.hint,
     this.onChanged,
   });
+  final Function(String)? onClicked;
+  final Function(String)? onChanged;
+  final Function? onClickedMic;
+  final String? query;
+  final String? hint;
 
   @override
   State<SearchBarWiget> createState() => _SearchBarWidgetState();
@@ -32,8 +31,7 @@ class _SearchBarWidgetState extends State<SearchBarWiget> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Directionality(
+  Widget build(BuildContext context) => Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
         padding: const EdgeInsets.only(left: 0, right: 0),
@@ -94,5 +92,4 @@ class _SearchBarWidgetState extends State<SearchBarWiget> {
         ),
       ),
     );
-  }
 }

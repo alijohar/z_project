@@ -8,9 +8,9 @@ part 'detail_state.dart';
 part 'detail_cubit.freezed.dart';
 
 class DetailCubit extends Cubit<DetailState> {
-  final JsonRepository _jsonRepository;
 
   DetailCubit(this._jsonRepository) : super(const DetailState.initial());
+  final JsonRepository _jsonRepository;
   Future<void> fetchItems(int id) async {
     try {
       emit(const DetailState.loading());

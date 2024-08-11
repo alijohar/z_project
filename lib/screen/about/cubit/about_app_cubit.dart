@@ -8,9 +8,9 @@ part 'about_app_state.dart';
 part 'about_app_cubit.freezed.dart';
 
 class AboutAppCubit extends Cubit<AboutAppState> {
-  final JsonRepository _jsonRepository;
 
   AboutAppCubit(this._jsonRepository) : super(const AboutAppState.initial());
+  final JsonRepository _jsonRepository;
 
   Future<void> fetchItems(int id) async {
     try {

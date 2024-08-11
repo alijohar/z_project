@@ -15,7 +15,7 @@ class DodecagonClipper extends CustomClipper<Path> {
 
     // Start drawing the path from the first vertex
     double angle = -math.pi / 2;
-    final double angleIncrement = 2 * math.pi / numberOfSides;
+    const double angleIncrement = 2 * math.pi / numberOfSides;
 
     path.moveTo(centerX + radius * math.cos(angle), centerY + radius * math.sin(angle));
     for (int i = 1; i <= numberOfSides; i++) {

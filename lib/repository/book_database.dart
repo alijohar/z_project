@@ -1,18 +1,17 @@
 import 'dart:io';
-import 'dart:typed_data';
+
 import 'package:flutter/services.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../model/book_model.dart';
 import '../model/category_model.dart';
 
 class BooksDatabase {
-  static final BooksDatabase instance = BooksDatabase._init();
-  static Database? _database;
 
   BooksDatabase._init();
+  static final BooksDatabase instance = BooksDatabase._init();
+  static Database? _database;
 
   Future<Database> initDb() async {
     if (_database != null) {
@@ -48,14 +47,12 @@ class BooksDatabase {
     final db = await initDb();
     final List<Map<String, dynamic>> bookMaps =
     await db.query('category_list');
-    return List.generate(bookMaps.length, (i) {
-      return BookModel(
+    return List.generate(bookMaps.length, (i) => BookModel(
         id: bookMaps[i]['id'],
         bookName: bookMaps[i]['book_name'],
         bookCover: bookMaps[i]['book_cover'],
         description: bookMaps[i]['description'],
-      );
-    });
+      ),);
   }
 
 
@@ -63,8 +60,7 @@ class BooksDatabase {
     final db = await initDb();
     final List<Map<String, dynamic>> catMaps =
     await db.query('book_list');
-    return List.generate(catMaps.length, (i) {
-      return CategoryModel(
+    return List.generate(catMaps.length, (i) => CategoryModel(
           id: catMaps[i]['id'],
           catId: catMaps[i]['cat_id'],
           bookPath: catMaps[i]['book_path'],
@@ -72,9 +68,8 @@ class BooksDatabase {
           bookCover: catMaps[i]['book_cover'],
           bookStyle: catMaps[i]['book_style'],
           bookAuthor: catMaps[i]['book_author'],
-          description: catMaps[i]['description']
-      );
-    });
+          description: catMaps[i]['description'],
+      ),);
   }
 
 
@@ -85,8 +80,7 @@ class BooksDatabase {
       where: 'cat_id = ?',
       whereArgs: [catId],
     );
-    return List.generate(catMaps.length, (i) {
-      return CategoryModel(
+    return List.generate(catMaps.length, (i) => CategoryModel(
         id: catMaps[i]['id'],
         catId: catMaps[i]['cat_id'],
         bookPath: catMaps[i]['book_path'],
@@ -95,8 +89,7 @@ class BooksDatabase {
         bookStyle: catMaps[i]['book_style'],
         bookAuthor: catMaps[i]['book_author'],
         description: catMaps[i]['description'],
-      );
-    });
+      ),);
   }
 
 }

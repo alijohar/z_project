@@ -1,8 +1,4 @@
 class BookModel {
-  final int? id;
-  final String? bookName;
-  final String? bookCover;
-  final String? description;
 
   BookModel({
     required this.id,
@@ -10,4 +6,8 @@ class BookModel {
     required this.bookCover,
     required this.description,
   });
+  final int? id;
+  final String? bookName;
+  final String? bookCover;
+  final String? description;
 }

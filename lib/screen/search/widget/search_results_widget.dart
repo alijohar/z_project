@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 import '../../../model/search_model.dart';
@@ -8,9 +6,9 @@ import '../../../util/epub_helper.dart';
 
 // Assuming you have a StatefulWidget for managing expand/collapse state
 class SearchResultsWidget extends StatefulWidget {
-  final List<SearchModel> searchResults;
 
-  const SearchResultsWidget({Key? key, required this.searchResults}) : super(key: key);
+  const SearchResultsWidget({super.key, required this.searchResults});
+  final List<SearchModel> searchResults;
 
   @override
   _SearchResultsWidgetState createState() => _SearchResultsWidgetState();
@@ -21,15 +19,14 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
 
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 16.0, left: 16, top: 8, bottom: 8),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text('كل النتائج: ${widget.searchResults.length}',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.background)),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.surface),),
           ),
         ),
         Expanded(
@@ -81,18 +78,18 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                           children: [
                             Text(
                               '${widget.searchResults[index].pageIndex}',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.background),
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.surface),
                             ),
                             Expanded(
                               child: Html(
                                 data: widget.searchResults[index].spanna ?? '',
                                 style: {
-                                  "html": Style(
+                                  'html': Style(
                                     fontSize: FontSize.medium,
                                     textAlign: TextAlign.right,
-                                    color: Theme.of(context).colorScheme.background,
+                                    color: Theme.of(context).colorScheme.surface,
                                   ),
-                                  "mark": Style(
+                                  'mark': Style(
                                     backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
                                   ),
                                 },
@@ -115,18 +112,18 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                       children: [
                         Text(
                           '${widget.searchResults[index].pageIndex}',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.background),
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.surface),
                         ),
                         Expanded(
                           child: Html(
                             data: widget.searchResults[index].spanna ?? '',
                             style: {
-                              "html": Style(
+                              'html': Style(
                                 fontSize: FontSize.medium,
                                 textAlign: TextAlign.right,
-                                color: Theme.of(context).colorScheme.background,
+                                color: Theme.of(context).colorScheme.surface,
                               ),
-                              "mark": Style(
+                              'mark': Style(
                                 backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
                               ),
                             },
@@ -142,7 +139,6 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
         ),
       ],
     );
-  }
 }
 
 

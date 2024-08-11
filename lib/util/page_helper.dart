@@ -9,7 +9,7 @@ class PageHelper {
     final bookData = prefs.getStringList(_key) ?? [];
 
     // Check if the book name already exists in the data list.
-    int existingIndex = bookData.indexWhere((entry) {
+    final int existingIndex = bookData.indexWhere((entry) {
       final parts = entry.split(':');
       return parts.isNotEmpty && parts[0] == bookName;
     });

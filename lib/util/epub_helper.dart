@@ -1,27 +1,23 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:epub_parser/epub_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/util/page_helper.dart';
 
 import '../model/category_model.dart';
 import '../model/reference_model.dart';
 import '../model/search_model.dart';
 import '../model/tree_toc_model.dart';
-import '../screen/epub_viewer/cubit/epub_viewer_cubit.dart';
-import '../screen/epub_viewer/epub_viewer_screen.dart';
 
 
-void openEpub({
+Future<void> openEpub({
   required BuildContext context,
   CategoryModel? cat,
   ReferenceModel? reference,
   EpubChaptersWithBookPath? toc,
   SearchModel? search,
-}) {
+}) async {
   Navigator.pushNamed(
     context,
     '/epubViewer',
@@ -36,16 +32,16 @@ void openEpub({
 
 
 Future<List<HtmlFileInfo>> extractHtmlContentWithEmbeddedImages(
-    EpubBook epubBook) async {
-  EpubContent? bookContent = epubBook.Content;
-  Map<String, EpubByteContentFile>? images = bookContent?.Images;
-  Map<String, EpubTextContentFile>? htmlFiles = bookContent?.Html;
+    EpubBook epubBook,) async {
+  final EpubContent? bookContent = epubBook.Content;
+  final Map<String, EpubByteContentFile>? images = bookContent?.Images;
+  final Map<String, EpubTextContentFile>? htmlFiles = bookContent?.Html;
 
-  List<HtmlFileInfo> htmlContentList = [];
+  final List<HtmlFileInfo> htmlContentList = [];
   if (htmlFiles != null) {
     int index = 0; // Initialize a counter to keep track of the file index
-    for (var entry in htmlFiles.entries) {
-      String htmlContent = embedImagesInHtmlContent(entry.value, images);
+    for (final entry in htmlFiles.entries) {
+      final String htmlContent = embedImagesInHtmlContent(entry.value, images);
       // Assuming HtmlFileInfo can take an additional `fileIndex` parameter
       htmlContentList.add(HtmlFileInfo(entry.key, htmlContent, index++));
     }
@@ -56,18 +52,18 @@ Future<List<HtmlFileInfo>> extractHtmlContentWithEmbeddedImages(
 
 
 String embedImagesInHtmlContent(EpubTextContentFile htmlFile,
-    Map<String, EpubByteContentFile>? images) {
+    Map<String, EpubByteContentFile>? images,) {
   String htmlContent = htmlFile.Content!;
   final imgRegExp = RegExp(r'<img[^>]*>');
-  Iterable<RegExpMatch> imgTags = imgRegExp.allMatches(htmlContent);
+  final Iterable<RegExpMatch> imgTags = imgRegExp.allMatches(htmlContent);
 
-  for (var imgMatch in imgTags) {
-    String imgTag = imgMatch.group(0)!;
-    String imageName = extractImageNameFromTag(imgTag);
-    String? base64Image = convertImageToBase64(images?['Images/$imageName']);
+  for (final imgMatch in imgTags) {
+    final String imgTag = imgMatch.group(0)!;
+    final String imageName = extractImageNameFromTag(imgTag);
+    final String? base64Image = convertImageToBase64(images?['Images/$imageName']);
 
     if (base64Image != null) {
-      String replacement = "<img src=\"data:image/jpg;base64,$base64Image\" alt=\"$imageName\" />";
+      final String replacement = '<img src="data:image/jpg;base64,$base64Image" alt="$imageName" />';
       htmlContent = htmlContent.replaceFirst(imgTag, replacement);
     }
   }
@@ -79,13 +75,13 @@ String embedImagesInHtmlContent(EpubTextContentFile htmlFile,
 List<HtmlFileInfo> reorderHtmlFilesBasedOnSpine(List<HtmlFileInfo> htmlFiles, List<String>? spineItems) {
   if (spineItems == null || spineItems.isEmpty) return htmlFiles;
 
-  Map<String, HtmlFileInfo> htmlFilesMap = {
-    for (var file in htmlFiles) file.fileName.replaceAll('Text/', ''): file
+  final Map<String, HtmlFileInfo> htmlFilesMap = {
+    for (final file in htmlFiles) file.fileName.replaceAll('Text/', ''): file,
   };
 
-  List<HtmlFileInfo> orderedFiles = [];
-  for (var spineItem in spineItems) {
-    HtmlFileInfo? file = htmlFilesMap[spineItem.replaceFirst('x', '')];
+  final List<HtmlFileInfo> orderedFiles = [];
+  for (final spineItem in spineItems) {
+    final HtmlFileInfo? file = htmlFilesMap[spineItem.replaceFirst('x', '')];
     if (file != null) {
       orderedFiles.add(file);
     }
@@ -110,11 +106,11 @@ String? convertImageToBase64(EpubByteContentFile? imageFile) {
 
 
 Future<int> findPageIndexInEpub(EpubBook epubBook, String fileName) async {
-  EpubContent? bookContent = epubBook.Content;
-  Map<String, EpubTextContentFile>? htmlFiles = bookContent?.Html;
+  final EpubContent? bookContent = epubBook.Content;
+  final Map<String, EpubTextContentFile>? htmlFiles = bookContent?.Html;
   if (htmlFiles != null) {
     int index = 0;
-    for (String key in htmlFiles.keys) {
+    for (final String key in htmlFiles.keys) {
       if (key == fileName) {
         return index;
       }
@@ -147,19 +143,19 @@ String extractImageNameFromTag(String imageTag) {
 }
 
 Future<EpubBook> loadEpubFromAsset(String assetPath) async {
-  ByteData data = await rootBundle.load(assetPath);
-  List<int> bytes = data.buffer.asUint8List();
+  final ByteData data = await rootBundle.load(assetPath);
+  final List<int> bytes = data.buffer.asUint8List();
 
-  EpubBook epubBook = await EpubReader.readBook(Uint8List.fromList(bytes));
+  final EpubBook epubBook = await EpubReader.readBook(Uint8List.fromList(bytes));
 
   return epubBook;
 }
 
 class HtmlFileInfo {
+
+  HtmlFileInfo(this.fileName, this.modifiedHtmlContent, this.pageIndex);
   final String fileName;
   final String modifiedHtmlContent;
   final int pageIndex;
-
-  HtmlFileInfo(this.fileName, this.modifiedHtmlContent, this.pageIndex);
 }
 

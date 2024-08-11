@@ -1,24 +1,22 @@
 import 'dart:async';
 import 'dart:isolate';
+
 import 'package:epub_parser/epub_parser.dart';
-import 'package:flutter/foundation.dart';
-import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' show parse;
 import 'package:zahra/model/epubBookLocal.dart';
+
 import '../model/search_model.dart';
 import 'epub_helper.dart';
-import 'package:html/parser.dart' show parse;
 
 class SearchHelper {
-  // Singleton instance
-  static final SearchHelper _instance = SearchHelper._internal();
+
+  // Factory constructor
+  factory SearchHelper() => _instance;
 
   // Private constructor
   SearchHelper._internal();
-
-  // Factory constructor
-  factory SearchHelper() {
-    return _instance;
-  }
+  // Singleton instance
+  static final SearchHelper _instance = SearchHelper._internal();
 
   final int searchSurroundCharNum = 40;
   bool _isSearchStopped = false;
@@ -57,11 +55,11 @@ class SearchHelper {
       final List<HtmlFileInfo> epubContent = await extractHtmlContentWithEmbeddedImages(epubBook.epubBook!);
 
       // Extract spine items from EPUB
-      var spineItems = epubBook.epubBook?.Schema?.Package?.Spine?.Items;
-      List<String> idRefs = [];
+      final spineItems = epubBook.epubBook?.Schema?.Package?.Spine?.Items;
+      final List<String> idRefs = [];
 
       if (spineItems != null) {
-        for (var item in spineItems) {
+        for (final item in spineItems) {
           if (item.IdRef != null) {
             idRefs.add(item.IdRef!);
           }
@@ -91,7 +89,7 @@ class SearchHelper {
   Future<List<SearchModel>> _searchSingleBook(String bookPath, String sw, EpubBook? epub, [List<HtmlFileInfo>? spineFile]) async {
     spineFile ??= [];
 
-    List<SearchModel> tempResult = [];
+    final List<SearchModel> tempResult = [];
     EpubBook epubBook;
     List<HtmlFileInfo> spine;
     try {
@@ -102,12 +100,12 @@ class SearchHelper {
         spine = spineFile;
         epubBook = epub;
       }
-      var spineHtmlContent = spine.map((info) => info.modifiedHtmlContent).toList();
-      var spineHtmlFileName = spine.map((info) => info.fileName).toList();
-      var spineHtmlIndex = spine.map((info) => info.pageIndex).toList();
+      final spineHtmlContent = spine.map((info) => info.modifiedHtmlContent).toList();
+      final spineHtmlFileName = spine.map((info) => info.fileName).toList();
+      final spineHtmlIndex = spine.map((info) => info.pageIndex).toList();
 
       for (int i = 0; i < spineHtmlContent.length; i++) {
-        var page = _removeHtmlTags(spineHtmlContent[i]);
+        final page = _removeHtmlTags(spineHtmlContent[i]);
         var searchIndex = _searchInString(page, sw, 0);
         while (searchIndex.startIndex >= 0) {
           tempResult.add(SearchModel(
@@ -118,7 +116,7 @@ class SearchHelper {
             pageId: spineHtmlFileName[i],
             searchCount: tempResult.length + 1, // Updated to directly use the length of tempResult for search count
             spanna: _getHighlightedSection(searchIndex, page),
-          ));
+          ),);
 
           searchIndex = _searchInString(page, sw, searchIndex.lastIndex + 1);
         }
@@ -133,10 +131,10 @@ class SearchHelper {
   // Your existing searchHtmlContents function remains as is
 
   Future<List<SearchModel>> searchHtmlContents(List<String> htmlContents, String searchWord, String? bookName, String? bookAddress) async {
-    List<SearchModel> results = [];
+    final List<SearchModel> results = [];
 
     for (int i = 0; i < htmlContents.length; i++) {
-      String pageContent = _removeHtmlTags(htmlContents[i]);
+      final String pageContent = _removeHtmlTags(htmlContents[i]);
       SearchIndex searchIndex = _searchInString(pageContent, searchWord, 0);
 
       while (searchIndex.startIndex >= 0) {
@@ -146,8 +144,8 @@ class SearchHelper {
           searchCount: results.length + 1,  // Directly use the length of results for search count
           spanna: _getHighlightedSection(searchIndex, pageContent),
           bookAddress: bookAddress,
-          bookTitle: bookName
-        ));
+          bookTitle: bookName,
+        ),);
 
         // Continue searching from the end of the last found index
         searchIndex = _searchInString(pageContent, searchWord, searchIndex.lastIndex + 1);
@@ -164,9 +162,9 @@ class SearchHelper {
     final lastIndex = wholeString.length;
     final firstCutIndex = index.startIndex - searchSurroundCharNum > 0 ? index.startIndex - searchSurroundCharNum : 0;
     final lastCutIndex = index.lastIndex + searchSurroundCharNum > lastIndex ? lastIndex : index.lastIndex + searchSurroundCharNum;
-    final surr1 = "...${wholeString.substring(firstCutIndex, index.startIndex)}";
-    final surr2 = "${wholeString.substring(index.lastIndex, lastCutIndex)}...";
-    return "$surr1<mark>$sw</mark>$surr2";
+    final surr1 = '...${wholeString.substring(firstCutIndex, index.startIndex)}';
+    final surr2 = '${wholeString.substring(index.lastIndex, lastCutIndex)}...';
+    return '$surr1<mark>$sw</mark>$surr2';
   }
 
   SearchIndex _searchInString(String pageString, String sw, int start) {
@@ -178,23 +176,21 @@ class SearchHelper {
     _isSearchStopped = stop;
   }
 
-  String _removeHtmlTags(String htmlString) {
-    return parse(htmlString).documentElement!.text;
-  }
+  String _removeHtmlTags(String htmlString) => parse(htmlString).documentElement!.text;
 }
 
 class SearchIndex {
-  final int startIndex;
-  final int lastIndex;
 
   SearchIndex(this.startIndex, this.lastIndex);
+  final int startIndex;
+  final int lastIndex;
 }
 
 
 class SearchTask {
+
+  SearchTask(this.allBooks, this.word, this.sendPort);
   final List<EpubBookLocal> allBooks;
   final String word;
   final SendPort sendPort;
-
-  SearchTask(this.allBooks, this.word, this.sendPort);
 }

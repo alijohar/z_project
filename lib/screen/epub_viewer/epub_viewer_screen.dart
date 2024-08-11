@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' as html_parser;
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:zahra/screen/epub_viewer/widgets/toc_tree_list_widget.dart';
-import 'package:zahra/widget/search_bar_widget.dart';
-import 'package:html/parser.dart' as html_parser;
-import 'package:html/dom.dart' as dom;
+
 import '../../model/category_model.dart';
 import '../../model/reference_model.dart';
 import '../../model/search_model.dart';
@@ -22,18 +22,18 @@ import 'widgets/style_sheet.dart';
 typedef DataCallback = void Function(dynamic data);
 
 class EpubViewerScreen extends StatefulWidget {
-  final ReferenceModel? referenceModel;
-  final CategoryModel? catModel;
-  final EpubChaptersWithBookPath? tocModel;
-  final SearchModel? searchModel;
 
   const EpubViewerScreen({
-    Key? key,
+    super.key,
     this.referenceModel,
     this.catModel,
     this.tocModel,
     this.searchModel,
-  }) : super(key: key);
+  });
+  final ReferenceModel? referenceModel;
+  final CategoryModel? catModel;
+  final EpubChaptersWithBookPath? tocModel;
+  final SearchModel? searchModel;
 
   @override
   _EpubViewerScreenState createState() => _EpubViewerScreenState();
@@ -81,7 +81,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     } else {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-          overlays: SystemUiOverlay.values);
+          overlays: SystemUiOverlay.values,);
     }
 
     return BlocConsumer<EpubViewerCubit, EpubViewerState>(
@@ -94,7 +94,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
             showSearchResultsDialog(context, searchResults);
           },
           styleChanged: (fontSize, lineSpace, fontFamily){
-            print('loadUserPreferences ${lineSpace} add ${fontFamily}');
+            print('loadUserPreferences $lineSpace add $fontFamily');
 
             _changeStyle(fontSize, lineSpace, fontFamily);
           },
@@ -103,8 +103,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
           orElse: () {},
         );
       },
-      builder: (context, state) {
-        return Scaffold(
+      builder: (context, state) => Scaffold(
           body: Stack(
             children: [
               if (isSliderVisible)
@@ -143,11 +142,9 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                         },
                       ),
                     ),
-                    onSubmitted: (value) {
-                      _search(value);
-                    },
+                    onSubmitted: _search,
                   )
-                      : SizedBox.shrink(),
+                      : const SizedBox.shrink(),
                   actions: isSearchOpen
                       ? null // No actions when search is open
                       : [
@@ -159,7 +156,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       icon: SvgPicture.asset('assets/icon/font.svg', color: Theme.of(context).colorScheme.onSurfaceVariant),
                       onPressed: () {
                         _showBottomSheet(
-                            context, context.read<EpubViewerCubit>());
+                            context, context.read<EpubViewerCubit>(),);
                       },
                     ),
                     IconButton(
@@ -167,7 +164,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                         isBookmarked
                             ? 'assets/icon/bookmarked.svg'
                             : 'assets/icon/bookmark.svg',
-                       color: Theme.of(context).colorScheme.onSurfaceVariant),
+                       color: Theme.of(context).colorScheme.onSurfaceVariant,),
                       onPressed: () {
                         _toggleBookmark();
                         if (isBookmarked) {
@@ -182,7 +179,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       onPressed: () {
                         _openInternalToc(context);
                       },
-                    )
+                    ),
                   ],
                 ),
               Align(
@@ -192,15 +189,15 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       top: !isSliderVisible
                           ? 0
                           : kToolbarHeight +
-                          MediaQuery.of(context).padding.top),
+                          MediaQuery.of(context).padding.top,),
                   child: state.when(
                       loaded: (content, _, tocList) {
                         _storeContentLoaded(content, context, state, tocList);
                         // context.read<EpubViewerCubit>().emitLastPageSeen();
 
                         if (widget.referenceModel?.navIndex !=null){
-                          double doubleValue = double.parse(widget.referenceModel!.navIndex);
-                          int intValue = doubleValue.toInt();
+                          final double doubleValue = double.parse(widget.referenceModel!.navIndex);
+                          final int intValue = doubleValue.toInt();
                           context.read<EpubViewerCubit>().emitCustomPageSeen((intValue).toString());
                         }
                         if (widget.searchModel?.pageIndex !=null){
@@ -224,37 +221,26 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       loading: () => const Center(
                         child: CircularProgressIndicator(),
                       ),
-                      error: (error) {
-                        return _buildCurrentUi(context, _content);
-                      },
+                      error: (error) => _buildCurrentUi(context, _content),
                       initial: () => const Center(
                         child: CircularProgressIndicator(),
                       ),
-                      pageChanged: (int? pageNumber) {
-                        return _buildCurrentUi(context, _content);
-                      },
+                      pageChanged: (int? pageNumber) => _buildCurrentUi(context, _content),
                       styleChanged: (fontSize,
                           lineHeight,
-                          fontFamily) {
-                        return _buildCurrentUi(context, _content);
-                      },
-                      bookmarkAdded: (int? status) {
-                        return _buildCurrentUi(context, _content);
-                      },
-                      searchResultsFound: (List<SearchModel> searchResults) {
-                        return _buildCurrentUi(context, _content);
-                      }),
+                          fontFamily,) => _buildCurrentUi(context, _content),
+                      bookmarkAdded: (int? status) => _buildCurrentUi(context, _content),
+                      searchResultsFound: (List<SearchModel> searchResults) => _buildCurrentUi(context, _content),),
                 ),
               ),
             ],
           ),
-        );
-      },
+        ),
     );
   }
 
   _storeContentLoaded(List<String> htmlContent, BuildContext context,
-      EpubViewerState state, List<EpubChapter>? tocList) {
+      EpubViewerState state, List<EpubChapter>? tocList,) {
     _content = htmlContent;
     _orginalContent = _content;
     _bookName = _getAppBarTitle(state);
@@ -280,21 +266,20 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   }
 
   void showSearchResultsDialog(
-      BuildContext context, List<SearchModel> searchResults) {
+      BuildContext context, List<SearchModel> searchResults,) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
+      builder: (BuildContext context) => AlertDialog(
           backgroundColor: Theme.of(context).colorScheme.primary,
           title: Padding(
             padding: const EdgeInsets.only(right: 16.0, left: 16, top: 8, bottom: 8),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text('كل النتائج: ${searchResults.length}',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.background)),
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.surface),),
             ),
           ),
-          content: Container(
+          content: SizedBox(
             width: double.maxFinite,
             child: Expanded(
               child: ListView.builder(
@@ -317,12 +302,12 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                               child: Html(
                                 data: result.spanna.toString(),
                                 style: {
-                                  "html": Style(
+                                  'html': Style(
                                     fontSize: FontSize.small,
                                     textAlign: TextAlign.justify,
-                                    color: Theme.of(context).colorScheme.background,
+                                    color: Theme.of(context).colorScheme.surface,
                                   ),
-                                  "mark": Style(
+                                  'mark': Style(
                                     backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
                                   ),
                                 },
@@ -336,13 +321,12 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
               ),
             ),
           ),
-        );
-      },
+        ),
     );
   }
 
   Widget _buildCurrentUi(BuildContext context, List<String> content) {
-    var allPagesCount = content.length.toDouble();
+    final allPagesCount = content.length.toDouble();
     return Column(
       children: [
         Expanded(
@@ -353,7 +337,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
             itemPositionsListener: itemPositionsListener,
             scrollOffsetListener: scrollOffsetListener,
             itemBuilder: (BuildContext context, int index) {
-              double screenHeight = MediaQuery.of(context).size.height; // Get screen height
+              final double screenHeight = MediaQuery.of(context).size.height; // Get screen height
 
               return Padding(
                 padding: const EdgeInsets.only(top: 20.0),
@@ -371,49 +355,49 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                   child: ConstrainedBox(
                     constraints: BoxConstraints(minHeight: screenHeight),
                     child: Container(
-                      margin: EdgeInsets.only(right: 16, left: 16),
+                      margin: const EdgeInsets.only(right: 16, left: 16),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background, // Set color here to use rounded corners
+                        color: Theme.of(context).colorScheme.surface, // Set color here to use rounded corners
                         borderRadius: BorderRadius.circular(10), // Adjust the radius to your liking
                       ),
                       child: SelectionArea(
                         child: Html(
                           data: content[index],
                           style: {
-                            "body": Style(
+                            'body': Style(
                               direction: TextDirection.rtl,
                               textAlign: TextAlign.justify,
                               lineHeight: LineHeight(lineHeight.size),
                               padding: HtmlPaddings.all(20),
                               textDecoration: TextDecoration.none,
                             ),
-                            "p": Style(
+                            'p': Style(
                               textAlign: TextAlign.justify,
                               fontSize: FontSize(fontSize.size),
                               margin: Margins.symmetric(vertical: 10),
                               fontFamily: fontFamily.name,
                             ),
-                            ".tit1": Style(
+                            '.tit1': Style(
                               color: Colors.green[700],
                               fontSize: FontSize(fontSize.size),
                               margin: Margins.symmetric(vertical: 10),
                               textAlign: TextAlign.center,
                               fontFamily: fontFamily.name,
                             ),
-                            ".tit2": Style(
+                            '.tit2': Style(
                               color: Colors.black87,
                               fontSize: FontSize(fontSize.size),
                               margin: Margins.symmetric(vertical: 10),
                               textAlign: TextAlign.center,
                               fontFamily: fontFamily.name,
                             ),
-                            ".tit3": Style(
+                            '.tit3': Style(
                               color: Colors.black87,
                               fontSize: FontSize(fontSize.size),
                               margin: Margins.symmetric(vertical: 10),
                               fontFamily: fontFamily.name,
                             ),
-                            ".tit4": Style(
+                            '.tit4': Style(
                               color: Colors.red,
                               fontSize: FontSize(fontSize.size),
                               margin: Margins.zero,
@@ -421,80 +405,80 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                               fontFamily: fontFamily.name,
                             ),
 
-                            ".pagen": Style(
+                            '.pagen': Style(
                               textAlign: TextAlign.center,
                               color: Colors.red,
                               fontSize: FontSize(fontSize.size*0.7),
                             ),
-                            ".asl": Style(
+                            '.asl': Style(
                               color: Colors.deepOrange,
                               fontSize: FontSize(fontSize.size),
                               fontWeight: FontWeight.bold,
                               margin: Margins.symmetric(vertical: 10),
                               fontFamily: 'Lotus Qazi Bold',
                             ),
-                            ".center": Style(
+                            '.center': Style(
                               textAlign: TextAlign.center,
                             ),
-                            ".fnote": Style(
+                            '.fnote': Style(
                               color: Colors.blue[900],
                               fontSize: FontSize(fontSize.size*0.8),
                               margin: Margins.zero,
                             ),
-                            ".sher": Style(
+                            '.sher': Style(
                               textAlign: TextAlign.center,
                               color: Colors.red[800],
                               fontSize: FontSize(fontSize.size),
                               margin: Margins.symmetric(vertical: 10),
                             ),
-                            ".fnotesher": Style(
+                            '.fnotesher': Style(
                               textAlign: TextAlign.center,
                               color: Colors.red[800],
                               fontSize: FontSize(fontSize.size),
                               margin: Margins.zero,
                             ),
-                            ".psm": Style(
+                            '.psm': Style(
                               textAlign: TextAlign.center,
                               color: Colors.red[800],
                               fontSize: FontSize(fontSize.size),
                               margin: Margins.symmetric(vertical: 10),
                             ),
-                            ".msaleh": Style(
+                            '.msaleh': Style(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold,
                             ),
-                            ".fn": Style(
+                            '.fn': Style(
                               color: Colors.blue[900],
                               fontWeight: FontWeight.normal,
                               fontSize: FontSize(fontSize.size*0.8),
                               textDecoration: TextDecoration.none,
                               verticalAlign: VerticalAlign.top,
                             ),
-                            ".fm": Style(
+                            '.fm': Style(
                               color: Colors.green,
                               fontWeight: FontWeight.bold,
                               fontSize: FontSize(fontSize.size*0.7),
                               textDecoration: TextDecoration.none,
                             ),
-                            ".quran": Style(
+                            '.quran': Style(
                               fontWeight: FontWeight.bold,
                               fontSize: FontSize(fontSize.size),
                               color: Colors.green,
                             ),
-                            ".hadith": Style(
+                            '.hadith': Style(
                               fontWeight: FontWeight.bold,
                               fontSize: FontSize(fontSize.size),
                               color: Colors.teal,
                             ),
-                            ".shreah": Style(
+                            '.shreah': Style(
                               fontWeight: FontWeight.bold,
                               color: Colors.purple[900],
                             ),
-                            ".kalema": Style(
+                            '.kalema': Style(
                               fontWeight: FontWeight.bold,
                               color: Colors.pink[700],
                             ),
-                            "mark": Style(
+                            'mark': Style(
                               backgroundColor: Colors.yellow, // Highlight color
                             ),
                           },
@@ -548,48 +532,47 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                           '${allPagesCount.toInt()}/${_currentPage.toInt() + 1}',
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
-                      )
+                      ),
 
                     ],
                   ),
                 ),
               ],
             ),
-          )
+          ),
       ],
     );
   }
 
   void _showPageJumpDialog(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final TextEditingController pageController = TextEditingController();
 
     showDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
+      builder: (context) => AlertDialog(
           content: Form(
-            key: _formKey,
+            key: formKey,
             child: TextFormField(
               controller: pageController,
               autofocus: true,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: "أدخل رقم الصفحة (بين 1 و ${_content.length})",
+                hintText: 'أدخل رقم الصفحة (بين 1 و ${_content.length})',
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'يرجى إدخال رقم الصفحة';
                 }
-                int? pageNumber = int.tryParse(value);
+                final int? pageNumber = int.tryParse(value);
                 if (pageNumber == null || pageNumber <= 0 || pageNumber > _content.length) {
                   return ' الرقم يجب أن يكون بين ١ و ${_content.length}';
                 }
                 return null;  // Means the input is valid
               },
               onFieldSubmitted: (value) {
-                if (_formKey.currentState!.validate()) {
-                  int? pageNumber = int.tryParse(value);
+                if (formKey.currentState!.validate()) {
+                  final int? pageNumber = int.tryParse(value);
                   _jumpTo(pageNumber: pageNumber! - 1);
                   Navigator.of(context).pop();
                 }
@@ -598,24 +581,23 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('إلغاء'),
+              child: const Text('إلغاء'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('انتقل'),
+              child: const Text('انتقل'),
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  int? pageNumber = int.tryParse(pageController.text);
+                if (formKey.currentState!.validate()) {
+                  final int? pageNumber = int.tryParse(pageController.text);
                   _jumpTo(pageNumber: pageNumber! - 1);
                   Navigator.of(context).pop();
                 }
               },
             ),
           ],
-        );
-      },
+        ),
     );
   }
 
@@ -637,7 +619,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   }
 
   void _addBookmark(BuildContext context) {
-    String? headingTitle = _findPreviousHeading(_currentPage);
+    final String? headingTitle = _findPreviousHeading(_currentPage);
 
     final reference = ReferenceModel(
       title: headingTitle ?? ' علامة مرجعية على كتاب $_bookName',
@@ -652,13 +634,12 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
 
   void _openInternalToc(BuildContext context) {
     // This variable holds the state of the AppBar visibility
-    ValueNotifier<bool> showAppBar = ValueNotifier(false);
+    final ValueNotifier<bool> showAppBar = ValueNotifier(false);
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (BuildContext context) {
-        return NotificationListener<DraggableScrollableNotification>(
+      builder: (BuildContext context) => NotificationListener<DraggableScrollableNotification>(
           onNotification: (notification) {
             // When the sheet is fully expanded, show the AppBar
             showAppBar.value = notification.extent == notification.maxExtent;
@@ -671,8 +652,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
               initialChildSize: 0.5,
               minChildSize: 0.25,
               maxChildSize: 1.0,
-              builder: (BuildContext context, ScrollController scrollController) {
-                return Stack(
+              builder: (BuildContext context, ScrollController scrollController) => Stack(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 26, right: 16, left: 16),
@@ -701,27 +681,25 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                             child: Container(
                               height: 56,
                               // Standard AppBar height
-                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
                               alignment: Alignment.centerRight,
                               color: Colors.transparent,
                               // Adjust the color as needed
                               child: IconButton(
-                                icon: Icon(Icons.arrow_back),
+                                icon: const Icon(Icons.arrow_back),
                                 onPressed: () => Navigator.pop(context),
                               ),
                             ),
                           ),
                         )
-                            : SizedBox.shrink(); // If false, don't show anything
+                            : const SizedBox.shrink(); // If false, don't show anything
                       },
                     ),
                   ],
-                );
-              },
+                ),
             ),
           ),
-        );
-      },
+        ),
     );
   }
 
@@ -731,7 +709,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
       isScrollControlled: true, // Set this property to true
       builder: (BuildContext context) {
         // Calculate the maximum height based on content
-        double maxContentHeight = MediaQuery.of(context).size.height * 0.8;
+        final double maxContentHeight = MediaQuery.of(context).size.height * 0.8;
 
         return ConstrainedBox(
           constraints: BoxConstraints(
@@ -778,13 +756,13 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   _loadEpubFromTableOfContents() {
     _bookPath = widget.tocModel!.epubChapter.ContentFileName;
     _loadAndParseEpub(
-        bookPath: widget.tocModel!.bookPath, fileName: _bookPath!);
+        bookPath: widget.tocModel!.bookPath, fileName: _bookPath!,);
   }
 
   _loadEpubFromSearchResult() {
     _bookPath = widget.searchModel!.bookAddress;
     _loadAndParseEpub(
-        bookPath: _bookPath!);
+        bookPath: _bookPath!,);
   }
 
   _loadEpubFromCategory() {
@@ -806,7 +784,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
         final int firstVisibleItemIndex = positions
             .where((position) => position.itemLeadingEdge < 1)
             .reduce(
-                (max, position) => position.index > max.index ? position : max)
+                (max, position) => position.index > max.index ? position : max,)
             .index;
 
         if (_currentIndex != firstVisibleItemIndex) {
@@ -832,7 +810,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     final pageHelper = PageHelper();
     pageHelper.saveBookData(widget.referenceModel?.bookPath?? _bookPath!, _currentPage);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+        overlays: SystemUiOverlay.values,);
     itemPositionsListener.itemPositions.removeListener(() {});
     focusNode.dispose();
     textEditingController.dispose();
@@ -840,16 +818,14 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     super.dispose();
   }
 
-  String _getAppBarTitle(EpubViewerState state) {
-    return state.maybeWhen(
+  String _getAppBarTitle(EpubViewerState state) => state.maybeWhen(
       loaded: (_, title, __) => title,
       orElse: () => '',
     );
-  }
 
 
   _changeStyle(FontSizeCustom? fontSize, LineHeightCustom? lineHeight,
-      FontFamily? fontFamily) {
+      FontFamily? fontFamily,) {
     this.fontFamily = fontFamily ?? FontFamily.font1;
     this.lineHeight = lineHeight ?? LineHeightCustom.medium;
     this.fontSize = fontSize ?? FontSizeCustom.medium;
@@ -876,12 +852,12 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
 
   String? _findPreviousHeading(double currentPage) {
     String? headingText;
-    int contentIndex = currentPage.toInt();
+    final int contentIndex = currentPage.toInt();
 
     // Traverse the pages backward from the current page to find the first heading
     for (int i = contentIndex; i >= 0; i--) {
-      dom.Document document = html_parser.parse(_content[i]);
-      List<dom.Element> headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      final dom.Document document = html_parser.parse(_content[i]);
+      final List<dom.Element> headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
       if (headings.isNotEmpty) {
         // Found the first heading on this page, return it

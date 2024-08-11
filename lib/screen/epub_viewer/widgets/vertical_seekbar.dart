@@ -1,19 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../cubit/epub_viewer_cubit.dart';
 
 class EpubSeekbar extends StatefulWidget {
-  double currentPage;
-  double allPagesCount;
-  EpubViewerCubit epubViewerCubit;
 
   EpubSeekbar(
       {required this.currentPage,
         required this.allPagesCount,
         required this.epubViewerCubit,
-        Key? key})
-      : super(key: key);
+        super.key,});
+  double currentPage;
+  double allPagesCount;
+  EpubViewerCubit epubViewerCubit;
 
   @override
   _EpubSeekbarState createState() => _EpubSeekbarState();
@@ -29,8 +27,7 @@ class _EpubSeekbarState extends State<EpubSeekbar> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Slider(
+  Widget build(BuildContext context) => Slider(
       value: _currentValue,
       onChangeEnd: (newValue) {
         widget.epubViewerCubit.jumpToPage(newPage: newValue.toInt());
@@ -43,5 +40,4 @@ class _EpubSeekbarState extends State<EpubSeekbar> {
       max: widget.allPagesCount,
       min: 0,
     );
-  }
 }
