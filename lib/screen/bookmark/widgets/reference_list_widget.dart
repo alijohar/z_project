@@ -6,16 +6,22 @@ import '../../../util/epub_helper.dart';
 import '../cubit/bookmark_cubit.dart';
 
 class ReferenceListWidget extends StatelessWidget {
+  const ReferenceListWidget(
+      {super.key,
+      required this.referenceList,
+      required this.onRefreshBookmarks});
 
-  const ReferenceListWidget({super.key, required this.referenceList});
   final List<ReferenceModel> referenceList;
+  final Function onRefreshBookmarks;
 
   @override
   Widget build(BuildContext context) {
     // Group the references by bookName
     final Map<String, List<ReferenceModel>> groupedReferences = {};
     for (final reference in referenceList) {
-      groupedReferences.putIfAbsent(reference.bookName, () => []).add(reference);
+      groupedReferences
+          .putIfAbsent(reference.bookName, () => [])
+          .add(reference);
     }
 
     return ListView.builder(
@@ -27,21 +33,19 @@ class ReferenceListWidget extends StatelessWidget {
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-
           children: [
             Card(
               color: Theme.of(context).colorScheme.onPrimary,
               child: SizedBox(
                 width: double.infinity,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                   child: Text(
                     textAlign: TextAlign.right,
                     bookName,
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelLarge
-                        ?.copyWith(color: Theme.of(context).colorScheme.onSurface),
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ),
               ),
@@ -58,7 +62,7 @@ class ReferenceListWidget extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         await openEpub(context: context, reference: reference);
-                        debugPrint('I came back');
+                        onRefreshBookmarks();
                       },
                       child: Row(
                         children: [
@@ -69,14 +73,11 @@ class ReferenceListWidget extends StatelessWidget {
                             },
                             child: CircleAvatar(
                               radius: 12,
-                              backgroundColor: Theme.of(context)
-                                  .colorScheme
-                                  .onPrimary,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.onPrimary,
                               child: Icon(
                                 Icons.close_rounded,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurface,
+                                color: Theme.of(context).colorScheme.onSurface,
                                 size: 16,
                               ),
                             ),
@@ -89,22 +90,24 @@ class ReferenceListWidget extends StatelessWidget {
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelSmall
-                                    ?.copyWith(color: Theme.of(context)
-                                    .colorScheme
-                                    .surface,),
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                    ),
                                 textAlign: TextAlign.right,
                               ),
                             ),
                           ),
                           Text(
-                            (intValue+1).toString(),
+                            (intValue + 1).toString(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall
                                 ?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .secondaryContainer,),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
+                                ),
                           ),
                         ],
                       ),

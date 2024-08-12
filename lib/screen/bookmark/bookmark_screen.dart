@@ -90,5 +90,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
     }
   }
 
-  Widget _buildList(AllBookmarksLoadedState state) => ReferenceListWidget(referenceList: state.bookmarks);
+  Widget _buildList(AllBookmarksLoadedState state) => ReferenceListWidget(referenceList: state.bookmarks, onRefreshBookmarks: (){
+    _loadAllBookmarks();
+  },);
 }

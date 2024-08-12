@@ -18,7 +18,7 @@ Future<void> openEpub({
   EpubChaptersWithBookPath? toc,
   SearchModel? search,
 }) async {
-  Navigator.pushNamed(
+  await Navigator.pushNamed(
     context,
     '/epubViewer',
     arguments: {

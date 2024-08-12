@@ -54,7 +54,7 @@ class _InternalSearchScreenState extends State<InternalSearchScreen> {
             title: Text(result.bookTitle!),
             subtitle: Text(result.spanna!),
             // You can customize the display of search results as needed
-          ),
+          )
         );
       },
     );
