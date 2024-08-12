@@ -60,15 +60,13 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                       const SizedBox(height: 120),
                       Text(
                         'قائمة الإشارات المرجعية فارغة',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        ),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.surface),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         textAlign: TextAlign.center,
                         'يمكنك إضافة إشارات مرجعية من الكتب التي تقرأها.',
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Theme.of(context).colorScheme.surface),
 
                       ),
 

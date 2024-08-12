@@ -23,7 +23,9 @@ class BigImageCardWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             // Apply the same radius here
             child: Image.asset(
-              'assets/image/${item.picName}' ?? '',
+              Theme.of(context).brightness == Brightness.dark && item.picName == '6.jpg'
+                  ? 'assets/image/6_dark.jpg' ?? ''
+                  : 'assets/image/${item.picName}' ?? '',
               fit: BoxFit.cover,
             ),
           ),

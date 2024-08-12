@@ -30,11 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
             alignment: Alignment.topCenter, // Align the image to the top
             child: Container(
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/image/main_light.jpg'),
-                  fit: BoxFit.fitWidth, // Keep fitWidth
-                  alignment: Alignment.topCenter, // Ensure the image starts from the top
+                  image: AssetImage(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/image/main_dark.jpg'
+                        : 'assets/image/main_light.jpg',
+                  ),
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
                 ),
               ),
             ),

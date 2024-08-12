@@ -19,8 +19,12 @@ class ThreeItemsCardWidget extends StatelessWidget {
                   width: MediaQuery.of(context).size.width / 3.7,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/image/squarelist_light.jpg'),
+                    image: DecorationImage(
+                      image: AssetImage(
+                        Theme.of(context).brightness == Brightness.dark
+                            ? 'assets/image/squarelist_light_dark.jpg'
+                            : 'assets/image/squarelist_light.jpg',
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),
