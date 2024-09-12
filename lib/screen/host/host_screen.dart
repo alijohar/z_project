@@ -48,15 +48,16 @@ class _HostScreenState extends State<HostScreen> {
     BlocProvider(
       create: (context) => LibraryCubit(),
       child: const LibraryScreen(),
-    ), // Replace with your actual widget for second tab
+    ),    // Replace with your actual widget for second tab
+
+    BlocProvider(
+      create: (context) => SearchCubit(),
+      child: const SearchScreen(),
+    ),
     BlocProvider(
       create: (context) => BookmarkCubit(),
       child: const BookmarkScreen(),
     ),
-    BlocProvider(
-      create: (context) => SearchCubit(),
-      child: const SearchScreen(),
-    ), // Replace with your actual widget for third tab
     BlocProvider(
       create: (context) => AboutAppCubit(JsonRepository()),
       child: const AboutAppScreen(id: 17,),
@@ -88,16 +89,17 @@ class _HostScreenState extends State<HostScreen> {
               label: 'الرئيسية',
             ),
             NavigationDestination(
-              icon: Icon(Icons.library_books_rounded),
+              icon: Icon(Icons.book),
               label: 'الكتب',
+            ),
+
+            NavigationDestination(
+              icon: Icon(Icons.search_rounded),
+              label: 'بحث',
             ),
             NavigationDestination(
               icon: Icon(Icons.bookmarks_rounded),
               label: 'العلامات',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.search_rounded),
-              label: 'بحث',
             ),
             NavigationDestination(
               icon: Icon(Icons.info_rounded),

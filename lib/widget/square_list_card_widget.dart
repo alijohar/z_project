@@ -28,41 +28,25 @@ class SquareListCardWidget extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 36.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                      child: GestureDetector(
-                        onTap: () => NavigationHelper.navigateTo(
-                            context: context,
-                            goto: item.items?[index].goto ?? '',
-                            subItem: item.items?[index],),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12.0, bottom: 12.0),
-                          child: Text(
-                            textAlign: TextAlign.left,
-                            item.items?[index].title??'',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                    child: GestureDetector(
+                      onTap: () => NavigationHelper.navigateTo(
+                          context: context,
+                          goto: item.items?[index].goto ?? '',
+                          subItem: item.items?[index],),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          item.items?[index].title??'',
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
-                      ),),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                        borderRadius: BorderRadius.circular(8),
                       ),
-                      margin: const EdgeInsets.all(16),
-                      width: 10,
-                      height: 10,
-                    ),
-                  ),
-                ],
-              ),
+                    ),),
+              ],
             ),
           ),),
       ),

@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
     );
 
     return MaterialApp(
-      title: 'Ketub Platform',
+      title: 'المعارف الفاطمية',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
