@@ -239,12 +239,24 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     );
   }
 
-  _storeContentLoaded(List<String> htmlContent, BuildContext context,
+  void _storeContentLoaded(List<String> htmlContent, BuildContext context,
       EpubViewerState state, List<EpubChapter>? tocList,) {
-    _content = htmlContent;
+    // Convert each content page's numbers from Latin to Arabic
+    _content = htmlContent.map((content) => convertLatinNumbersToArabic(content)).toList();
     _orginalContent = _content;
     _bookName = _getAppBarTitle(state);
     _tocList = tocList;
+  }
+
+  String convertLatinNumbersToArabic(String input) {
+    const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    return input.replaceAllMapped(
+      RegExp(r'[0-9]'), // Matches any Latin digit
+          (match) {
+        final latinDigit = int.parse(match[0]!);
+        return arabicDigits[latinDigit];
+      },
+    );
   }
 
   void _toggleSearch(bool open) {

@@ -85,7 +85,7 @@ class _HostScreenState extends State<HostScreen> {
           },
           destinations: const [
             NavigationDestination(
-              icon: Icon(Icons.home_rounded),
+              icon: Icon(Icons.access_alarms_sharp),
               label: 'الرئيسية',
             ),
             NavigationDestination(
