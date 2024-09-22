@@ -17,17 +17,16 @@ class AboutAppScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         body: Column(
           children: [
-          Container(
-            margin: const EdgeInsets.only(top: 100),
-          width: 120,
-          height: 120,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/image/icon1024.png'),
-              alignment: Alignment.topCenter, // Ensure the image starts from the top
+            Padding(
+              padding: const EdgeInsets.only(top: 40, right: 16, left: 16, bottom: 0),
+              child: Image.asset(
+                'assets/image/name.png',
+                width: MediaQuery.of(context).size.width, // Full width of the screen
+                fit: BoxFit.cover, // Ensures the image covers the height
+                alignment: Alignment.topCenter, // Aligns the image to the top center
+              ),
             ),
-          ),
-          ),
+
           Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 8, left: 8),

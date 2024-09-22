@@ -35,7 +35,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
             itemBuilder: (context, index) {
               // Separate results by book
               if (index == 0 || widget.searchResults[index].bookTitle != widget.searchResults[index - 1].bookTitle) {
-              // Calculate count of results for the current book
+                // Calculate count of results for the current book
                 final currentBookResults = widget.searchResults.where((result) => result.bookTitle == widget.searchResults[index].bookTitle).toList();
 
                 // Display a header for each book with result count
@@ -62,7 +62,6 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                   style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.primary),
                                 ),
                               ),
-
                             ],
                           ),
                         ),
@@ -72,7 +71,6 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                       title: GestureDetector(
                         onTap: () {
                           openEpub(context: context, search: widget.searchResults[index]);
-
                         },
                         child: Row(
                           children: [
@@ -99,44 +97,63 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Divider(
+                        thickness: 0.3,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
                   ],
                 );
               } else {
                 // Display subsequent results for the same book
-                return ListTile(
-                  title: GestureDetector(
-                    onTap: () {
-                      openEpub(context: context, search: widget.searchResults[index]);
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          '${widget.searchResults[index].pageIndex}',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.surface),
-                        ),
-                        Expanded(
-                          child: Html(
-                            data: widget.searchResults[index].spanna ?? '',
-                            style: {
-                              'html': Style(
-                                fontSize: FontSize.medium,
-                                textAlign: TextAlign.right,
-                                color: Theme.of(context).colorScheme.surface,
+                return Column(
+                  children: [
+                    ListTile(
+                      title: GestureDetector(
+                        onTap: () {
+                          openEpub(context: context, search: widget.searchResults[index]);
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              '${widget.searchResults[index].pageIndex}',
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.surface),
+                            ),
+                            Expanded(
+                              child: Html(
+                                data: widget.searchResults[index].spanna ?? '',
+                                style: {
+                                  'html': Style(
+                                    fontSize: FontSize.medium,
+                                    textAlign: TextAlign.right,
+                                    color: Theme.of(context).colorScheme.surface,
+                                  ),
+                                  'mark': Style(
+                                    backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                                  ),
+                                },
                               ),
-                              'mark': Style(
-                                backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-                              ),
-                            },
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Divider(
+                        thickness: 0.3,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
+                  ],
                 );
               }
             },
           ),
         ),
+
       ],
     );
 }

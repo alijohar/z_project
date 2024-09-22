@@ -94,6 +94,6 @@ flutter:
     - family: font5
       fonts:
         - asset: assets/font/font5.ttf
-    - family: tajwal
+    - family: almarai
       fonts:
-        - asset: assets/font/tajwal.ttf
+        - asset: assets/font/almarai.ttf

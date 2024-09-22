@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
       error: Color(0xFFBA1A1A),
       onError: Color(0xFFFFFFFF),
       surface: Color(0xFF111111),
-      onSurface: Color(0xFF58596d),
+      onSurface: Color(0xFFa0a0af),
     );
 
     final ThemeData lightTheme = ThemeData(
@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       colorScheme: lightColorScheme,
-      fontFamily: 'tajwal',
+      fontFamily: 'almarai',
     );
 
     final ThemeData darkTheme = ThemeData(
@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       colorScheme: darkColorScheme,
-      fontFamily: 'tajwal',
+      fontFamily: 'almarai',
     );
 
     return MaterialApp(

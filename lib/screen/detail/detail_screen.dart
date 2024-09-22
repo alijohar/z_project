@@ -32,6 +32,8 @@ class DetailScreen extends StatelessWidget {
                     TextStyle(color: Theme.of(context).colorScheme.surface),),),
         body: CustomScrollView(
           slivers: <Widget>[
+
+
             BlocBuilder<DetailCubit, DetailState>(
               builder: (context, state) => state.when(
                   initial: () => const SliverFillRemaining(
@@ -42,8 +44,8 @@ class DetailScreen extends StatelessWidget {
                   ),
                   loaded: (items) => SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      (context, index) =>
-                          NavigationHelper.buildItem(context, items[index]),
+                          (context, index) => Padding(padding: const EdgeInsets.only(right: 12, left: 12), child: NavigationHelper.buildItem(context, items[index])),
+
                       childCount: items.length,
                     ),
                   ),
