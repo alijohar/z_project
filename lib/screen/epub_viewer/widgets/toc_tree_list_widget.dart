@@ -39,7 +39,7 @@ class _EpubChapterListWidgetState extends State<EpubChapterListWidget> {
     const minFontSize = 10.0;
     const maxFontSize = 18.0;
     const minPadding = 0.0;
-    const maxPadding = 40.0;
+    const maxPadding = 6.0;
     final padding = level == 0 ? 8.0 : maxPadding - ((maxPadding - minPadding) / maxLevel) * level; // Calculate padding
     final fontSize = maxFontSize - ((maxFontSize - minFontSize) / maxLevel) * level; // Calculate font size
 

@@ -51,12 +51,16 @@ class TocScreen extends StatelessWidget {
       children: items.map((item) => _buildTocItem(item, context)).toList(),
     );
 
-  Widget _buildTocItem(TocItem item, BuildContext context) {
+  Widget _buildTocItem(TocItem item, BuildContext context, {bool isNestedParent = false}) {
     if (item.childs == null || item.childs!.isEmpty) {
       return _buildCardView(item, context);
     } else {
       return Container(
-        margin: const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 6), // Margin between parent items
+        margin: EdgeInsets.only(
+          right: 16.0,
+          left: isNestedParent ? 0.0 : 16.0, // Conditionally apply left margin only if not a nested parent
+          bottom: 6,
+        ),
         child: Card(
           color: Theme.of(context).colorScheme.onPrimary,
           elevation: 0,
@@ -65,7 +69,7 @@ class TocScreen extends StatelessWidget {
             iconColor: const Color(0xFFCFA355),
             collapsedIconColor: const Color(0xFFCFA355),
             children: item.childs!
-                .map((child) => _buildTocItem(child, context))
+                .map((child) => _buildTocItem(child, context, isNestedParent: true)) // Pass `isNestedParent: true` for child items
                 .toList(),
           ),
         ),
@@ -77,7 +81,7 @@ class TocScreen extends StatelessWidget {
       {bool isParent = false,}) => Container(
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(
-          vertical: 0.0, horizontal: isParent ? 0.0 : 8.0,),
+          vertical: 0.0, horizontal: isParent ? 0.0 : 16.0,),
       child: Card(
         color: Theme.of(context).colorScheme.onPrimary,
         elevation: 0,
