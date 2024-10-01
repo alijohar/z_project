@@ -12,7 +12,10 @@ class MultiDarkCardWidget extends StatelessWidget {
   final ItemModel item;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return Container(
       height: 90,
       alignment: Alignment.center,
       margin: const EdgeInsets.all(8),
@@ -45,7 +48,8 @@ class MultiDarkCardWidget extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
-                          ?.copyWith(color: Colors.white),
+                          ?.copyWith(color: isDarkMode ?  Theme.of(context).colorScheme.onSurface: Colors.white, // Set color based on the theme
+                      ),
                     ),
                   ),
                 ),
@@ -59,4 +63,5 @@ class MultiDarkCardWidget extends StatelessWidget {
           ),).toList(),
       ),
     );
+  }
 }
