@@ -30,7 +30,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: CustomPaint(painter:
               DottedBorderPainter(
                 borderWidth: 1.0,

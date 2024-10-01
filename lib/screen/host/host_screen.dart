@@ -89,7 +89,7 @@ class _HostScreenState extends State<HostScreen> {
               label: 'الرئيسية',
             ),
             NavigationDestination(
-              icon: Icon(Icons.book),
+              icon: Icon(Icons.library_books_rounded),
               label: 'الكتب',
             ),
 
