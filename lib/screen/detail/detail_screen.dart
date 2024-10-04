@@ -13,6 +13,8 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     context.read<DetailCubit>().fetchItems(id);
 
     if (title != null){
@@ -24,12 +26,14 @@ class DetailScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(
             iconTheme: IconThemeData(
-              color: Theme.of(context).colorScheme.surface,
+              color: isDarkMode ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSecondary ,
             ),
             backgroundColor: Theme.of(context).colorScheme.primary,
             title: Text(title ?? '',
                 style:
-                    TextStyle(color: Theme.of(context).colorScheme.surface),),),
+                    TextStyle(
+                      color: isDarkMode ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSecondary ,
+                    ),),),
         body: CustomScrollView(
           slivers: <Widget>[
 
