@@ -250,13 +250,29 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
 
   String convertLatinNumbersToArabic(String input) {
     const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-    return input.replaceAllMapped(
-      RegExp(r'[0-9]'), // Matches any Latin digit
-          (match) {
-        final latinDigit = int.parse(match[0]!);
-        return arabicDigits[latinDigit];
-      },
-    );
+
+    // Parse the HTML document
+    final document = html_parser.parse(input);
+
+    // A helper function to traverse and replace numbers in text nodes
+    void traverseAndReplace(dom.Node node) {
+      if (node is dom.Text) {
+        // Replace Latin numbers with Arabic numbers in the text node
+        node.text = node.text.replaceAllMapped(RegExp(r'[0-9]'), (match) {
+          final latinDigit = int.parse(match[0]!);
+          return arabicDigits[latinDigit];
+        });
+      } else if (node.hasChildNodes()) {
+        // Recursively traverse the child nodes
+        node.nodes.forEach(traverseAndReplace);
+      }
+    }
+
+    // Start traversing from the document body
+    traverseAndReplace(document.body!);
+
+    // Return the modified HTML as a string
+    return document.outerHtml;
   }
 
   void _toggleSearch(bool open) {
