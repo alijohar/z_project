@@ -72,20 +72,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleLarge
-                                                  ?.copyWith(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary,),
+                                                  ,
                                             ),
                                             Text(
                                               book.title2,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleLarge
-                                                  ?.copyWith(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary,),
+                                                  ,
                                             ),
                                           ],
                                         ),
@@ -114,11 +108,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall
-                                                ?.copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary,
-                                                ),
+                                                ,
                                           ),
                                         ),
                                       ],
@@ -141,11 +131,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleSmall
-                                                ?.copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .primary,
-                                                ),
+                                                ,
                                           ),
                                         ),
                                       ],
@@ -169,11 +155,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleSmall
-                                                  ?.copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary,
-                                                  ),
+                                                  ,
                                             ),
                                           ),
                                         ],
@@ -197,11 +179,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleSmall
-                                                  ?.copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary,
-                                                  ),
+                                                  ,
                                             ),
                                           ),
                                         ],
@@ -225,11 +203,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleSmall
-                                                  ?.copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary,
-                                                  ),
+                                              ,
                                             ),
                                           ),
                                         ],
@@ -270,16 +244,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleLarge
-                                              ?.copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .surface,),
-                                        ),
+                                              ,
                                       ),),
                                 ),
                               ),
                             ),
-                          ],
+                            )],
                         ),
                       );
                     },

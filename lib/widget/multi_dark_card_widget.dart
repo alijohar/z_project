@@ -48,8 +48,7 @@ class MultiDarkCardWidget extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
-                          ?.copyWith(color: isDarkMode ?  Theme.of(context).colorScheme.onSurface: Colors.white, // Set color based on the theme
-                      ),
+                          ,
                     ),
                   ),
                 ),

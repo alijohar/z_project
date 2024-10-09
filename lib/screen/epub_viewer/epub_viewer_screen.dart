@@ -304,7 +304,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text('كل النتائج: ${searchResults.length}',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.surface),),
+                  style: Theme.of(context).textTheme.titleSmall,),
             ),
           ),
           content: SizedBox(

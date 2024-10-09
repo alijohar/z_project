@@ -44,8 +44,7 @@ class ReferenceListWidget extends StatelessWidget {
                   child: Text(
                     textAlign: TextAlign.right,
                     bookName,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface),
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
               ),
@@ -90,10 +89,7 @@ class ReferenceListWidget extends StatelessWidget {
                                 style: Theme.of(context)
                                     .textTheme
                                     .labelSmall
-                                    ?.copyWith(
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                    ),
+                                    ,
                                 textAlign: TextAlign.right,
                               ),
                             ),
@@ -103,11 +99,7 @@ class ReferenceListWidget extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall
-                                ?.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .secondaryContainer,
-                                ),
+                                ,
                           ),
                         ],
                       ),

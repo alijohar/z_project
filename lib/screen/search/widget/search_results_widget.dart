@@ -26,7 +26,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text('كل النتائج: ${widget.searchResults.length}',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.surface),),
+                style: Theme.of(context).textTheme.titleSmall),
           ),
         ),
         Expanded(
@@ -53,13 +53,13 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                             children: [
                               Text(
                                 '${currentBookResults.length}',
-                                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+                                style: Theme.of(context).textTheme.titleSmall,
                               ),
                               Expanded(
                                 child: Text(
                                   textAlign: TextAlign.right,
                                   '${widget.searchResults[index].bookTitle}',
-                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                               ),
                             ],
@@ -76,7 +76,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                           children: [
                             Text(
                               '${widget.searchResults[index].pageIndex}',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.surface),
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                             Expanded(
                               child: Html(
@@ -119,7 +119,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                           children: [
                             Text(
                               '${widget.searchResults[index].pageIndex}',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.surface),
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                             Expanded(
                               child: Html(
