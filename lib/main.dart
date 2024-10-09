@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
       navigationBarTheme: NavigationBarThemeData(
         labelTextStyle: WidgetStateProperty.all(
           TextStyle(
-            color: lightColorScheme.primary,
           ),
         ),
       ),
@@ -76,7 +75,6 @@ class MyApp extends StatelessWidget {
       navigationBarTheme: NavigationBarThemeData(
         labelTextStyle: WidgetStateProperty.all(
           TextStyle(
-            color: lightColorScheme.primary,
           ),
         ),
       ),
