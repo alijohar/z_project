@@ -243,7 +243,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                           'مطالعة',
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleLarge
+                                              .titleLarge?.copyWith(color: const Color(0xffffffff))
                                               ,
                                       ),),
                                 ),
