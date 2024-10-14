@@ -24,7 +24,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
           backgroundColor: Theme.of(context).colorScheme.primary,
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
-            title: Center(child: Text('إشارات مرجعية', style: Theme.of(context).textTheme.titleLarge,)),
+            title: Center(child: Text('إشارات مرجعية', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: const Color(0xFFffffff)),)),
           ),
           body: _buildBody(state),
         ),
@@ -60,13 +60,13 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                       const SizedBox(height: 120),
                       Text(
                         'قائمة الإشارات المرجعية فارغة',
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(color: const Color(0xFFffffff)),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         textAlign: TextAlign.center,
                         'يمكنك إضافة إشارات مرجعية من الكتب التي تقرأها.',
-                        style: Theme.of(context).textTheme.labelLarge,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(color: const Color(0xFFffffff)),
 
                       ),
 

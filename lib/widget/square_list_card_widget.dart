@@ -30,8 +30,12 @@ class SquareListCardWidget extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 4),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                image: const DecorationImage(
-                  image: AssetImage('assets/image/squarelist_light.jpg'),
+                image: DecorationImage(
+                  image: AssetImage(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/image/squarelist_light_dark.jpg'
+                        : 'assets/image/squarelist_light.jpg',
+                  ),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -40,7 +44,7 @@ class SquareListCardWidget extends StatelessWidget {
                 child: CustomPaint(
                   painter: DottedBorderPainter(
                     borderWidth: 1.0,
-                    borderColor: Colors.black45,
+                    borderColor: Theme.of(context).colorScheme.onSurface,
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

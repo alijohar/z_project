@@ -24,7 +24,7 @@ class NormalListCardWidget extends StatelessWidget {
                 item: item,
                 title: item.items?[index].title ?? ''),
             child: Container(
-              width: MediaQuery.of(context).size.width / 3.5,
+              width: MediaQuery.of(context).size.width / 3,
               // Slightly more space than the fixed width previously
               margin: const EdgeInsets.symmetric(horizontal: 4),
               decoration: BoxDecoration(

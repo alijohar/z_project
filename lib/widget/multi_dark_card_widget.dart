@@ -47,7 +47,7 @@ class MultiDarkCardWidget extends StatelessWidget {
                       item.title ?? '',
                       style: Theme.of(context)
                           .textTheme
-                          .titleLarge
+                          .titleLarge?.copyWith(color: const Color(0xFFa0a0af))
                           ,
                     ),
                   ),

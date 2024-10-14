@@ -26,7 +26,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text('كل النتائج: ${widget.searchResults.length}',
-                style: Theme.of(context).textTheme.titleSmall),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: const Color(0xFFFFffff)),),
           ),
         ),
         Expanded(
@@ -76,7 +76,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                           children: [
                             Text(
                               '${widget.searchResults[index].pageIndex}',
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Color(0xffffffff)),
                             ),
                             Expanded(
                               child: Html(
@@ -85,7 +85,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                   'html': Style(
                                     fontSize: FontSize.medium,
                                     textAlign: TextAlign.right,
-                                    color: Theme.of(context).colorScheme.surface,
+                                    color: const Color(0xffffffff),
                                   ),
                                   'mark': Style(
                                     backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
@@ -119,7 +119,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                           children: [
                             Text(
                               '${widget.searchResults[index].pageIndex}',
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: const Color(0xffffffff)),
                             ),
                             Expanded(
                               child: Html(
@@ -128,7 +128,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                   'html': Style(
                                     fontSize: FontSize.medium,
                                     textAlign: TextAlign.right,
-                                    color: Theme.of(context).colorScheme.surface,
+                                    color: const Color(0xffffffff),
                                   ),
                                   'mark': Style(
                                     backgroundColor: Theme.of(context).colorScheme.secondaryContainer,

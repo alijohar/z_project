@@ -20,15 +20,13 @@ class TocScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Theme.of(context)
-              .colorScheme
-              .surface, // Change this to your desired color
+        iconTheme: const IconThemeData(
+          color: Color(0xFFFFFFFF)// Change this to your desired color
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           title ?? '',
-          style: TextStyle(color: Theme.of(context).colorScheme.surface),
+          style: const TextStyle(color:Color(0xFFFFFFFF)),
         ),
       ),
       body: BlocBuilder<TocCubit, TocState>(

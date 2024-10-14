@@ -88,7 +88,7 @@ class ReferenceListWidget extends StatelessWidget {
                                 reference.title,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .labelSmall
+                                    .labelSmall?.copyWith(color: const Color(0xFFFFffff))
                                     ,
                                 textAlign: TextAlign.right,
                               ),
@@ -98,7 +98,7 @@ class ReferenceListWidget extends StatelessWidget {
                             (intValue + 1).toString(),
                             style: Theme.of(context)
                                 .textTheme
-                                .titleSmall
+                                .titleSmall?.copyWith(color: const Color(0xFFFFffff))
                                 ,
                           ),
                         ],

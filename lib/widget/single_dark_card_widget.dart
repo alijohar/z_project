@@ -37,7 +37,7 @@ class SingleDarkCardWidget extends StatelessWidget {
         child: Text(
           item.title ?? '',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: const Color(0xFFa0a0af),),
         ),
       ),
     );

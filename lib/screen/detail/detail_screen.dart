@@ -25,14 +25,14 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(
-            iconTheme: IconThemeData(
-              color: isDarkMode ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSecondary ,
-            ),
+          iconTheme: const IconThemeData(
+              color: Color(0xFFFFFFFF)// Change this to your desired color
+          ),
             backgroundColor: Theme.of(context).colorScheme.primary,
             title: Text(title ?? '',
                 style:
-                    TextStyle(
-                      color: isDarkMode ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSecondary ,
+                    const TextStyle(
+                      color: Color(0xFFFFFFFF),
                     ),),),
         body: CustomScrollView(
           slivers: <Widget>[
