@@ -2,7 +2,9 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/route_generator.dart';
+import 'package:zahra/screen/bookmark/cubit/bookmark_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static FirebaseAnalyticsObserver observer =
-      FirebaseAnalyticsObserver(analytics: analytics);
+  FirebaseAnalyticsObserver(analytics: analytics);
 
   // This widget is the root of your application.
   @override
@@ -82,18 +84,21 @@ class MyApp extends StatelessWidget {
       fontFamily: 'almarai',
     );
 
-    return MaterialApp(
-      title: 'المعارف الفاطمية',
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
-      initialRoute: '/',
+    return BlocProvider(
+      create: (_) => BookmarkCubit(),
+      child: MaterialApp(
+        title: 'المعارف الفاطمية',
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
+        initialRoute: '/',
 
-      onGenerateRoute: RouteGenerator.generateRoute,
-      navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: analytics),
-      ], // Setup Firebase Analytics observer for route tracking
+        onGenerateRoute: RouteGenerator.generateRoute,
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: analytics),
+        ], // Setup Firebase Analytics observer for route tracking
+      ),
     );
   }
 }

@@ -15,6 +15,7 @@ import '../../model/search_model.dart';
 import '../../model/style_model.dart';
 import '../../model/tree_toc_model.dart';
 import '../../util/page_helper.dart';
+import '../bookmark/cubit/bookmark_cubit.dart';
 import 'cubit/epub_viewer_cubit.dart';
 import 'internal_search/internal_search_screen.dart';
 import 'widgets/style_sheet.dart';
@@ -660,6 +661,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
 
     BlocProvider.of<EpubViewerCubit>(context).addBookmark(reference);
     context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
+    BlocProvider.of<BookmarkCubit>(context).loadAllBookmarks();
   }
 
   void _openInternalToc(BuildContext context) {
@@ -878,6 +880,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   void _removeBookmark(BuildContext context) {
     context.read<EpubViewerCubit>().removeBookmark(_bookPath!, _currentPage.toString());
     context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
+    BlocProvider.of<BookmarkCubit>(context).loadAllBookmarks();
   }
 
   String? _findPreviousHeading(double currentPage) {

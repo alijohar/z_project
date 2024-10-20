@@ -29,12 +29,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const HostScreen(),
-    );
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          useMaterial3: true,
+        ),
+        home: const HostScreen(),
+      );
 }
 
 class HostScreen extends StatefulWidget {
@@ -55,65 +55,60 @@ class _HostScreenState extends State<HostScreen> {
     BlocProvider(
       create: (context) => LibraryCubit(),
       child: const LibraryScreen(),
-    ),    // Replace with your actual widget for second tab
+    ), // Replace with your actual widget for second tab
 
     BlocProvider(
       create: (context) => SearchCubit(),
       child: const SearchScreen(),
     ),
-    BlocProvider(
-      create: (context) => BookmarkCubit(),
-      child: const BookmarkScreen(),
-    ),
+    const BookmarkScreen(),
     BlocProvider(
       create: (context) => AboutAppCubit(JsonRepository()),
-      child: const AboutAppScreen(id: 17,),
+      child: const AboutAppScreen(
+        id: 17,
+      ),
     ), // Replace with your actual widget for fourth tab
   ];
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
-      bottomNavigationBar: Directionality(
-        textDirection: TextDirection.rtl,
-        child: NavigationBar(
-          backgroundColor: Theme
-              .of(context)
-              .colorScheme
-              .onPrimary,
-          selectedIndex: _currentIndex,
-          onDestinationSelected: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.home_rounded),
-              label: 'الرئيسية',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.library_books_rounded),
-              label: 'الكتب',
-            ),
-
-            NavigationDestination(
-              icon: Icon(Icons.search_rounded),
-              label: 'بحث',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.bookmarks_rounded),
-              label: 'العلامات',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.info_rounded),
-              label: 'حول',
-            ),
-          ],
+        body: IndexedStack(
+          index: _currentIndex,
+          children: _screens,
         ),
-      ),
-    );
+        bottomNavigationBar: Directionality(
+          textDirection: TextDirection.rtl,
+          child: NavigationBar(
+            backgroundColor: Theme.of(context).colorScheme.onPrimary,
+            selectedIndex: _currentIndex,
+            onDestinationSelected: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(Icons.home_rounded),
+                label: 'الرئيسية',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.library_books_rounded),
+                label: 'الكتب',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.search_rounded),
+                label: 'بحث',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.bookmarks_rounded),
+                label: 'العلامات',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.info_rounded),
+                label: 'حول',
+              ),
+            ],
+          ),
+        ),
+      );
 }
