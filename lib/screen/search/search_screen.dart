@@ -16,7 +16,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    context.read<SearchCubit>().storeEpubBooks();
     super.initState();
   }
   @override
@@ -26,6 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.transparent,
         title: SearchBarWiget(
           onClicked: (query) {
+            context.read<SearchCubit>().storeEpubBooks();
             context.read<SearchCubit>().search(query);
           },
         ),
