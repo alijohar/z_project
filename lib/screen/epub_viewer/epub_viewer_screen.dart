@@ -354,225 +354,245 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     );
   }
 
-  Widget _buildCurrentUi(BuildContext context, List<String> content) {
-    final allPagesCount = content.length.toDouble();
-    return Column(
-      children: [
-        Expanded(
-          child: ScrollablePositionedList.builder(
-            itemCount: content.length,
-            itemScrollController: itemScrollController,
-            scrollOffsetController: scrollOffsetController,
-            itemPositionsListener: itemPositionsListener,
-            scrollOffsetListener: scrollOffsetListener,
-            itemBuilder: (BuildContext context, int index) {
-              final double screenHeight = MediaQuery.of(context).size.height; // Get screen height
+  Widget _buildCurrentUi(BuildContext context, List<String>? content) {
+    if (content == null){
+      return Placeholder();
+    } else {
+      final allPagesCount = content.length.toDouble();
+      return Column(
+        children: [
+          Expanded(
+            child: ScrollablePositionedList.builder(
+              itemCount: content.length ?? 0,
+              itemScrollController: itemScrollController,
+              scrollOffsetController: scrollOffsetController,
+              itemPositionsListener: itemPositionsListener,
+              scrollOffsetListener: scrollOffsetListener,
+              itemBuilder: (BuildContext context, int index) {
+                final double screenHeight = MediaQuery
+                    .of(context)
+                    .size
+                    .height; // Get screen height
 
-              return Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: GestureDetector(
-                  onDoubleTap: () {
-                    setState(() {
-                      isSliderVisible = !isSliderVisible;
-                    });
-                  },
-                  onLongPress: () {
-                    setState(() {
-                      isSliderVisible = !isSliderVisible;
-                    });
-                  },
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: screenHeight),
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 16, left: 16),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface, // Set color here to use rounded corners
-                        borderRadius: BorderRadius.circular(10), // Adjust the radius to your liking
-                      ),
-                      child: SelectionArea(
-                        child: Html(
-                          data: content[index],
-                          style: {
-                            'body': Style(
-                              direction: TextDirection.rtl,
-                              textAlign: TextAlign.justify,
-                              lineHeight: LineHeight(lineHeight.size),
-                              padding: HtmlPaddings.all(20),
-                              textDecoration: TextDecoration.none,
-                            ),
-                            'p': Style(
-                              textAlign: TextAlign.justify,
-                              fontSize: FontSize(fontSize.size),
-                              margin: Margins.symmetric(vertical: 10),
-                              fontFamily: fontFamily.name,
-                            ),
-                            '.tit1': Style(
-                              color: Colors.green[700],
-                              fontSize: FontSize(fontSize.size),
-                              margin: Margins.symmetric(vertical: 10),
-                              textAlign: TextAlign.center,
-                              fontFamily: fontFamily.name,
-                            ),
-                            '.tit2': Style(
-                              color: Colors.black87,
-                              fontSize: FontSize(fontSize.size),
-                              margin: Margins.symmetric(vertical: 10),
-                              textAlign: TextAlign.center,
-                              fontFamily: fontFamily.name,
-                            ),
-                            '.tit3': Style(
-                              color: Colors.black87,
-                              fontSize: FontSize(fontSize.size),
-                              margin: Margins.symmetric(vertical: 10),
-                              fontFamily: fontFamily.name,
-                            ),
-                            '.tit4': Style(
-                              color: Colors.red,
-                              fontSize: FontSize(fontSize.size),
-                              margin: Margins.zero,
-                              textAlign: TextAlign.right,
-                              fontFamily: fontFamily.name,
-                            ),
+                return Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: GestureDetector(
+                    onDoubleTap: () {
+                      setState(() {
+                        isSliderVisible = !isSliderVisible;
+                      });
+                    },
+                    onLongPress: () {
+                      setState(() {
+                        isSliderVisible = !isSliderVisible;
+                      });
+                    },
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minHeight: screenHeight),
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 16, left: 16),
+                        decoration: BoxDecoration(
+                          color: Theme
+                              .of(context)
+                              .colorScheme
+                              .surface, // Set color here to use rounded corners
+                          borderRadius: BorderRadius.circular(
+                              10), // Adjust the radius to your liking
+                        ),
+                        child: SelectionArea(
+                          child: Html(
+                            data: content?[index],
+                            style: {
+                              'body': Style(
+                                direction: TextDirection.rtl,
+                                textAlign: TextAlign.justify,
+                                lineHeight: LineHeight(lineHeight.size),
+                                padding: HtmlPaddings.all(20),
+                                textDecoration: TextDecoration.none,
+                              ),
+                              'p': Style(
+                                textAlign: TextAlign.justify,
+                                fontSize: FontSize(fontSize.size),
+                                margin: Margins.symmetric(vertical: 10),
+                                fontFamily: fontFamily.name,
+                              ),
+                              '.tit1': Style(
+                                color: Colors.green[700],
+                                fontSize: FontSize(fontSize.size),
+                                margin: Margins.symmetric(vertical: 10),
+                                textAlign: TextAlign.center,
+                                fontFamily: fontFamily.name,
+                              ),
+                              '.tit2': Style(
+                                color: Colors.black87,
+                                fontSize: FontSize(fontSize.size),
+                                margin: Margins.symmetric(vertical: 10),
+                                textAlign: TextAlign.center,
+                                fontFamily: fontFamily.name,
+                              ),
+                              '.tit3': Style(
+                                color: Colors.black87,
+                                fontSize: FontSize(fontSize.size),
+                                margin: Margins.symmetric(vertical: 10),
+                                fontFamily: fontFamily.name,
+                              ),
+                              '.tit4': Style(
+                                color: Colors.red,
+                                fontSize: FontSize(fontSize.size),
+                                margin: Margins.zero,
+                                textAlign: TextAlign.right,
+                                fontFamily: fontFamily.name,
+                              ),
 
-                            '.pagen': Style(
-                              textAlign: TextAlign.center,
-                              color: Colors.red,
-                              fontSize: FontSize(fontSize.size*0.7),
-                            ),
-                            '.asl': Style(
-                              color: Colors.deepOrange,
-                              fontSize: FontSize(fontSize.size),
-                              fontWeight: FontWeight.bold,
-                              margin: Margins.symmetric(vertical: 10),
-                              fontFamily: 'Lotus Qazi Bold',
-                            ),
-                            '.center': Style(
-                              textAlign: TextAlign.center,
-                            ),
-                            '.fnote': Style(
-                              color: Colors.blue[900],
-                              fontSize: FontSize(fontSize.size*0.8),
-                              margin: Margins.zero,
-                            ),
-                            '.sher': Style(
-                              textAlign: TextAlign.center,
-                              color: Colors.red[800],
-                              fontSize: FontSize(fontSize.size),
-                              margin: Margins.symmetric(vertical: 10),
-                            ),
-                            '.fnotesher': Style(
-                              textAlign: TextAlign.center,
-                              color: Colors.red[800],
-                              fontSize: FontSize(fontSize.size),
-                              margin: Margins.zero,
-                            ),
-                            '.psm': Style(
-                              textAlign: TextAlign.center,
-                              color: Colors.red[800],
-                              fontSize: FontSize(fontSize.size),
-                              margin: Margins.symmetric(vertical: 10),
-                            ),
-                            '.msaleh': Style(
-                              color: Colors.purple,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            '.fn': Style(
-                              color: Colors.blue[900],
-                              fontWeight: FontWeight.normal,
-                              fontSize: FontSize(fontSize.size*0.8),
-                              textDecoration: TextDecoration.none,
-                              verticalAlign: VerticalAlign.top,
-                            ),
-                            '.fm': Style(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                              fontSize: FontSize(fontSize.size*0.7),
-                              textDecoration: TextDecoration.none,
-                            ),
-                            '.quran': Style(
-                              fontWeight: FontWeight.bold,
-                              fontSize: FontSize(fontSize.size),
-                              color: Colors.green,
-                            ),
-                            '.hadith': Style(
-                              fontWeight: FontWeight.bold,
-                              fontSize: FontSize(fontSize.size),
-                              color: Colors.teal,
-                            ),
-                            '.shreah': Style(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.purple[900],
-                            ),
-                            '.kalema': Style(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.pink[700],
-                            ),
-                            'mark': Style(
-                              backgroundColor: Colors.yellow, // Highlight color
-                            ),
-                          },
+                              '.pagen': Style(
+                                textAlign: TextAlign.center,
+                                color: Colors.red,
+                                fontSize: FontSize(fontSize.size * 0.7),
+                              ),
+                              '.asl': Style(
+                                color: Colors.deepOrange,
+                                fontSize: FontSize(fontSize.size),
+                                fontWeight: FontWeight.bold,
+                                margin: Margins.symmetric(vertical: 10),
+                                fontFamily: 'Lotus Qazi Bold',
+                              ),
+                              '.center': Style(
+                                textAlign: TextAlign.center,
+                              ),
+                              '.fnote': Style(
+                                color: Colors.blue[900],
+                                fontSize: FontSize(fontSize.size * 0.8),
+                                margin: Margins.zero,
+                              ),
+                              '.sher': Style(
+                                textAlign: TextAlign.center,
+                                color: Colors.red[800],
+                                fontSize: FontSize(fontSize.size),
+                                margin: Margins.symmetric(vertical: 10),
+                              ),
+                              '.fnotesher': Style(
+                                textAlign: TextAlign.center,
+                                color: Colors.red[800],
+                                fontSize: FontSize(fontSize.size),
+                                margin: Margins.zero,
+                              ),
+                              '.psm': Style(
+                                textAlign: TextAlign.center,
+                                color: Colors.red[800],
+                                fontSize: FontSize(fontSize.size),
+                                margin: Margins.symmetric(vertical: 10),
+                              ),
+                              '.msaleh': Style(
+                                color: Colors.purple,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              '.fn': Style(
+                                color: Colors.blue[900],
+                                fontWeight: FontWeight.normal,
+                                fontSize: FontSize(fontSize.size * 0.8),
+                                textDecoration: TextDecoration.none,
+                                verticalAlign: VerticalAlign.top,
+                              ),
+                              '.fm': Style(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: FontSize(fontSize.size * 0.7),
+                                textDecoration: TextDecoration.none,
+                              ),
+                              '.quran': Style(
+                                fontWeight: FontWeight.bold,
+                                fontSize: FontSize(fontSize.size),
+                                color: Colors.green,
+                              ),
+                              '.hadith': Style(
+                                fontWeight: FontWeight.bold,
+                                fontSize: FontSize(fontSize.size),
+                                color: Colors.teal,
+                              ),
+                              '.shreah': Style(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.purple[900],
+                              ),
+                              '.kalema': Style(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.pink[700],
+                              ),
+                              'mark': Style(
+                                backgroundColor: Colors
+                                    .yellow, // Highlight color
+                              ),
+                            },
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
-          ),
-        ),
-        if (isSliderVisible)
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: Column(
-              children: [
-                Slider(
-                  thumbColor: const Color(0xFF3f426d),
-                  activeColor: const Color(0xFF3f426d),
-                  value: _currentPage,
-                  min: 0,
-                  max: allPagesCount - 1,
-                  onChanged: (newValue) {
-                    _isSliderChange = true;
-                    setState(() {
-                      _currentPage = newValue;
-                    });
-                  },
-                  onChangeEnd: (newValue) {
-                    _jumpTo(pageNumber: newValue.toInt());
-                    _isSliderChange = false;
-                  },
-                ),
-                Padding(
-                  padding:
-                  const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 0.0, top: 0.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          _bookName,
-                          style: Theme.of(context).textTheme.labelMedium,
-                          maxLines: 1,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          _showPageJumpDialog(context);
-                        },
-                        child: Text(
-                          '${allPagesCount.toInt()}/${_currentPage.toInt() + 1}',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                      ),
-
-                    ],
-                  ),
-                ),
-              ],
+                );
+              },
             ),
           ),
-      ],
-    );
+          if (isSliderVisible)
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: Column(
+                children: [
+                  Slider(
+                    thumbColor: const Color(0xFF3f426d),
+                    activeColor: const Color(0xFF3f426d),
+                    value: _currentPage,
+                    min: 0,
+                    max: allPagesCount ?? -1,
+                    onChanged: (newValue) {
+                      _isSliderChange = true;
+                      setState(() {
+                        _currentPage = newValue;
+                      });
+                    },
+                    onChangeEnd: (newValue) {
+                      _jumpTo(pageNumber: newValue.toInt());
+                      _isSliderChange = false;
+                    },
+                  ),
+                  Padding(
+                    padding:
+                    const EdgeInsets.only(
+                        right: 16.0, left: 16.0, bottom: 0.0, top: 0.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            _bookName,
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .labelMedium,
+                            maxLines: 1,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            _showPageJumpDialog(context);
+                          },
+                          child: Text(
+                            '${allPagesCount?.toInt()}/${_currentPage.toInt() +
+                                1}',
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .labelMedium,
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      );
+    }
   }
 
   void _showPageJumpDialog(BuildContext context) {
@@ -704,8 +724,8 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                     ValueListenableBuilder<bool>(
                       valueListenable: showAppBar,
                       builder: (context, value, child) {
-                        return value
-                            ? Positioned(
+                        if (value) {
+                          return Positioned(
                           top: 20,
                           left: 0,
                           right: 0,
@@ -723,8 +743,10 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                               ),
                             ),
                           ),
-                        )
-                            : const SizedBox.shrink(); // If false, don't show anything
+                        );
+                        } else {
+                          return const SizedBox.shrink();
+                        } // If false, don't show anything
                       },
                     ),
                   ],
@@ -802,6 +824,8 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     _loadAndParseEpub(bookPath: _bookPath!);
   }
 
+
+
   _loadAndParseEpub({required String bookPath, String? fileName}) {
     context.read<EpubViewerCubit>().loadAndParseEpub('$_pathUrl$bookPath');
   }
@@ -809,6 +833,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   @override
   void initState() {
     super.initState();
+     _buildCurrentUi(context, null);
     _determineEpubSourceAndLoad();
     itemPositionsListener.itemPositions.addListener(() {
       final positions = itemPositionsListener.itemPositions.value;
