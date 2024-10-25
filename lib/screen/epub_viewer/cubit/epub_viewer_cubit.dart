@@ -56,9 +56,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
 
   Future<void> loadAndParseEpub(String assetPath) async {
     emit(const EpubViewerState.loading());
-
-    await Future.delayed(const Duration(milliseconds: 1000)); // To ensure UI update
-
+    
     try {
       final EpubBook epubBook = await loadEpubFromAsset(assetPath);
       final List<HtmlFileInfo> epubContent =
@@ -219,15 +217,19 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
 
     // Apply highlighting to each page content
     for (final content in _spineHtmlContent!) {
-      final highlightedContent = content.replaceAllMapped(
+      // Convert Latin numbers to Arabic in the content before highlighting
+      final convertedContent = convertLatinNumbersToArabic(content);
+
+      final highlightedContent = convertedContent.replaceAllMapped(
         regex,
             (match) => '<mark>${match[0]}</mark>',
       );
+
       updatedContent.add(highlightedContent);
     }
 
     // Emit the new state with updated content
-    emit(EpubViewerState.contentHighlighted(content: updatedContent, highlightedIndex: pageIndex-1));
+    emit(EpubViewerState.contentHighlighted(content: updatedContent, highlightedIndex: pageIndex - 1));
   }
 
 }

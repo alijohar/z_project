@@ -14,6 +14,7 @@ import '../../model/reference_model.dart';
 import '../../model/search_model.dart';
 import '../../model/style_model.dart';
 import '../../model/tree_toc_model.dart';
+import '../../util/epub_helper.dart';
 import '../../util/page_helper.dart';
 import '../bookmark/cubit/bookmark_cubit.dart';
 import 'cubit/epub_viewer_cubit.dart';
@@ -249,32 +250,6 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     _tocList = tocList;
   }
 
-  String convertLatinNumbersToArabic(String input) {
-    const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-
-    // Parse the HTML document
-    final document = html_parser.parse(input);
-
-    // A helper function to traverse and replace numbers in text nodes
-    void traverseAndReplace(dom.Node node) {
-      if (node is dom.Text) {
-        // Replace Latin numbers with Arabic numbers in the text node
-        node.text = node.text.replaceAllMapped(RegExp(r'[0-9]'), (match) {
-          final latinDigit = int.parse(match[0]!);
-          return arabicDigits[latinDigit];
-        });
-      } else if (node.hasChildNodes()) {
-        // Recursively traverse the child nodes
-        node.nodes.forEach(traverseAndReplace);
-      }
-    }
-
-    // Start traversing from the document body
-    traverseAndReplace(document.body!);
-
-    // Return the modified HTML as a string
-    return document.outerHtml;
-  }
 
   void _toggleSearch(bool open) {
     setState(() {
@@ -669,7 +644,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     );
   }
 
-  void _addBookmark(BuildContext context) {
+  Future<void> _addBookmark(BuildContext context) async {
     final String? headingTitle = _findPreviousHeading(_currentPage);
 
     final reference = ReferenceModel(
@@ -679,10 +654,16 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
       navIndex: _currentPage.toString(),
     );
 
-    BlocProvider.of<EpubViewerCubit>(context).addBookmark(reference);
-    context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
-    BlocProvider.of<BookmarkCubit>(context).loadAllBookmarks();
+    // Await the addBookmark function
+    await BlocProvider.of<EpubViewerCubit>(context).addBookmark(reference);
+
+    // Await the checkBookmark function
+    await context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
+
+    // Finally, load all bookmarks
+    await BlocProvider.of<BookmarkCubit>(context).loadAllBookmarks();
   }
+
 
   void _openInternalToc(BuildContext context) {
     // This variable holds the state of the AppBar visibility
@@ -902,11 +883,17 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     }
   }
 
-  void _removeBookmark(BuildContext context) {
-    context.read<EpubViewerCubit>().removeBookmark(_bookPath!, _currentPage.toString());
-    context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
-    BlocProvider.of<BookmarkCubit>(context).loadAllBookmarks();
+  Future<void> _removeBookmark(BuildContext context) async {
+    // Await the removeBookmark function
+    await context.read<EpubViewerCubit>().removeBookmark(_bookPath!, _currentPage.toString());
+
+    // Await the checkBookmark function
+    await context.read<EpubViewerCubit>().checkBookmark(_bookPath!, _currentPage.toString());
+
+    // Finally, load all bookmarks
+    await BlocProvider.of<BookmarkCubit>(context).loadAllBookmarks();
   }
+
 
   String? _findPreviousHeading(double currentPage) {
     String? headingText;
