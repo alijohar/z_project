@@ -56,7 +56,7 @@ class EpubViewerCubit extends Cubit<EpubViewerState> {
 
   Future<void> loadAndParseEpub(String assetPath) async {
     emit(const EpubViewerState.loading());
-    
+
     try {
       final EpubBook epubBook = await loadEpubFromAsset(assetPath);
       final List<HtmlFileInfo> epubContent =

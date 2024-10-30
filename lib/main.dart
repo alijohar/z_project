@@ -1,7 +1,9 @@
+import 'dart:math';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/route_generator.dart';
 import 'package:zahra/screen/bookmark/cubit/bookmark_cubit.dart';
@@ -10,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  lockOrientation(); // Lock orientation based on device type
   runApp(const MyApp());
 }
 
@@ -20,15 +23,12 @@ class MyApp extends StatelessWidget {
   static FirebaseAnalyticsObserver observer =
   FirebaseAnalyticsObserver(analytics: analytics);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     const ColorScheme lightColorScheme = ColorScheme(
       brightness: Brightness.light,
       primary: Color(0xFF3f426d),
-      // Replace with actual color code from the screenshot
       onPrimary: Color(0xFFD3C8C8),
-      // And so on for the rest of the colors
       secondary: Color(0xFF5A6147),
       onSecondary: Color(0xFFFFFFFF),
       error: Color(0xFFBA1A1A),
@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
       outline: Color(0xFF76786B),
       outlineVariant: Color(0xFFC6C8B9),
     );
+
     const ColorScheme darkColorScheme = ColorScheme(
       brightness: Brightness.dark,
       primary: Color(0xFF19192d),
@@ -64,8 +65,7 @@ class MyApp extends StatelessWidget {
       useMaterial3: true,
       navigationBarTheme: NavigationBarThemeData(
         labelTextStyle: WidgetStateProperty.all(
-          TextStyle(
-          ),
+          TextStyle(),
         ),
       ),
       colorScheme: lightColorScheme,
@@ -76,8 +76,7 @@ class MyApp extends StatelessWidget {
       useMaterial3: true,
       navigationBarTheme: NavigationBarThemeData(
         labelTextStyle: WidgetStateProperty.all(
-          TextStyle(
-          ),
+          TextStyle(),
         ),
       ),
       colorScheme: darkColorScheme,
@@ -93,12 +92,44 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme,
         themeMode: ThemeMode.system,
         initialRoute: '/',
-
         onGenerateRoute: RouteGenerator.generateRoute,
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: analytics),
-        ], // Setup Firebase Analytics observer for route tracking
+        ],
       ),
     );
   }
+}
+
+void lockOrientation() {
+  if (isMobileDevice()) {
+    // Lock orientation for mobile devices
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  } else {
+    // Allow full rotation for larger devices
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
+}
+
+bool isMobileDevice() {
+  // Get device information
+  final window = WidgetsBinding.instance.window;
+  final width = window.physicalSize.width / window.devicePixelRatio;
+  final height = window.physicalSize.height / window.devicePixelRatio;
+
+  // Calculate diagonal screen size in inches
+  final diagonalInPixels = sqrt(pow(window.physicalSize.width, 2) +
+      pow(window.physicalSize.height, 2));
+  final diagonalInInches = diagonalInPixels / (window.devicePixelRatio * 160);
+
+  // Consider devices with diagonal less than 7 inches as mobile
+  return diagonalInInches < 7.0;
 }

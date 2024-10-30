@@ -1,43 +1,38 @@
 import 'package:flutter/material.dart';
 import '../model/item_model.dart';
 import '../util/navigation_helper.dart';
+import 'basic_card_view.dart';
 
 class SingleDarkCardWidget extends StatelessWidget {
-  const SingleDarkCardWidget({
-    super.key,
-    required this.item,
-  });
+  const SingleDarkCardWidget({super.key, required this.item});
   final ItemModel item;
 
   @override
   Widget build(BuildContext context) {
-    // Check if the current theme is dark or light
+    // Determine the background image based on the dark mode status
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final imageAsset = 'assets/image/singledark.jpg';
 
-    return Container(
+    return BaseCardWidget(
       height: 90,
-      alignment: Alignment.center,
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(vertical: 6), // Vertical margin between list items
       padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFFdfad52)),
-        image: const DecorationImage(
-          image: AssetImage('assets/image/singledark.jpg'),
-          fit: BoxFit.cover,
-        ),
+      withBorder: true,
+      borderThickness: 1.0,
+      imageAsset: imageAsset,
+      onTap: () => NavigationHelper.navigateTo(
+        context: context,
+        goto: item.linkTo?.goto ?? '',
+        item: item,
+        title: item.title ?? '',
       ),
-      child: GestureDetector(
-        onTap: () => NavigationHelper.navigateTo(
-          context: context,
-          goto: item.linkTo?.goto ?? '',
-          item: item,
-          title: item.title ?? '',
-        ),
+      child: Center(
         child: Text(
           item.title ?? '',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: const Color(0xFFa0a0af),),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: const Color(0xFFa0a0af),
+          ),
         ),
       ),
     );
