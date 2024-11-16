@@ -125,9 +125,9 @@ class _DetailScreenState extends State<DetailScreen> {
       )
           : Stack(
         children: [
-          Container(
+          !isLandscape ? Container(
             color: Theme.of(context).colorScheme.primary,
-          ),
+          ):
           Align(
             alignment: Alignment.topCenter,
             child: Container(
