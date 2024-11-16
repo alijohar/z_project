@@ -10,51 +10,62 @@ class SquareListCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     // Determine the background image based on dark mode
     final imageAsset = Theme.of(context).brightness == Brightness.dark
         ? 'assets/image/squarelist_light_dark.jpg'
         : 'assets/image/squarelist_light.jpg';
 
-    return Container(
+    return BaseCardWidget(
       height: 110,
-      margin: const EdgeInsets.all(8),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        reverse: true,
-        itemCount: item.items?.length ?? 0,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () => NavigationHelper.navigateTo(
-            context: context,
-            subItem: item.items?[index],
-            goto: item.items?[index].goto ?? '',
-            item: item,
-            title: item.items?[index].title ?? '',
-          ),
-          child: BaseCardWidget(
-            height: 110,
-            imageAsset: imageAsset,
-            padding: EdgeInsets.zero, // Customize padding to zero for each card
-            margin: const EdgeInsets.symmetric(horizontal: 4), // Horizontal spacing between items
+      margin: const EdgeInsets.symmetric(vertical: 6), // Vertical margin between list items
+      padding: const EdgeInsets.all(0),
+      backgroundColor: Colors.transparent,
+      child: Container(
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          reverse: true,
+          itemCount: item.items?.length ?? 0,
+          itemBuilder: (context, index) => GestureDetector(
             onTap: () => NavigationHelper.navigateTo(
-                context: context,
-                subItem: item.items?[index],
-                goto: item.items?[index].goto ?? '',
-                item: item,
-                title: item.items?[index].title ?? ''),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomPaint(
-                painter: DottedBorderPainter(
-                  borderWidth: 1.0,
-                  borderColor: Theme.of(context).colorScheme.onSurface,
+              context: context,
+              subItem: item.items?[index],
+              goto: item.items?[index].goto ?? '',
+              item: item,
+              title: item.items?[index].title ?? '',
+            ),
+
+            child: Container(
+              margin: EdgeInsets.only(left: 8),
+              height: 110,
+              width: screenWidth>600? 140:120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                image: DecorationImage(
+                  image: AssetImage(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/image/squarelist_light_dark.jpg'
+                        : 'assets/image/squarelist_light.jpg',
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Text(
-                      item.items?[index].title ?? '',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleMedium,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomPaint(
+                  painter: DottedBorderPainter(
+                    borderWidth: 1.0,
+                    borderColor: Theme.of(context).colorScheme.onSurface,
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Text(
+                        item.items?[index].title ?? '',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                     ),
                   ),
                 ),
