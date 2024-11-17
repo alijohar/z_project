@@ -12,6 +12,7 @@ class AboutAppScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<AboutAppCubit>().fetchItems(id);
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -21,7 +22,7 @@ class AboutAppScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 40, right: 16, left: 16, bottom: 0),
               child: Image.asset(
                 'assets/image/name.png',
-                width: MediaQuery.of(context).size.width, // Full width of the screen
+                width: screenWidth > 600? 400: MediaQuery.of(context).size.width, // Full width of the screen
                 fit: BoxFit.cover, // Ensures the image covers the height
                 alignment: Alignment.topCenter, // Aligns the image to the top center
               ),
