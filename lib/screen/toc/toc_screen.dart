@@ -150,21 +150,15 @@ class _TocScreenState extends State<TocScreen> {
               }
               return true;
             },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 48.0, vertical: 40.0),
-              child: BlocBuilder<TocCubit, TocState>(
-                builder: (context, state) => state.when(
-                  initial: () =>
-                  const Center(child: Text('Tap to start fetching...')),
-                  loading: () =>
-                  const Center(child: CircularProgressIndicator()),
-                  loaded: (items) {
-                    return _buildTocTree(items, context);
-                  },
-                  error: (message) =>
-                      Center(child: SelectionArea(child: Text(message))),
-                ),
+            child: BlocBuilder<TocCubit, TocState>(
+              builder: (context, state) => state.when(
+                initial: () =>
+                const Center(child: Text('Tap to start fetching...')),
+                loading: () =>
+                const Center(child: CircularProgressIndicator()),
+                loaded: (items) => _buildTocTree(items, context),
+                error: (message) =>
+                    Center(child: SelectionArea(child: Text(message))),
               ),
             ),
           ),
@@ -227,7 +221,7 @@ class _TocScreenState extends State<TocScreen> {
                         child: Text(
                           item.title,
                           textAlign: TextAlign.justify,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
                     ),
@@ -259,7 +253,7 @@ class _TocScreenState extends State<TocScreen> {
             child: Text(
               item.title,
               textAlign: TextAlign.justify,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
         ),

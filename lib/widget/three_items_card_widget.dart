@@ -51,6 +51,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
                       context: context,
                       goto: item.goto ?? '',
                       subItem: item,
+                      title: item.title
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(12),

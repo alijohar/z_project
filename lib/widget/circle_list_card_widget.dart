@@ -25,6 +25,7 @@ class CircleListCardWidget extends StatelessWidget {
             subItem: item.items?[index],
             goto: item.items?[index].goto ?? '',
             item: item,
+            title: item.items?[index].title
           ),
           child: ClipPath(
             clipper: DodecagonClipper(),  // Applying the custom clipper for hexagon shape

@@ -126,7 +126,7 @@ class _SearchResultsWidgetState extends State<SearchResultsWidget> {
                                 data: widget.searchResults[index].spanna ?? '',
                                 style: {
                                   'html': Style(
-                                    fontSize: FontSize.medium,
+                                    fontSize: FontSize.large,
                                     textAlign: TextAlign.right,
                                     color: const Color(0xffffffff),
                                   ),

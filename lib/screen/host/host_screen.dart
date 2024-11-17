@@ -93,7 +93,7 @@ class _HostScreenState extends State<HostScreen> {
               ),
               NavigationDestination(
                 icon: Icon(Icons.library_books_rounded),
-                label: 'الكتب',
+                label: 'الموسوعة',
               ),
               NavigationDestination(
                 icon: Icon(Icons.search_rounded),
@@ -101,7 +101,7 @@ class _HostScreenState extends State<HostScreen> {
               ),
               NavigationDestination(
                 icon: Icon(Icons.bookmarks_rounded),
-                label: 'العلامات',
+                label: 'الإشارات',
               ),
               NavigationDestination(
                 icon: Icon(Icons.info_rounded),

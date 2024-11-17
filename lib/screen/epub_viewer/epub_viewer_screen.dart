@@ -531,18 +531,21 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                   Padding(
                     padding:
                     const EdgeInsets.only(
-                        right: 16.0, left: 16.0, bottom: 0.0, top: 0.0),
+                        right: 16.0, left: 16.0, bottom: 20.0, top: 0.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: Text(
-                            _bookName,
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .labelMedium,
-                            maxLines: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              _bookName,
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .labelLarge,
+                              maxLines: 1,
+                            ),
                           ),
                         ),
                         TextButton(
@@ -555,7 +558,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                             style: Theme
                                 .of(context)
                                 .textTheme
-                                .labelMedium,
+                                .labelLarge,
                           ),
                         ),
 
