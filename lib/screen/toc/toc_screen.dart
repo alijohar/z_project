@@ -7,7 +7,7 @@ import 'package:zahra/util/navigation_helper.dart';
 import '../../model/toc_item.dart';
 
 class TocScreen extends StatefulWidget {
-  const TocScreen({
+   TocScreen({
     super.key,
     required this.id,
     required this.item,
@@ -16,7 +16,7 @@ class TocScreen extends StatefulWidget {
 
   final int id;
   final ItemModel? item;
-  final String? title;
+   String? title;
 
   @override
   State<TocScreen> createState() => _TocScreenState();
@@ -31,7 +31,9 @@ class _TocScreenState extends State<TocScreen> {
         MediaQuery.of(context).orientation == Orientation.landscape;
 
     context.read<TocCubit>().fetchItems(widget.id);
-
+    if (widget.title != null && widget.title!.contains('\n')) {
+      widget.title = widget.title!.replaceAll('\n', ' ');
+    }
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(

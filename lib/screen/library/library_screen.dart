@@ -23,6 +23,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -50,169 +52,174 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         textDirection: TextDirection.rtl,
                         child: Stack(
                           children: [
-                            Card(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              margin: const EdgeInsets.all(16),
-                              child: ListTile(
-                                title: Padding(
-                                  padding: const EdgeInsets.only(top: 16.0),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
-                                        width: 3,
-                                        height: 60,
-                                        color: Theme.of(context).colorScheme.primary,
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              book.title1,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleLarge
-                                                  ,
+                            Center(
+                              child: Container(
+                                width: isLandscape? MediaQuery.of(context).size.width/2 : MediaQuery.of(context).size.width,
+                                child: Card(
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                  margin: const EdgeInsets.all(16),
+                                  child: ListTile(
+                                    title: Padding(
+                                      padding: const EdgeInsets.only(top: 16.0),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            margin: const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                                            width: 3,
+                                            height: 60,
+                                            color: Theme.of(context).colorScheme.primary,
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  book.title1,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge
+                                                      ,
+                                                ),
+                                                Text(
+                                                  book.title2,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge
+                                                      ,
+                                                ),
+                                              ],
                                             ),
-                                            Text(
-                                              book.title2,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleLarge
-                                                  ,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    subtitle: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 12),
+                                        if (book.subtitle.sub1 != null)
+                                          Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
+                                              width: 10,
+                                              height: 10,
+                                              color: const Color(0xFFCFA355),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                book.subtitle.sub1!,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall
+                                                    ,
+                                              ),
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    ],
+                                        const SizedBox(height: 10),
+                                        if (book.subtitle.sub2 != null)
+                                          Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
+                                              width: 10,
+                                              height: 10,
+                                              color: const Color(0xFFCFA355),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                book.subtitle.sub2!,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleSmall
+                                                    ,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10),
+                                        if (book.subtitle.sub3 != null)
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
+                                                width: 10,
+                                                height: 10,
+                                                color: const Color(0xFFCFA355),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  book.subtitle.sub3!,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall
+                                                      ,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        const SizedBox(height: 10),
+                                        if (book.subtitle.sub4 != null)
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
+                                                width: 10,
+                                                height: 10,
+                                                color: const Color(0xFFCFA355),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  book.subtitle.sub4!,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall
+                                                      ,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        const SizedBox(height: 10),
+                                        if (book.subtitle.sub5 != null)
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
+                                                width: 10,
+                                                height: 10,
+                                                color: const Color(0xFFCFA355),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  book.subtitle.sub5!,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleSmall
+                                                  ,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        const SizedBox(height: 10),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 12),
-                                    if (book.subtitle.sub1 != null)
-                                      Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                          width: 10,
-                                          height: 10,
-                                          color: const Color(0xFFCFA355),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            book.subtitle.sub1!,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall
-                                                ,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    if (book.subtitle.sub2 != null)
-                                      Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                          width: 10,
-                                          height: 10,
-                                          color: const Color(0xFFCFA355),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            book.subtitle.sub2!,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleSmall
-                                                ,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    if (book.subtitle.sub3 != null)
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                            width: 10,
-                                            height: 10,
-                                            color: const Color(0xFFCFA355),
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              book.subtitle.sub3!,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall
-                                                  ,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    const SizedBox(height: 10),
-                                    if (book.subtitle.sub4 != null)
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                            width: 10,
-                                            height: 10,
-                                            color: const Color(0xFFCFA355),
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              book.subtitle.sub4!,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall
-                                                  ,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    const SizedBox(height: 10),
-                                    if (book.subtitle.sub5 != null)
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                            width: 10,
-                                            height: 10,
-                                            color: const Color(0xFFCFA355),
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              book.subtitle.sub5!,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall
-                                              ,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    const SizedBox(height: 10),
-                                  ],
                                 ),
                               ),
                             ),

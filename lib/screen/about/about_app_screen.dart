@@ -13,6 +13,8 @@ class AboutAppScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<AboutAppCubit>().fetchItems(id);
     double screenWidth = MediaQuery.of(context).size.width;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -29,8 +31,8 @@ class AboutAppScreen extends StatelessWidget {
             ),
 
           Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 8, left: 8),
+              child: Container(
+                width: isLandscape? MediaQuery.of(context).size.width/2 : MediaQuery.of(context).size.width,
                 child: CustomScrollView(
                   slivers: <Widget>[
                     BlocBuilder<AboutAppCubit, AboutAppState>(
@@ -57,16 +59,37 @@ class AboutAppScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20, top: 20),
-              height: 40,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/image/masaha_logo.png'),
-                  alignment: Alignment.topCenter, // Ensure the image starts from the top
+            Row(
+              children: [
+                // Left line
+                Expanded(
+                  child: Container(
+                    height: 10, // Match the height of the image container
+                    color: Color(0xFFCFA355), // Set the color to yellow
+                  ),
                 ),
-              ),
-            ),
+                // Image container
+                Container(
+                  width: 100,
+                  margin: const EdgeInsets.only(bottom: 20, top: 20),
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/image/masaha_logo.png'),
+                      alignment: Alignment.center, // Ensure the image starts from the top
+                    ),
+                  ),
+                ),
+                // Right line
+                Expanded(
+                  child: Container(
+                    height: 10, // Match the height of the image container
+                    color: Color(0xFFCFA355), // Set the color to yellow
+                  ),
+                ),
+              ],
+            )
+
 
           ],
         ),);
