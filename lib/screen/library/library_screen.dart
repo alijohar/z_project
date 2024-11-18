@@ -54,7 +54,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                           children: [
                             Center(
                               child: Container(
-                                width: isLandscape? MediaQuery.of(context).size.width/2 : MediaQuery.of(context).size.width,
+                                width: isLandscape? MediaQuery.of(context).size.width/1.5 : MediaQuery.of(context).size.width,
                                 child: Card(
                                   color: Theme.of(context).colorScheme.onPrimary,
                                   margin: const EdgeInsets.all(16),

@@ -32,7 +32,7 @@ class AboutAppScreen extends StatelessWidget {
 
           Expanded(
               child: Container(
-                width: isLandscape? MediaQuery.of(context).size.width/2 : MediaQuery.of(context).size.width,
+                width: isLandscape? MediaQuery.of(context).size.width/1.5 : MediaQuery.of(context).size.width,
                 child: CustomScrollView(
                   slivers: <Widget>[
                     BlocBuilder<AboutAppCubit, AboutAppState>(
