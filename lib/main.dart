@@ -13,6 +13,9 @@ void main() async {
   await Firebase.initializeApp();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   lockOrientation(); // Lock orientation based on device type
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xFFD3C8C8), // Set your desired color here.
+  ));
   runApp(const MyApp());
 }
 

@@ -24,9 +24,9 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: SearchBarWiget(
-          onClicked: (query) {
-            context.read<SearchCubit>().storeEpubBooks();
-            context.read<SearchCubit>().search(query);
+          onClicked: (query) async{
+            await context.read<SearchCubit>().storeEpubBooks();
+            await context.read<SearchCubit>().search(query);
           },
         ),
       ),
@@ -34,7 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<SearchCubit, SearchState>(
           builder: (context, state) => state.when(
-              initial: () => Center(child: Text('ابدأ البحث', style: Theme.of(context).textTheme.titleLarge)),
+              initial: () => Center(child: Text('ابدأ البحث', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.onPrimary))),
               loading: () => Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.onPrimary,)),
               loaded: (searchResults) => SearchResultsWidget(searchResults: searchResults),
               error: (error) => Center(child: Text('Error: $error')),

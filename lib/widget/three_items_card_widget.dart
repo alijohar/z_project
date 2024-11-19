@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zahra/widget/basic_card_view.dart';
 
+import '../main.dart';
 import '../model/item_model.dart';
 import '../util/dotted_broder_painter.dart';
 import '../util/navigation_helper.dart';
@@ -13,7 +14,15 @@ class ThreeItemsCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double itemWidth = 100.0;
 
+    if (isMobileDevice()){
+      itemWidth = MediaQuery.of(context).size.width/3.5;
+    }else{
+      if (screenWidth > 600) {
+        itemWidth = 140;
+      }
+    }
     return BaseCardWidget(
     backgroundColor: Colors.transparent,
     height: 110,
@@ -23,7 +32,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
       children: item.items!
           .map((item) => Container(
         height: 110,
-        width: screenWidth>600? 140:120,
+        width: itemWidth,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(

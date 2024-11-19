@@ -60,6 +60,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                       children: [
                         const SizedBox(height: 120),
                         Text(
+                          textAlign: TextAlign.center,
                           'قائمة الإشارات المرجعية فارغة',
                           style: Theme.of(context).textTheme.titleLarge?.copyWith(color: const Color(0xFFffffff)),
                         ),

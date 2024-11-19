@@ -33,29 +33,32 @@ class AboutAppScreen extends StatelessWidget {
           Expanded(
               child: Container(
                 width: isLandscape? MediaQuery.of(context).size.width/1.5 : MediaQuery.of(context).size.width,
-                child: CustomScrollView(
-                  slivers: <Widget>[
-                    BlocBuilder<AboutAppCubit, AboutAppState>(
-                      builder: (context, state) => state.when(
-                          initial: () => const SliverFillRemaining(
-                            child: Center(child: Text('Tap to start fetching...')),
-                          ),
-                          loading: () => const SliverFillRemaining(
-                            child: CircularProgressIndicator(),
-                          ),
-                          loaded: (items) => SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                                  (context, index) =>
-                                  NavigationHelper.buildItem(context, items[index]),
-                              childCount: items.length,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      BlocBuilder<AboutAppCubit, AboutAppState>(
+                        builder: (context, state) => state.when(
+                            initial: () => const SliverFillRemaining(
+                              child: Center(child: Text('Tap to start fetching...')),
+                            ),
+                            loading: () => const SliverFillRemaining(
+                              child: CircularProgressIndicator(),
+                            ),
+                            loaded: (items) => SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                    (context, index) =>
+                                    NavigationHelper.buildItem(context, items[index]),
+                                childCount: items.length,
+                              ),
+                            ),
+                            error: (message) => SliverFillRemaining(
+                              child: Center(child: Text(message)),
                             ),
                           ),
-                          error: (message) => SliverFillRemaining(
-                            child: Center(child: Text(message)),
-                          ),
-                        ),
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
