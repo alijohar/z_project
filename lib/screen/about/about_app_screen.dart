@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zahra/screen/about/cubit/about_app_cubit.dart';
 
 import '../../util/navigation_helper.dart';
@@ -21,7 +22,7 @@ class AboutAppScreen extends StatelessWidget {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 40, right: 16, left: 16, bottom: 0),
+              padding: const EdgeInsets.only(top: 54, right: 16, left: 16, bottom: 0),
               child: Image.asset(
                 'assets/image/name.png',
                 width: screenWidth > 600? 400: MediaQuery.of(context).size.width, // Full width of the screen
@@ -72,16 +73,9 @@ class AboutAppScreen extends StatelessWidget {
                   ),
                 ),
                 // Image container
-                Container(
-                  width: 100,
-                  margin: const EdgeInsets.only(bottom: 20, top: 20),
-                  height: 40,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/image/masaha_logo.png'),
-                      alignment: Alignment.center, // Ensure the image starts from the top
-                    ),
-                  ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SvgPicture.asset('assets/icon/logo.svg'),
                 ),
                 // Right line
                 Expanded(

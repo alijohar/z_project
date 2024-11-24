@@ -283,48 +283,46 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                   style: Theme.of(context).textTheme.titleSmall,),
             ),
           ),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: searchResults.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final result = searchResults[index];
-                  return ListTile(
-                    title: GestureDetector(
-                      onTap: () {
-                        this.context.read<EpubViewerCubit>().highlightContent(result.pageIndex, searchedWord);
-                        Navigator.of(context)
-                            .pop(); // Close the dialog on selection
-                      },
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: Html(
-                                data: result.spanna.toString(),
-                                style: {
-                                  'html': Style(
-                                    fontSize: FontSize.small,
-                                    textAlign: TextAlign.justify,
-                                    color: Theme.of(context).colorScheme.surface,
-                                  ),
-                                  'mark': Style(
-                                    backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-                                  ),
-                                },
+        content: SizedBox(
+          width: double.maxFinite,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: searchResults.length,
+            itemBuilder: (BuildContext context, int index) {
+              final result = searchResults[index];
+              return ListTile(
+                title: GestureDetector(
+                  onTap: () {
+                    this.context.read<EpubViewerCubit>().highlightContent(result.pageIndex, searchedWord);
+                    Navigator.of(context).pop(); // Close the dialog on selection
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Html(
+                            data: result.spanna.toString(),
+                            style: {
+                              'html': Style(
+                                fontSize: FontSize.small,
+                                textAlign: TextAlign.justify,
+                                color: Colors.white,
                               ),
-                            ),
+                              'mark': Style(
+                                backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                              ),
+                            },
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  );},
-              ),
-            ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
+        ),
         ),
     );
   }

@@ -35,7 +35,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             loaded: (books) => Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 40, right: 16, left: 16, bottom: 0),
+                  padding: const EdgeInsets.only(top: 54, right: 16, left: 16, bottom: 0),
                   child: Image.asset(
                     'assets/image/name.png',
                     width: screenWidth > 600 ? 400: MediaQuery.of(context).size.width, // Full width of the screen

@@ -49,7 +49,7 @@ class ThreeItemsCardWidget extends StatelessWidget {
           child: CustomPaint(painter:
           DottedBorderPainter(
             borderWidth: 1.0,
-            borderColor: Colors.black45,
+            borderColor: Theme.of(context).colorScheme.onSurface,
           ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,

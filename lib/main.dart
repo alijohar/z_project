@@ -13,9 +13,6 @@ void main() async {
   await Firebase.initializeApp();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   lockOrientation(); // Lock orientation based on device type
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Color(0xFFD3C8C8), // Set your desired color here.
-  ));
   runApp(const MyApp());
 }
 
@@ -67,8 +64,8 @@ class MyApp extends StatelessWidget {
     final ThemeData lightTheme = ThemeData(
       useMaterial3: true,
       navigationBarTheme: NavigationBarThemeData(
-        labelTextStyle: WidgetStateProperty.all(
-          TextStyle(),
+        labelTextStyle: MaterialStateProperty.all(
+          const TextStyle(),
         ),
       ),
       colorScheme: lightColorScheme,
@@ -78,8 +75,8 @@ class MyApp extends StatelessWidget {
     final ThemeData darkTheme = ThemeData(
       useMaterial3: true,
       navigationBarTheme: NavigationBarThemeData(
-        labelTextStyle: WidgetStateProperty.all(
-          TextStyle(),
+        labelTextStyle: MaterialStateProperty.all(
+          const TextStyle(),
         ),
       ),
       colorScheme: darkColorScheme,
@@ -99,6 +96,20 @@ class MyApp extends StatelessWidget {
         navigatorObservers: [
           FirebaseAnalyticsObserver(analytics: analytics),
         ],
+        builder: (context, child) {
+          // Detect current brightness (light or dark mode)
+          final brightness = MediaQuery.of(context).platformBrightness;
+
+          // Set the navigation bar color dynamically
+          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            systemNavigationBarColor:
+            brightness == Brightness.dark ? Color(0xFF111111) : Color(0xFFD3C8C8),
+            systemNavigationBarIconBrightness:
+            brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+          ));
+
+          return child!;
+        },
       ),
     );
   }

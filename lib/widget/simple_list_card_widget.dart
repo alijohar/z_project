@@ -9,11 +9,14 @@ class SimpleListCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      itemCount: item.items?.length ?? 0,
-      itemBuilder: (context, index) => GestureDetector(
+    physics: const NeverScrollableScrollPhysics(),
+    shrinkWrap: true,
+    padding: EdgeInsets.zero,
+    itemCount: item.items?.length ?? 0,
+    itemBuilder: (context, index) {
+      final text = item.items?[index].title ?? '';
+
+      return GestureDetector(
         onTap: () => NavigationHelper.navigateTo(
           context: context,
           subItem: item.items?[index],
@@ -22,17 +25,24 @@ class SimpleListCardWidget extends StatelessWidget {
           title: item.items?[index].title ?? '',
         ),
         child: BaseCardWidget(
-          height: 48,
-          margin: const EdgeInsets.symmetric(vertical: 6), // Vertical margin between list items
+          height: 60, // A base height for consistency
+          margin: const EdgeInsets.symmetric(vertical: 6),
           padding: const EdgeInsets.all(8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Expanded(
                 child: Text(
-                  item.items?[index].title ?? '',
+                  text,
                   textAlign: TextAlign.right,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(
+                    fontSize: calculateFontSize(context, text),
+                  ),
+                  maxLines: 2, // Limit to 2 lines
+                  overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
                 ),
               ),
               Container(
@@ -44,6 +54,20 @@ class SimpleListCardWidget extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
+    },
+  );
+
+  // Helper function to calculate font size based on text length
+  double calculateFontSize(BuildContext context, String text) {
+    const double baseFontSize = 16; // Default font size
+    final double maxWidth = MediaQuery.of(context).size.width - 32;
+
+    if (text.length > 30) {
+      return baseFontSize - 2; // Reduce font size for longer texts
+    } else if (text.length > 50) {
+      return baseFontSize - 4; // Further reduce font size
+    }
+    return baseFontSize;
+  }
 }
