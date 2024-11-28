@@ -20,7 +20,6 @@ class SearchCubit extends Cubit<SearchState> {
 
       await SearchHelper().searchAllBooks(epubBooks, searchTerm, (partialResults) {
         allResults.addAll(partialResults);
-        // You can optionally emit partial results here if needed
         emit(SearchState.loaded(searchResults: List<SearchModel>.from(allResults)));
       });
 
@@ -46,7 +45,6 @@ class SearchCubit extends Cubit<SearchState> {
       'assets/epub/11.epub',
       'assets/epub/12.epub',
       'assets/epub/13.epub',
-      'assets/epub/14.epub',
       'assets/epub/15.epub',
       'assets/epub/16.epub',
       'assets/epub/17.epub',

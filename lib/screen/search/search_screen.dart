@@ -34,8 +34,8 @@ class _SearchScreenState extends State<SearchScreen> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<SearchCubit, SearchState>(
           builder: (context, state) => state.when(
-              initial: () => Center(child: Text('ابدأ البحث', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.onPrimary))),
-              loading: () => Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.onPrimary,)),
+              initial: () => Center(child: Text('ابدأ البحث', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.onSecondary))),
+              loading: () => Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.onSecondary,)),
               loaded: (searchResults) => SearchResultsWidget(searchResults: searchResults),
               error: (error) => Center(child: Text('Error: $error')),
             ),
