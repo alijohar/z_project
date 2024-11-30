@@ -16,14 +16,14 @@ class SearchCubit extends Cubit<SearchState> {
   Future<void> search(String searchTerm) async {
     try {
       emit(const SearchState.loading());
-      final List<SearchModel> allResults = [];
+      final Set<SearchModel> uniqueResults = {};
 
       await SearchHelper().searchAllBooks(epubBooks, searchTerm, (partialResults) {
-        allResults.addAll(partialResults);
-        emit(SearchState.loaded(searchResults: List<SearchModel>.from(allResults)));
+        uniqueResults.addAll(partialResults);
+        emit(SearchState.loaded(searchResults: uniqueResults.toList()));
       });
 
-      emit(SearchState.loaded(searchResults: allResults));
+      emit(SearchState.loaded(searchResults: uniqueResults.toList()));
     } catch (error) {
       emit(SearchState.error(error: error.toString()));
     }

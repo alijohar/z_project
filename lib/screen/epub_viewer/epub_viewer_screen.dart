@@ -374,7 +374,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                         ),
                         child: SelectionArea(
                           child: Html(
-                            data: content?[index],
+                            data: content[index],
                             style: {
                               'body': Style(
                                 direction: TextDirection.rtl,
@@ -416,7 +416,6 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                                 textAlign: TextAlign.right,
                                 fontFamily: fontFamily.name,
                               ),
-
                               '.pagen': Style(
                                 textAlign: TextAlign.center,
                                 color: Colors.red,
