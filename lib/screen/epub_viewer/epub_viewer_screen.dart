@@ -73,6 +73,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     if (_chapter != null) {
       context
           .read<EpubViewerCubit>()
@@ -328,6 +329,8 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   }
 
   Widget _buildCurrentUi(BuildContext context, List<String>? content) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     if (content == null){
       return Placeholder();
     } else {
@@ -389,28 +392,28 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                                 margin: Margins.symmetric(vertical: 10),
                                 fontFamily: fontFamily.name,
                               ),
-                              '.tit1': Style(
-                                color: Colors.green[700],
+                              '.tit1, h1': Style(
+                                color: isDarkMode? Colors.white :Colors.green[700],
                                 fontSize: FontSize(fontSize.size),
                                 margin: Margins.symmetric(vertical: 10),
                                 textAlign: TextAlign.center,
                                 fontFamily: fontFamily.name,
                               ),
-                              '.tit2': Style(
-                                color: Colors.black87,
+                              '.tit2, h2': Style(
+                                color: isDarkMode? Colors.white :Colors.green[700],
                                 fontSize: FontSize(fontSize.size),
                                 margin: Margins.symmetric(vertical: 10),
                                 textAlign: TextAlign.center,
                                 fontFamily: fontFamily.name,
                               ),
-                              '.tit3': Style(
-                                color: Colors.black87,
+                              '.tit3, h3': Style(
+                                color: isDarkMode? Colors.white :Colors.black87,
                                 fontSize: FontSize(fontSize.size),
                                 margin: Margins.symmetric(vertical: 10),
                                 fontFamily: fontFamily.name,
                               ),
-                              '.tit4': Style(
-                                color: Colors.red,
+                              '.tit4, h4': Style(
+                                color: isDarkMode? Colors.white :Colors.red,
                                 fontSize: FontSize(fontSize.size),
                                 margin: Margins.zero,
                                 textAlign: TextAlign.right,
@@ -418,7 +421,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                               ),
                               '.pagen': Style(
                                 textAlign: TextAlign.center,
-                                color: Colors.red,
+                                color: isDarkMode ? Colors.deepOrangeAccent: Colors.red,
                                 fontSize: FontSize(fontSize.size * 0.7),
                               ),
                               '.asl': Style(
@@ -438,10 +441,11 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                               ),
                               '.sher': Style(
                                 textAlign: TextAlign.center,
-                                color: Colors.red[800],
+                                color: isDarkMode ? Colors.white : Colors.red[800],
                                 fontSize: FontSize(fontSize.size),
                                 margin: Margins.symmetric(vertical: 10),
                               ),
+
                               '.fnotesher': Style(
                                 textAlign: TextAlign.center,
                                 color: Colors.red[800],
