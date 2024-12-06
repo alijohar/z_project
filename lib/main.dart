@@ -101,12 +101,12 @@ class MyApp extends StatelessWidget {
           final brightness = MediaQuery.of(context).platformBrightness;
 
           // Set the navigation bar color dynamically
-          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            systemNavigationBarColor:
-            brightness == Brightness.dark ? Color(0xFF111111) : Color(0xFFD3C8C8),
-            systemNavigationBarIconBrightness:
-            brightness == Brightness.dark ? Brightness.light : Brightness.dark,
-          ));
+          // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          //   systemNavigationBarColor:
+          //   brightness == Brightness.dark ? Color(0xFF111111) : Color(0xFFD3C8C8),
+          //   systemNavigationBarIconBrightness:
+          //   brightness == Brightness.dark ? Brightness.light : Brightness.dark,
+          // ));
 
           return child!;
         },

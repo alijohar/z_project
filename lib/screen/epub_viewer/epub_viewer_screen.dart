@@ -54,6 +54,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   PageHelper pageHelper = PageHelper();
   double _currentPage = 0;
   bool isSliderVisible = true;
+  bool isAboutUsBook = false;
   bool isBookmarked = false;
   EpubChapter? _chapter;
   List<EpubChapter>? _tocList;
@@ -133,12 +134,9 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       border: InputBorder.none,
                       suffixIcon: IconButton(
                         icon: SvgPicture.asset('assets/icon/search.svg', color: Theme.of(context).colorScheme.onSurfaceVariant),
-                        // The search icon inside the TextField
                         onPressed: () {
-                          // Trigger the search logic, similar to what's done in onSubmitted
                           if (textEditingController.text.isNotEmpty) {
-                            final String searchQuery =
-                                textEditingController.text;
+                            final String searchQuery = textEditingController.text;
                             _search(searchQuery);
                           }
                         },
@@ -147,8 +145,8 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                     onSubmitted: _search,
                   )
                       : const SizedBox.shrink(),
-                  actions: isSearchOpen
-                      ? null // No actions when search is open
+                  actions: isSearchOpen || isAboutUsBook
+                      ? null // No actions when search is open or when it's About Us page
                       : [
                     IconButton(
                       icon: SvgPicture.asset('assets/icon/search.svg', color: Theme.of(context).colorScheme.onSurfaceVariant),
@@ -158,7 +156,8 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                       icon: SvgPicture.asset('assets/icon/font.svg', color: Theme.of(context).colorScheme.onSurfaceVariant),
                       onPressed: () {
                         _showBottomSheet(
-                            context, context.read<EpubViewerCubit>(),);
+                          context, context.read<EpubViewerCubit>(),
+                        );
                       },
                     ),
                     IconButton(
@@ -166,7 +165,8 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                         isBookmarked
                             ? 'assets/icon/bookmarked.svg'
                             : 'assets/icon/bookmark.svg',
-                       color: Theme.of(context).colorScheme.onSurfaceVariant,),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                       onPressed: () {
                         _toggleBookmark();
                         if (isBookmarked) {
@@ -503,7 +503,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
               },
             ),
           ),
-          if (isSliderVisible)
+          if (isSliderVisible && !isAboutUsBook)
             Directionality(
               textDirection: TextDirection.rtl,
               child: Column(
@@ -786,6 +786,9 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
     // _pageController.jumpToPage(bookmarkPageNumber);
     _bookPath = widget.referenceModel!.bookPath;
     _loadAndParseEpub(bookPath: _bookPath!);
+    if (_bookPath == '0.epub'){
+      isAboutUsBook = true;
+    }
   }
 
   _loadEpubFromTableOfContents() {
@@ -803,6 +806,7 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   _loadEpubFromCategory() {
     _bookPath = widget.catModel!.bookPath!;
     _loadAndParseEpub(bookPath: _bookPath!);
+
   }
 
 

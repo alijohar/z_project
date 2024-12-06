@@ -31,6 +31,8 @@ class SearchCubit extends Cubit<SearchState> {
 
 
   Future<void> storeEpubBooks() async {
+    emit(const SearchState.loading());
+
     final List<String> allBooks = [
       'assets/epub/1.epub',
       'assets/epub/2.epub',

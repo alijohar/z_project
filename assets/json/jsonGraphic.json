@@ -1690,7 +1690,7 @@
         "picName": "singledark.jpg",
         "items": [],
         "linkTo": {
-          "goto": "jsonGraphic",
+          "goto": "jsonList",
           "key": "",
           "id": 5352
         }
@@ -1953,7 +1953,7 @@
         "items": [],
         "linkTo": {
           "goto": "text",
-          "key": "about.html",
+          "key": "0_1",
           "id": 0
         }
       }
