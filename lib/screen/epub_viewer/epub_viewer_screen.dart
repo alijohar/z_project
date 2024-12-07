@@ -69,11 +69,13 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   bool _isSliderChange = false;
   String searchedWord = '';
   bool isSearchOpen = false;
+  bool isDarkMode = false;
   final focusNode = FocusNode();
   final textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+     isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (_chapter != null) {
       context
@@ -329,7 +331,6 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
   }
 
   Widget _buildCurrentUi(BuildContext context, List<String>? content) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     if (content == null){
       return Placeholder();
