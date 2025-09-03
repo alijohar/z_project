@@ -98,7 +98,7 @@ class MyApp extends StatelessWidget {
         ],
         builder: (context, child) {
           // Detect current brightness (light or dark mode)
-          final brightness = MediaQuery.of(context).platformBrightness;
+          // final brightness = MediaQuery.of(context).platformBrightness;
 
           // Set the navigation bar color dynamically
           // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

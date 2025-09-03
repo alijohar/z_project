@@ -477,12 +477,12 @@ class _EpubViewerScreenState extends State<EpubViewerScreen> {
                                 textDecoration: TextDecoration.none,
                               ),
                               '.quran': Style(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.normal,
                                 fontSize: FontSize(fontSize.size),
                                 color: Colors.green,
                               ),
                               '.hadith': Style(
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.normal,
                                 fontSize: FontSize(fontSize.size),
                                 color: Colors.teal,
                               ),
