@@ -40,16 +40,16 @@ dependencies:
   http: ^0.13.3
   json_annotation: ^4.9.0
   epub_parser: ^3.0.1
-  flutter_svg: ^1.0.3
+  flutter_svg: ^1.1.0
   scrollable_positioned_list: ^0.3.8
   flutter_html: ^3.0.0-beta.2
   html: ^0.15.4
-  shared_preferences: ^2.0.6
+  shared_preferences: ^2.5.3
   sqflite: ^2.3.3+1
   dotted_border: ^2.1.0
-  firebase_core: ^3.8.1
-  firebase_analytics: ^11.3.6
-  firebase_crashlytics: ^4.2.0
+  firebase_core: ^4.2.0
+  firebase_analytics: ^12.0.3
+  firebase_crashlytics: ^5.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,7 +62,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
-
+dependency_overrides:
+  xml: ^5.3.1
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
