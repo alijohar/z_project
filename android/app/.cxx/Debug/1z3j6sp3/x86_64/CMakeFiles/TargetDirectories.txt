@@ -1,0 +1,2 @@
+/Users/alibayati/Works/Programming/MultiPlatform/z_project/android/app/.cxx/Debug/1z3j6sp3/x86_64/CMakeFiles/edit_cache.dir
+/Users/alibayati/Works/Programming/MultiPlatform/z_project/android/app/.cxx/Debug/1z3j6sp3/x86_64/CMakeFiles/rebuild_cache.dir

@@ -14,16 +14,266 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+LibraryCollection _$LibraryCollectionFromJson(Map<String, dynamic> json) {
+  return _LibraryCollection.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LibraryCollection {
+  String get title => throw _privateConstructorUsedError;
+  String get author => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
+  String get epub => throw _privateConstructorUsedError;
+  List<Book> get series => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LibraryCollectionCopyWith<LibraryCollection> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LibraryCollectionCopyWith<$Res> {
+  factory $LibraryCollectionCopyWith(
+          LibraryCollection value, $Res Function(LibraryCollection) then) =
+      _$LibraryCollectionCopyWithImpl<$Res, LibraryCollection>;
+  @useResult
+  $Res call(
+      {String title,
+      String author,
+      String description,
+      String image,
+      String epub,
+      List<Book> series});
+}
+
+/// @nodoc
+class _$LibraryCollectionCopyWithImpl<$Res, $Val extends LibraryCollection>
+    implements $LibraryCollectionCopyWith<$Res> {
+  _$LibraryCollectionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? author = null,
+    Object? description = null,
+    Object? image = null,
+    Object? epub = null,
+    Object? series = null,
+  }) {
+    return _then(_value.copyWith(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      epub: null == epub
+          ? _value.epub
+          : epub // ignore: cast_nullable_to_non_nullable
+              as String,
+      series: null == series
+          ? _value.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as List<Book>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$LibraryCollectionImplCopyWith<$Res>
+    implements $LibraryCollectionCopyWith<$Res> {
+  factory _$$LibraryCollectionImplCopyWith(_$LibraryCollectionImpl value,
+          $Res Function(_$LibraryCollectionImpl) then) =
+      __$$LibraryCollectionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String title,
+      String author,
+      String description,
+      String image,
+      String epub,
+      List<Book> series});
+}
+
+/// @nodoc
+class __$$LibraryCollectionImplCopyWithImpl<$Res>
+    extends _$LibraryCollectionCopyWithImpl<$Res, _$LibraryCollectionImpl>
+    implements _$$LibraryCollectionImplCopyWith<$Res> {
+  __$$LibraryCollectionImplCopyWithImpl(_$LibraryCollectionImpl _value,
+      $Res Function(_$LibraryCollectionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? author = null,
+    Object? description = null,
+    Object? image = null,
+    Object? epub = null,
+    Object? series = null,
+  }) {
+    return _then(_$LibraryCollectionImpl(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      epub: null == epub
+          ? _value.epub
+          : epub // ignore: cast_nullable_to_non_nullable
+              as String,
+      series: null == series
+          ? _value._series
+          : series // ignore: cast_nullable_to_non_nullable
+              as List<Book>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$LibraryCollectionImpl implements _LibraryCollection {
+  const _$LibraryCollectionImpl(
+      {required this.title,
+      required this.author,
+      required this.description,
+      required this.image,
+      required this.epub,
+      final List<Book> series = const []})
+      : _series = series;
+
+  factory _$LibraryCollectionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LibraryCollectionImplFromJson(json);
+
+  @override
+  final String title;
+  @override
+  final String author;
+  @override
+  final String description;
+  @override
+  final String image;
+  @override
+  final String epub;
+  final List<Book> _series;
+  @override
+  @JsonKey()
+  List<Book> get series {
+    if (_series is EqualUnmodifiableListView) return _series;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_series);
+  }
+
+  @override
+  String toString() {
+    return 'LibraryCollection(title: $title, author: $author, description: $description, image: $image, epub: $epub, series: $series)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LibraryCollectionImpl &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.epub, epub) || other.epub == epub) &&
+            const DeepCollectionEquality().equals(other._series, _series));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, title, author, description,
+      image, epub, const DeepCollectionEquality().hash(_series));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LibraryCollectionImplCopyWith<_$LibraryCollectionImpl> get copyWith =>
+      __$$LibraryCollectionImplCopyWithImpl<_$LibraryCollectionImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$LibraryCollectionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _LibraryCollection implements LibraryCollection {
+  const factory _LibraryCollection(
+      {required final String title,
+      required final String author,
+      required final String description,
+      required final String image,
+      required final String epub,
+      final List<Book> series}) = _$LibraryCollectionImpl;
+
+  factory _LibraryCollection.fromJson(Map<String, dynamic> json) =
+      _$LibraryCollectionImpl.fromJson;
+
+  @override
+  String get title;
+  @override
+  String get author;
+  @override
+  String get description;
+  @override
+  String get image;
+  @override
+  String get epub;
+  @override
+  List<Book> get series;
+  @override
+  @JsonKey(ignore: true)
+  _$$LibraryCollectionImplCopyWith<_$LibraryCollectionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 Book _$BookFromJson(Map<String, dynamic> json) {
   return _Book.fromJson(json);
 }
 
 /// @nodoc
 mixin _$Book {
-  int get epubName => throw _privateConstructorUsedError;
-  String get title1 => throw _privateConstructorUsedError;
-  String get title2 => throw _privateConstructorUsedError;
-  Subtitle get subtitle => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
+  String get epub => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,9 +285,7 @@ abstract class $BookCopyWith<$Res> {
   factory $BookCopyWith(Book value, $Res Function(Book) then) =
       _$BookCopyWithImpl<$Res, Book>;
   @useResult
-  $Res call({int epubName, String title1, String title2, Subtitle subtitle});
-
-  $SubtitleCopyWith<$Res> get subtitle;
+  $Res call({String title, String description, String image, String epub});
 }
 
 /// @nodoc
@@ -53,37 +301,29 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? epubName = null,
-    Object? title1 = null,
-    Object? title2 = null,
-    Object? subtitle = null,
+    Object? title = null,
+    Object? description = null,
+    Object? image = null,
+    Object? epub = null,
   }) {
     return _then(_value.copyWith(
-      epubName: null == epubName
-          ? _value.epubName
-          : epubName // ignore: cast_nullable_to_non_nullable
-              as int,
-      title1: null == title1
-          ? _value.title1
-          : title1 // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      title2: null == title2
-          ? _value.title2
-          : title2 // ignore: cast_nullable_to_non_nullable
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
-      subtitle: null == subtitle
-          ? _value.subtitle
-          : subtitle // ignore: cast_nullable_to_non_nullable
-              as Subtitle,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      epub: null == epub
+          ? _value.epub
+          : epub // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SubtitleCopyWith<$Res> get subtitle {
-    return $SubtitleCopyWith<$Res>(_value.subtitle, (value) {
-      return _then(_value.copyWith(subtitle: value) as $Val);
-    });
   }
 }
 
@@ -94,10 +334,7 @@ abstract class _$$BookImplCopyWith<$Res> implements $BookCopyWith<$Res> {
       __$$BookImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int epubName, String title1, String title2, Subtitle subtitle});
-
-  @override
-  $SubtitleCopyWith<$Res> get subtitle;
+  $Res call({String title, String description, String image, String epub});
 }
 
 /// @nodoc
@@ -110,28 +347,28 @@ class __$$BookImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? epubName = null,
-    Object? title1 = null,
-    Object? title2 = null,
-    Object? subtitle = null,
+    Object? title = null,
+    Object? description = null,
+    Object? image = null,
+    Object? epub = null,
   }) {
     return _then(_$BookImpl(
-      epubName: null == epubName
-          ? _value.epubName
-          : epubName // ignore: cast_nullable_to_non_nullable
-              as int,
-      title1: null == title1
-          ? _value.title1
-          : title1 // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      title2: null == title2
-          ? _value.title2
-          : title2 // ignore: cast_nullable_to_non_nullable
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
-      subtitle: null == subtitle
-          ? _value.subtitle
-          : subtitle // ignore: cast_nullable_to_non_nullable
-              as Subtitle,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      epub: null == epub
+          ? _value.epub
+          : epub // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -140,26 +377,26 @@ class __$$BookImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BookImpl implements _Book {
   const _$BookImpl(
-      {required this.epubName,
-      required this.title1,
-      required this.title2,
-      required this.subtitle});
+      {required this.title,
+      required this.description,
+      required this.image,
+      required this.epub});
 
   factory _$BookImpl.fromJson(Map<String, dynamic> json) =>
       _$$BookImplFromJson(json);
 
   @override
-  final int epubName;
+  final String title;
   @override
-  final String title1;
+  final String description;
   @override
-  final String title2;
+  final String image;
   @override
-  final Subtitle subtitle;
+  final String epub;
 
   @override
   String toString() {
-    return 'Book(epubName: $epubName, title1: $title1, title2: $title2, subtitle: $subtitle)';
+    return 'Book(title: $title, description: $description, image: $image, epub: $epub)';
   }
 
   @override
@@ -167,18 +404,16 @@ class _$BookImpl implements _Book {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BookImpl &&
-            (identical(other.epubName, epubName) ||
-                other.epubName == epubName) &&
-            (identical(other.title1, title1) || other.title1 == title1) &&
-            (identical(other.title2, title2) || other.title2 == title2) &&
-            (identical(other.subtitle, subtitle) ||
-                other.subtitle == subtitle));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.epub, epub) || other.epub == epub));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, epubName, title1, title2, subtitle);
+  int get hashCode => Object.hash(runtimeType, title, description, image, epub);
 
   @JsonKey(ignore: true)
   @override
@@ -196,229 +431,23 @@ class _$BookImpl implements _Book {
 
 abstract class _Book implements Book {
   const factory _Book(
-      {required final int epubName,
-      required final String title1,
-      required final String title2,
-      required final Subtitle subtitle}) = _$BookImpl;
+      {required final String title,
+      required final String description,
+      required final String image,
+      required final String epub}) = _$BookImpl;
 
   factory _Book.fromJson(Map<String, dynamic> json) = _$BookImpl.fromJson;
 
   @override
-  int get epubName;
+  String get title;
   @override
-  String get title1;
+  String get description;
   @override
-  String get title2;
+  String get image;
   @override
-  Subtitle get subtitle;
+  String get epub;
   @override
   @JsonKey(ignore: true)
   _$$BookImplCopyWith<_$BookImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Subtitle _$SubtitleFromJson(Map<String, dynamic> json) {
-  return _Subtitle.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Subtitle {
-  String? get sub1 => throw _privateConstructorUsedError;
-  String? get sub2 => throw _privateConstructorUsedError;
-  String? get sub3 => throw _privateConstructorUsedError;
-  String? get sub4 => throw _privateConstructorUsedError;
-  String? get sub5 => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SubtitleCopyWith<Subtitle> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SubtitleCopyWith<$Res> {
-  factory $SubtitleCopyWith(Subtitle value, $Res Function(Subtitle) then) =
-      _$SubtitleCopyWithImpl<$Res, Subtitle>;
-  @useResult
-  $Res call(
-      {String? sub1, String? sub2, String? sub3, String? sub4, String? sub5});
-}
-
-/// @nodoc
-class _$SubtitleCopyWithImpl<$Res, $Val extends Subtitle>
-    implements $SubtitleCopyWith<$Res> {
-  _$SubtitleCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sub1 = freezed,
-    Object? sub2 = freezed,
-    Object? sub3 = freezed,
-    Object? sub4 = freezed,
-    Object? sub5 = freezed,
-  }) {
-    return _then(_value.copyWith(
-      sub1: freezed == sub1
-          ? _value.sub1
-          : sub1 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sub2: freezed == sub2
-          ? _value.sub2
-          : sub2 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sub3: freezed == sub3
-          ? _value.sub3
-          : sub3 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sub4: freezed == sub4
-          ? _value.sub4
-          : sub4 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sub5: freezed == sub5
-          ? _value.sub5
-          : sub5 // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SubtitleImplCopyWith<$Res>
-    implements $SubtitleCopyWith<$Res> {
-  factory _$$SubtitleImplCopyWith(
-          _$SubtitleImpl value, $Res Function(_$SubtitleImpl) then) =
-      __$$SubtitleImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String? sub1, String? sub2, String? sub3, String? sub4, String? sub5});
-}
-
-/// @nodoc
-class __$$SubtitleImplCopyWithImpl<$Res>
-    extends _$SubtitleCopyWithImpl<$Res, _$SubtitleImpl>
-    implements _$$SubtitleImplCopyWith<$Res> {
-  __$$SubtitleImplCopyWithImpl(
-      _$SubtitleImpl _value, $Res Function(_$SubtitleImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? sub1 = freezed,
-    Object? sub2 = freezed,
-    Object? sub3 = freezed,
-    Object? sub4 = freezed,
-    Object? sub5 = freezed,
-  }) {
-    return _then(_$SubtitleImpl(
-      sub1: freezed == sub1
-          ? _value.sub1
-          : sub1 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sub2: freezed == sub2
-          ? _value.sub2
-          : sub2 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sub3: freezed == sub3
-          ? _value.sub3
-          : sub3 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sub4: freezed == sub4
-          ? _value.sub4
-          : sub4 // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sub5: freezed == sub5
-          ? _value.sub5
-          : sub5 // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SubtitleImpl implements _Subtitle {
-  const _$SubtitleImpl({this.sub1, this.sub2, this.sub3, this.sub4, this.sub5});
-
-  factory _$SubtitleImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubtitleImplFromJson(json);
-
-  @override
-  final String? sub1;
-  @override
-  final String? sub2;
-  @override
-  final String? sub3;
-  @override
-  final String? sub4;
-  @override
-  final String? sub5;
-
-  @override
-  String toString() {
-    return 'Subtitle(sub1: $sub1, sub2: $sub2, sub3: $sub3, sub4: $sub4, sub5: $sub5)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SubtitleImpl &&
-            (identical(other.sub1, sub1) || other.sub1 == sub1) &&
-            (identical(other.sub2, sub2) || other.sub2 == sub2) &&
-            (identical(other.sub3, sub3) || other.sub3 == sub3) &&
-            (identical(other.sub4, sub4) || other.sub4 == sub4) &&
-            (identical(other.sub5, sub5) || other.sub5 == sub5));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, sub1, sub2, sub3, sub4, sub5);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SubtitleImplCopyWith<_$SubtitleImpl> get copyWith =>
-      __$$SubtitleImplCopyWithImpl<_$SubtitleImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SubtitleImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Subtitle implements Subtitle {
-  const factory _Subtitle(
-      {final String? sub1,
-      final String? sub2,
-      final String? sub3,
-      final String? sub4,
-      final String? sub5}) = _$SubtitleImpl;
-
-  factory _Subtitle.fromJson(Map<String, dynamic> json) =
-      _$SubtitleImpl.fromJson;
-
-  @override
-  String? get sub1;
-  @override
-  String? get sub2;
-  @override
-  String? get sub3;
-  @override
-  String? get sub4;
-  @override
-  String? get sub5;
-  @override
-  @JsonKey(ignore: true)
-  _$$SubtitleImplCopyWith<_$SubtitleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -53,10 +53,33 @@ class JsonRepository {
   }
 
   Future<List<Book>> fetchBooks() async {
-    final String response = await rootBundle.loadString('assets/json/library.json');
+    final String response =
+        await rootBundle.loadString('assets/json/library.json');
     final List<dynamic> data = json.decode(response) as List<dynamic>;
 
-    return data.map((item) => Book.fromJson(item as Map<String, dynamic>)).toList();
+    final collections = data
+        .map((item) =>
+            LibraryCollection.fromJson(item as Map<String, dynamic>))
+        .toList();
+
+    final List<Book> books = [];
+
+    for (final collection in collections) {
+      if (collection.series.isNotEmpty) {
+        books.addAll(collection.series);
+      } else if (collection.epub.isNotEmpty) {
+        books.add(
+          Book(
+            title: collection.title,
+            description: collection.description,
+            image: collection.image,
+            epub: collection.epub,
+          ),
+        );
+      }
+    }
+
+    return books;
   }
 
 

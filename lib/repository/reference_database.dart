@@ -35,7 +35,7 @@ class ReferencesDatabase {
 
   Future<int> addReference(ReferenceModel referenceModel) async {
     final db = await instance.database;
-    return await db.insert('reference_database', referenceModel.toMap());
+    return await db.insert('reference_database', referenceModel.toJson());
   }
 
   Future<List<ReferenceModel>> getAllReferences() async {
@@ -62,7 +62,7 @@ class ReferencesDatabase {
     final db = await instance.database;
     return await db.update(
       'reference_database',
-      referenceModel.toMap(),
+      referenceModel.toJson(),
       where: 'id = ?',
       whereArgs: [referenceModel.id],
     );

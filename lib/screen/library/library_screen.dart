@@ -48,6 +48,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     itemCount: books.length,
                     itemBuilder: (context, index) {
                       final book = books[index];
+                      final titleParts = book.title.split('—').map((part) => part.trim()).where((part) => part.isNotEmpty).toList();
+                      final descriptionItems = book.description
+                          .split('\n')
+                          .map((line) => line.trim())
+                          .where((line) => line.isNotEmpty)
+                          .toList();
                       return Directionality(
                         textDirection: TextDirection.rtl,
                         child: Stack(
@@ -75,20 +81,14 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  book.title1,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge
-                                                      ,
-                                                ),
-                                                Text(
-                                                  book.title2,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge
-                                                      ,
-                                                ),
+                                                for (final part in titleParts)
+                                                  Text(
+                                                    part,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge
+                                                        ,
+                                                  ),
                                               ],
                                             ),
                                           ),
@@ -99,56 +99,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         const SizedBox(height: 12),
-                                        if (book.subtitle.sub1 != null)
+                                        for (final description in descriptionItems) ...[
                                           Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                              width: 10,
-                                              height: 10,
-                                              color: const Color(0xFFCFA355),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                book.subtitle.sub1!,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleSmall
-                                                    ,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10),
-                                        if (book.subtitle.sub2 != null)
-                                          Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                              width: 10,
-                                              height: 10,
-                                              color: const Color(0xFFCFA355),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                book.subtitle.sub2!,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleSmall
-                                                    ,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10),
-                                        if (book.subtitle.sub3 != null)
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Container(
@@ -159,7 +112,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  book.subtitle.sub3!,
+                                                  description,
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .titleSmall
@@ -168,55 +121,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                               ),
                                             ],
                                           ),
-                                        const SizedBox(height: 10),
-                                        if (book.subtitle.sub4 != null)
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                                width: 10,
-                                                height: 10,
-                                                color: const Color(0xFFCFA355),
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  book.subtitle.sub4!,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall
-                                                      ,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        const SizedBox(height: 10),
-                                        if (book.subtitle.sub5 != null)
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8, top: 2),
-                                                width: 10,
-                                                height: 10,
-                                                color: const Color(0xFFCFA355),
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  book.subtitle.sub5!,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleSmall
-                                                  ,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        const SizedBox(height: 10),
+                                          const SizedBox(height: 0),
+                                        ],
                                       ],
                                     ),
                                   ),
@@ -231,11 +137,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                 alignment: Alignment.bottomCenter,
                                 child: GestureDetector(
                                   onTap: () {
-                                    final bookPath = '${book.epubName}.epub';
+                                    final bookPath = book.epub;
                                     openEpub(
                                         context: context, cat: CategoryModel(bookPath: bookPath),);
                                   },
                                   child: Container(
+
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
                                         border:
