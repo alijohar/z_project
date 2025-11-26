@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zahra/model/book_json_model.dart';
 import 'package:zahra/model/category_model.dart';
 import '../../util/epub_helper.dart';
 import 'cubit/library_cubit.dart';
@@ -139,7 +140,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                                   onTap: () {
                                     final bookPath = book.epub;
                                     openEpub(
-                                        context: context, cat: CategoryModel(bookPath: bookPath),);
+                                        context: context, book: Book(title: '', description: '', image: '', epub: bookPath),);
                                   },
                                   child: Container(
 

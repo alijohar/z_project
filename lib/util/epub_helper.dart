@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zahra/util/page_helper.dart';
 
+import '../model/book_json_model.dart';
 import '../model/category_model.dart';
+import '../model/history_model.dart';
 import '../model/reference_model.dart';
 import '../model/search_model.dart';
 import '../model/tree_toc_model.dart';
@@ -42,8 +44,9 @@ String convertLatinNumbersToArabic(String input) {
 
 Future<void> openEpub({
   required BuildContext context,
-  CategoryModel? cat,
+  Book? book,
   ReferenceModel? reference,
+  HistoryModel? history,
   EpubChaptersWithBookPath? toc,
   SearchModel? search,
 }) async {
@@ -51,7 +54,7 @@ Future<void> openEpub({
     context,
     '/epubViewer',
     arguments: {
-      'cat': cat,
+      'cat': book,
       'reference': reference,
       'toc': toc,
       'search': search,

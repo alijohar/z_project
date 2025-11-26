@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:epub_bookmarks/epub_bookmarks.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zahra/route_generator.dart';
-import 'package:zahra/screen/bookmark/cubit/bookmark_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,9 +83,7 @@ class MyApp extends StatelessWidget {
       fontFamily: 'almarai',
     );
 
-    return BlocProvider(
-      create: (_) => BookmarkCubit(),
-      child: MaterialApp(
+    return MaterialApp(
         title: 'المعارف الفاطمية',
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
@@ -110,8 +108,7 @@ class MyApp extends StatelessWidget {
 
           return child!;
         },
-      ),
-    );
+      );
   }
 }
 
