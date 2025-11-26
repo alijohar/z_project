@@ -229,8 +229,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/epub_bookmarks"
-      ref: HEAD
-      resolved-ref: ea452bcdf0a592f6d3f1778e433e35afff9ef4e6
+      ref: "v0.0.2-beta"
+      resolved-ref: "7f106beff30a78d8b31871067874c288ec8ad4bc"
       url: "https://github.com/Amorphteam/ketub_reader.git"
     source: git
     version: "0.1.0"
@@ -246,8 +246,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/epub_search"
-      ref: HEAD
-      resolved-ref: ea452bcdf0a592f6d3f1778e433e35afff9ef4e6
+      ref: "v0.0.2-beta"
+      resolved-ref: "7f106beff30a78d8b31871067874c288ec8ad4bc"
       url: "https://github.com/Amorphteam/ketub_reader.git"
     source: git
     version: "1.0.0"
@@ -255,8 +255,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/epub_viewer"
-      ref: HEAD
-      resolved-ref: ea452bcdf0a592f6d3f1778e433e35afff9ef4e6
+      ref: "v0.0.2-beta"
+      resolved-ref: "7f106beff30a78d8b31871067874c288ec8ad4bc"
       url: "https://github.com/Amorphteam/ketub_reader.git"
     source: git
     version: "0.1.0"
