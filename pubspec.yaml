@@ -38,17 +38,17 @@ dependencies:
   epub_viewer:
     git:
       url: https://github.com/Amorphteam/ketub_reader.git
-      ref: v0.0.2-beta
+      ref: v0.0.3-beta
       path: packages/epub_viewer
   epub_bookmarks:
     git:
       url: https://github.com/Amorphteam/ketub_reader.git
-      ref: v0.0.2-beta
+      ref: v0.0.3-beta
       path: packages/epub_bookmarks
   epub_search:
     git:
       url: https://github.com/Amorphteam/ketub_reader.git
-      ref: v0.0.2-beta
+      ref: v0.0.3-beta
       path: packages/epub_search
   flutter_bloc: ^8.0.0
   modal_bottom_sheet: ^3.0.0
