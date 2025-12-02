@@ -40,7 +40,24 @@ class HistoryDatabase {
 
   Future<int> addHistory(HistoryModel historyModel) async {
     final db = await instance.database;
-    return await db.insert('history_database', historyModel.toJson());
+    // Use a transaction to make check-and-insert atomic
+    // This prevents race conditions where addHistory might be called twice simultaneously
+    return await db.transaction((txn) async {
+      // Check if history already exists within the transaction
+      final existing = await txn.query(
+        'history_database',
+        where: 'bookPath = ? AND navIndex = ?',
+        whereArgs: [historyModel.bookPath, historyModel.navIndex],
+      );
+
+      if (existing.isNotEmpty) {
+        // History already exists, return 0 to indicate no insert
+        return 0;
+      }
+
+      // Insert the history record
+      return await txn.insert('history_database', historyModel.toJson());
+    });
   }
 
   Future<List<HistoryModel>> getAllHistory() async {

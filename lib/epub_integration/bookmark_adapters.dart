@@ -3,7 +3,6 @@ import 'package:epub_bookmarks/epub_bookmarks.dart';
 import '../repository/hostory_database.dart';
 import '../repository/reference_database.dart';
 
-
 /// Creates the persistence bundle used by `epub_bookmarks`.
 BookmarkPersistence createBookmarkPersistence({
   ReferencesDatabase? referencesDatabase,
@@ -29,14 +28,14 @@ class BookmarkListDataSource implements BookmarkDataSource {
     return references
         .map(
           (reference) => Bookmark(
-            id: reference.id,
-            title: reference.title,
-            bookName: reference.bookName,
-            bookPath: reference.bookPath,
-            pageIndex: reference.navIndex,
-            fileName: reference.fileName,
-          ),
-        )
+        id: reference.id,
+        title: reference.title,
+        bookName: reference.bookName,
+        bookPath: reference.bookPath,
+        pageIndex: reference.navIndex,
+        fileName: reference.fileName,
+      ),
+    )
         .toList();
   }
 
@@ -61,14 +60,14 @@ class BookmarkListDataSource implements BookmarkDataSource {
     return references
         .map(
           (reference) => Bookmark(
-            id: reference.id,
-            title: reference.title,
-            bookName: reference.bookName,
-            bookPath: reference.bookPath,
-            pageIndex: reference.navIndex,
-            fileName: reference.fileName,
-          ),
-        )
+        id: reference.id,
+        title: reference.title,
+        bookName: reference.bookName,
+        bookPath: reference.bookPath,
+        pageIndex: reference.navIndex,
+        fileName: reference.fileName,
+      ),
+    )
         .toList();
   }
 }
@@ -84,13 +83,13 @@ class BookmarkHistoryDataSource implements HistoryDataSource {
     return historyList
         .map(
           (history) => History(
-            id: history.id,
-            title: history.title,
-            bookName: history.bookName,
-            bookPath: history.bookPath,
-            pageIndex: history.navIndex,
-          ),
-        )
+        id: history.id,
+        title: history.title,
+        bookName: history.bookName,
+        bookPath: history.bookPath,
+        pageIndex: history.navIndex,
+      ),
+    )
         .toList();
   }
 
