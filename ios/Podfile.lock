@@ -13,7 +13,7 @@ PODS:
   - firebase_core (4.2.1):
     - Firebase/CoreOnly (= 12.4.0)
     - Flutter
-  - firebase_crashlytics (5.0.5):
+  - firebase_crashlytics (5.0.4):
     - Firebase/Crashlytics (= 12.4.0)
     - firebase_core
     - Flutter
@@ -185,11 +185,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/darwin"
 
 SPEC CHECKSUMS:
-  cupertino_native: 2bf2872026a59c9db5b72250892f7d9ca5244197
+  cupertino_native: 1db0611c94f9a9ea28433ed16a344dcb996370b5
   Firebase: f07b15ae5a6ec0f93713e30b923d9970d144af3e
-  firebase_analytics: 2b372cc13c077de5f1ac37e232bacd5bacb41963
-  firebase_core: e6b8bb503b7d1d9856e698d4f193f7b414e6bf1f
-  firebase_crashlytics: 5991a84e0a09733ab69e204664afc87d1cb3ce07
+  firebase_analytics: 67fbdd9f3c04e55048024f3da21cfc36f05e56cf
+  firebase_core: f1aafb21c14f497e5498f7ffc4dc63cbb52b2594
+  firebase_crashlytics: 83c7467d7534975a4d779af43bd226d0a4616464
   FirebaseAnalytics: 0fc2b20091f0ddd21bf73397cf8f0eb5346dc24f
   FirebaseCore: bb595f3114953664e3c1dc032f008a244147cfd3
   FirebaseCoreExtension: 7e1f7118ee970e001a8013719fb90950ee5e0018
@@ -206,8 +206,8 @@ SPEC CHECKSUMS:
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
-  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
-  sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
+  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
+  sqflite: c35dad70033b8862124f8337cc994a809fcd9fa3
 
 PODFILE CHECKSUM: bb84eb771e6cb024a20d443b9a848ff06d6c00bd
 
