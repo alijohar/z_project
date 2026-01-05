@@ -46,6 +46,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 ),
                 Expanded(
                   child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    cacheExtent: 500,
+                    addAutomaticKeepAlives: false,
+                    addRepaintBoundaries: true,
+                    addSemanticIndexes: false,
                     itemCount: books.length,
                     itemBuilder: (context, index) {
                       final book = books[index];

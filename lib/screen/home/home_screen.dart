@@ -45,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 48.0, left: 48, top: 40),
                     child: CustomScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      cacheExtent: 500,
                       slivers: <Widget>[
                         if (!isLandscape)
                           SliverAppBar(
@@ -69,6 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: NavigationHelper.buildItem(context, items[index]),
                                 ),
                                 childCount: items.length,
+                                addAutomaticKeepAlives: false,
+                                addRepaintBoundaries: true,
+                                addSemanticIndexes: false,
                               ),
                             ),
                             error: (message) => SliverFillRemaining(
@@ -144,6 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
               return true;
             },
             child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              cacheExtent: 500,
               slivers: <Widget>[
                 SliverAppBar(
                   expandedHeight: halfMediaHeight,
@@ -167,6 +174,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: NavigationHelper.buildItem(context, items[index]),
                         ),
                         childCount: items.length,
+                        addAutomaticKeepAlives: false,
+                        addRepaintBoundaries: true,
+                        addSemanticIndexes: false,
                       ),
                     ),
                     error: (message) => SliverFillRemaining(

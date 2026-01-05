@@ -68,6 +68,8 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 48.0, left: 48, top: 0),
                     child: CustomScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      cacheExtent: 500,
                       slivers: <Widget>[
                         BlocBuilder<DetailCubit, DetailState>(
                           builder: (context, state) => state.when(
@@ -88,6 +90,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                       context, items[index]),
                                 ),
                                 childCount: items.length,
+                                addAutomaticKeepAlives: false,
+                                addRepaintBoundaries: true,
+                                addSemanticIndexes: false,
                               ),
                             ),
                             error: (message) => SliverFillRemaining(
@@ -164,6 +169,8 @@ class _DetailScreenState extends State<DetailScreen> {
               return true;
             },
             child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              cacheExtent: 500,
               slivers: <Widget>[
                 BlocBuilder<DetailCubit, DetailState>(
                   builder: (context, state) => state.when(
@@ -183,6 +190,9 @@ class _DetailScreenState extends State<DetailScreen> {
                               context, items[index]),
                         ),
                         childCount: items.length,
+                        addAutomaticKeepAlives: false,
+                        addRepaintBoundaries: true,
+                        addSemanticIndexes: false,
                       ),
                     ),
                     error: (message) => SliverFillRemaining(
